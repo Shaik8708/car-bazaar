@@ -34,10 +34,6 @@ https://www.kodingwife.com/demos/unipro/v1-x/01-design-blue/index.html
 
 https://preview.themeforest.net/item/unipro-bootstrap-5-html-admin-template/full_screen_preview/32619252?_ga=2.216509023.894650210.1693233341-1387888055.1684586843&_gac=1.83576548.1690462567.CjwKCAjwq4imBhBQEiwA9Nx1Bh4h161c119nFikeB_7JTfRcjOyYkBOWXs5_FJ-IVnY6xJ1f3XOGFBoC8roQAvD_BwE
 
-## Bitbucket App Password
-
-ATBBykCSNGqFBTkTSGz9kkpamWXr798A2E75
-
 ## Apex charts
 
 https://apexcharts.com/docs/angular-charts/
