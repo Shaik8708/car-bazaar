@@ -27,6 +27,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Original html design link
+
 https://www.kodingwife.com/demos/unipro/v1-x/01-design-blue/index.html
 
 ## Original html design template link
@@ -41,47 +42,14 @@ ATBBykCSNGqFBTkTSGz9kkpamWXr798A2E75
 
 https://apexcharts.com/docs/angular-charts/
 
-
 ## Sidebar toggle
 
 https://www.c-sharpcorner.com/blogs/external-js-files-are-not-loading-correctly-in-angular
 
-## date sort 
+## date sort
 
 https://stackblitz.com/edit/angular-6-sort-array-of-object-by-date?file=src%2Fapp%2Fdynamicform%2Fdynamicform.component.html
 
 ## autoComplete
 
 http://mukeshkumar.net/articles/angular/3-ways-to-implement-autocomplete-textbox-in-angular-with-typescript-on-large-data
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

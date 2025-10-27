@@ -1,0 +1,291 @@
+<ngx-spinner></ngx-spinner>
+
+<!-- Row start -->
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Add New Dealer</div>
+            </div>
+            <form [formGroup]="addDealerForm" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+                    <div id="example-form" class="wizard clearfix">
+                        <h3>Dealer Information</h3>
+                        <section>
+                            <h6 class="h-0 m-0">&nbsp;</h6>
+                            <div class="row gutters">
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="field-wrapper">
+                  <input type="text" formControlName="username" placeholder="Enetr User Name" />
+                  <div class="field-placeholder">
+                    Dealer User Name <span class="text-danger">*</span>
+                  </div>
+                </div>
+              </div> -->
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="fullName" placeholder="Enetr Full Name" readonly/>
+                                        <div class="field-placeholder">
+                                            Dealer Full Name <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="username" placeholder="Enetr User Name" readonly/>
+                                        <div class="field-placeholder">
+                                            Dealer User Name <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="field-wrapper">
+                  <input type="text" formControlName="city" placeholder="Enetr City" />
+                  <div class="field-placeholder">
+                    Dealer City <span class="text-danger">*</span>
+                  </div>
+                </div>
+              </div> -->
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" maxlength="10" formControlName="phoneNumber"
+                                            placeholder="Enetr Phone No" readonly />
+                                        <div class="field-placeholder">
+                                            Dealer Phone No <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="email" placeholder="Enetr Email" />
+                                        <div class="field-placeholder" readonly>
+                                            Dealer Email
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="shopRegisteredName"
+                                            placeholder="Enetr Bussines/shop Name" />
+                                        <div class="field-placeholder">
+                                            Dealer Bussiness/Shop Name
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="shopAddress" placeholder="Enetr Shop Address" />
+                                        <div class="field-placeholder">
+                                            Dealer Shop Address
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="aadharCardNumber"
+                                            placeholder="Enetr Aadhar Card Number" />
+                                        <div class="field-placeholder">
+                                            Dealer Aadhar Card Number
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="date" formControlName="dob" name="dob" placeholder="Enter DOB" />
+                                        <div class="field-placeholder">
+                                            DOB
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div *ngIf="addDealerForm.get('city')" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input readonly type="text" formControlName="city" name="city" placeholder="Enter city" />
+                                        <div class="field-placeholder">
+                                            Selected City [Read Only]
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper">
+                                        <select class="select-single js-states" title="Select Dealer City"
+                                            [(ngModel)]="selectedCity" [ngModelOptions]="{ standalone: true }"
+                                            (change)="getDealersByCity()" data-live-search="true">
+                                            <option selected disabled value="">Select City</option>
+                                            <option [ngValue]="{cityId:ci?._id, cityName:ci?.cityName}"
+                                                *ngFor="let ci of cityList">
+                                                {{ci?.cityName}}</option>
+                                        </select>
+                                        <div class="field-placeholder">{{addDealerForm.get('city')?'Select different city if you want to update':'Select Dealer City'}} <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper">
+                                        <select class="select-single js-states" title="Select Dealer City"
+                                            formControlName="status" data-live-search="true">
+                                            <option selected disabled value="">Select Status</option>
+                                            <option value="false">Inactive</option>
+                                            <option value="true">Active</option>
+                                        </select>
+                                        <div class="field-placeholder">Status <span class="text-danger">*</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper">
+                                        <select class="select-single js-states" 
+                                            formControlName="initialVerification" data-live-search="true">
+                                            <option selected disabled value="">Select Initial Verification</option>
+                                            <option value="false">Not Verify</option>
+                                            <option value="true">Verify</option>
+                                        </select>
+                                        <div class="field-placeholder">Initial Verification <span class="text-danger">*</span></div>
+                                    </div>
+                                </div>
+                                <!-- *ngIf="responseData?.businessCard" -->
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper">
+                                        <select class="select-single js-states" 
+                                            formControlName="bussinessDocumentVerification" data-live-search="true">
+                                            <option selected disabled value="">Select Bussiness Document Verification</option>
+                                            <option value="false">Not Verify</option>
+                                            <option value="true">Verify</option>
+                                        </select>
+                                        <div class="field-placeholder">Bussiness Documents Verification <span class="text-danger">*</span></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper border">
+                                        
+
+                                        <input type="file" #uploadBussinessPic style="display:none" name="aadharCard"
+                                        (change)="dynamicFileChangeEvent($event,'bussinessCardImg')" class="fileInputProfile">
+                                      <div  *ngIf="!bussinessCardImg" (click)="uploadBussinessPic.click()">
+               
+                                        <a class="d-flex justify-content-center m-3" *ngIf="!bussinessCardImg">
+                                            <img style="width: 100px;" src="assets/img/uploadImgIcon.jpg"
+                                              alt="product-img">
+                                          </a>
+                                      </div>
+                                      <div  *ngIf="bussinessCardImg">
+                                        <a >
+                                          <img class="img-fluid product-thumbnail" [src]="bussinessCardImg" alt="product-img">
+              
+                                        </a>
+                                        
+                                        <span (click)="removeImg('bussinessCardImg')" class="bg-danger text-white">DELETE</span>
+                                       
+                                      </div>
+                                        <div class="field-placeholder">Business Card Image <span class="text-danger">*</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper border">
+                                     
+
+                                        <input type="file" #uploadLetterHeadPic style="display:none" name="aadharCard"
+                                        (change)="dynamicFileChangeEvent($event,'letterHeadImg')" class="fileInputProfile">
+                                      <div *ngIf="!letterHeadImg" (click)="uploadLetterHeadPic.click()">
+                                        <a class="d-flex justify-content-center m-3">
+                                           <img style="width: 100px;" src="assets/img/uploadImgIcon.jpg"
+                                            alt="product-img">
+                                        </a>
+                                      </div>
+                                      <div *ngIf="letterHeadImg">
+                                        <a >
+                                          <img class="img-fluid product-thumbnail" [src]="letterHeadImg" alt="product-img">
+              
+                                        </a>
+                                        <span (click)="removeImg('letterHeadImg')" class="bg-danger text-white">DELETE</span>
+                                         
+                                      </div>
+                                        <div class="field-placeholder">Letter Head Image <span class="text-danger">*</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper border">
+                                        
+
+                                        <input type="file" #uploadWordLicencePic style="display:none" name="aadharCard"
+                          (change)="dynamicFileChangeEvent($event,'workLicenceImg')" class="fileInputProfile">
+                        <div *ngIf="!workLicenceImg" (click)="uploadWordLicencePic.click()">
+                            <a class="d-flex justify-content-center m-3">
+                             <img style="width: 100px;" src="assets/img/uploadImgIcon.jpg"
+                              alt="product-img">
+                          </a>
+                        </div>
+                        <div *ngIf="workLicenceImg">
+                          <a >
+                            <img class="img-fluid product-thumbnail" [src]="workLicenceImg" alt="product-img">
+
+                          </a>
+                          <span (click)="removeImg('workLicenceImg')" class="bg-danger text-white">DELETE</span>
+                         
+                        </div>
+                                        <div class="field-placeholder">Work License Image <span class="text-danger">*</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper border">
+                                      
+
+                                        <input type="file" #uploadAadharPic style="display:none" name="aadharCard"
+                          (change)="dynamicFileChangeEvent($event,'aadharImg')" class="fileInputProfile">
+
+
+                        <div *ngIf="!aadharImg" (click)="uploadAadharPic.click()">
+                          <a class="d-flex justify-content-center m-3">
+                            <img style="width: 100px;" src="assets/img/uploadImgIcon.jpg"
+                              alt="product-img">
+                          </a>
+                        </div>
+                        <div  *ngIf="aadharImg">
+                          <a >
+                            <img class="img-fluid product-thumbnail" [src]="aadharImg" alt="product-img">
+
+                          </a>
+                          <span (click)="removeImg('aadharImg')" class="bg-danger text-white">DELETE</span>
+
+                        </div>
+                                        <div class="field-placeholder">Aadhar Card Image <span class="text-danger">*</span></div>
+                                    </div>
+
+                                </div>
+                                </div>
+                        </section>
+                        <div class="actions clearfix">
+                            <ul role="menu" aria-label="Pagination">
+
+                                <!-- <button class="btn btn-danger" *ngIf="editId && addDealerForm.controls['isResgistered']"
+                                    type="button" (click)="nativateTo()">Register Dealer
+                                </button> -->
+                                <button class="btn btn-danger m-2"
+                                    type="button"  [routerLink]="['/single-dealer',responseData?.dealerId]">View Dealer Quotations
+                                </button>
+                                <!-- [disabled]="!addDealerForm?.valid" -->
+                                <button class="btn btn-primary" 
+                                    type="submit">{{editId?'Update':'Create'}} Dealer Details</button>
+                                <!-- <li aria-hidden="true" style="display: none">
+                <a href="#finish" role="menuitem">Finish</a>
+              </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

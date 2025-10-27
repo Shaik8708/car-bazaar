@@ -1,0 +1,15 @@
+.rounded-circle {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+
+.danger {
+    background-color: red; /* Adjust as needed */
+    color: white;
+  }
+  
+  .success {
+    background-color: green; /* Adjust as needed */
+    color: white;
+  }
+  

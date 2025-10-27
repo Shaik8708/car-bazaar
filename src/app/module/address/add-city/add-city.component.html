@@ -1,0 +1,96 @@
+<ngx-spinner></ngx-spinner>
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <!-- <div class="card-title">Add New City</div> -->
+            </div>
+            <form [formGroup]="addCityForm" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+                    <div id="example-form" class="wizard clearfix">
+                        <h3>Add New City</h3>
+                        <section>
+                            <h6 class="h-0 m-0">&nbsp;</h6>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" autofocus formControlName="cityName" placeholder="City Name" />
+                                        <div class="field-placeholder">
+                                            City Name <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <button class="btn btn-primary" type="submit">Add</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Row start -->
+<div class="row gutters">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="copy-print-csv" class="table v-middle">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>City</th>
+                <th>Created Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let dele of cityList;let i= index">
+              <tr>
+                <td>{{i+1}}</td>
+                <td>{{dele?.cityName}}</td>
+                <td>{{dele?.createdAt | date:'short'}}</td>
+                
+                <td>
+                  <div class="actions d-flex justify-content-center" >
+                    <a
+                      href="#"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title=""
+                      data-original-title="Edit"
+                    >
+                      <i data-toggle="tooltip" data-placement="top" title="Edit" tooltip class="icon-edit1 text-info"></i>
+                    </a>
+                  
+                    <a
+                      href="#"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title=""
+                      data-original-title="Delete"
+                    >
+                      <i data-toggle="tooltip" data-placement="top" title="Delete" class="icon-x-circle text-danger"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage">
+</pagination>
+<!-- Row end -->

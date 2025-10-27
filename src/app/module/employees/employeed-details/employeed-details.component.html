@@ -1,0 +1,219 @@
+<!-- Row start -->
+<!-- <app-spinner *ngIf="loader"></app-spinner> -->
+
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <!-- <div class="card-title">Add New Staff</div> -->
+            </div>
+            <form [formGroup]="addDealerForm" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+                    <div id="example-form" class="wizard clearfix">
+
+                        <section>
+                            <h6 class="h-0 m-0">&nbsp;</h6>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="employeeName" name="employeeName" placeholder="Enetr Staff Name" />
+                                        <div class="field-placeholder">
+                                            Staff Name <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="designation" name="designation" placeholder="Enetr Designation" />
+                                        <div class="field-placeholder">
+                                            Designation <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="qualification" name="qualification" placeholder="Enetr Qualification" />
+                                        <div class="field-placeholder">
+                                            Qualification <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" maxlength="10" [readOnly]="isView" formControlName="panNumber" name="panNumber" placeholder="Enetr Pan Number" />
+                                        <div class="field-placeholder">
+                                            Pan Number <span class="text-danger">*</span>
+                                        </div>
+                                        <!-- <p *ngIf="isView  && isView" class="text-danger">Not Editable</p> -->
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="dob" [readOnly]="isView" type="date" name="dob" placeholder="Enetr Date Of Birth" />
+                                        <!-- <p *ngIf="isView  && isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">
+                                            Dob
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper">
+                                        <select class="select-single js-states" formControlName="country" name="country" title="Select Dealer Country" (change)="addCity($event.target)" data-live-search="true">
+  <option selected disabled value="">Select Country</option>
+  <option value="Bangalore">India</option>
+
+  </select>
+                                        <!-- <p *ngIf="isView   && !isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">Staff Country <span class="text-danger">*</span></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <select class="select-single js-states" formControlName="gender" name="gender" title="Select  Gender" (change)="addCity($event.target)" data-live-search="true">
+  <option selected  value=""   [disabled]="true">Gender</option>
+  <option value="male">Male</option>
+  <option value="female" >Female</option>
+
+  </select>
+                                        <!-- <p *ngIf="isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">Gender<span class="text-danger">*</span></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="phoneNumber" [readOnly]="isView" name="phoneNumber" placeholder="Enetr Phone Number" />
+                                        <!-- <p *ngIf="isView && !isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">
+                                            phoneNumber <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="emergencyNumber" [readOnly]="isView" name="emergencyNumber" placeholder="Enetr Emergency Number" />
+                                        <!-- <p *ngIf="isView && !isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">
+                                            emergencyNumber <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" maxlength="10" name="address" [readOnly]="isView" formControlName="address" placeholder="Enetr Address" />
+                                        <!-- <p *ngIf="isView && !isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">
+                                            address <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="postalCode" [readOnly]="isView" name="postalCode" placeholder="Enetr Postal Code" />
+                                        <!-- <p *ngIf="isView && !isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">
+                                            postalCode
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" maxlength="10" formControlName="age" [readOnly]="isView" name="age" placeholder="Enetr Age" />
+                                        <!-- <p *ngIf="isView && !isView" class="text-danger">Not Editable</p> -->
+                                        <div class="field-placeholder">
+                                            Age <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p>Photos</p>
+
+                                <div class="add-img-input">
+                                    <!-- <input name="photos" multiple formControlName="photos" type="file" placeholder="" (change)="changeListeners($event)" /> -->
+
+                                    <input #uploadPic style="display:none" name="photos" formControlName="photos" multiple type="file" placeholder="" (change)="changeListeners($event)">
+                                    <img style="width: 50px;" (click)="uploadPic.click()" src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                    <label class="js-labelFile">
+                                        <i class="fa fa-upload imgNo"></i>
+                                        </label>
+                                    <img style="width: 100px;" [src]="image? image : '../../../../assets/img/download.png'" alt="">
+                                    <a class="btn btn-danger" (click)="image=''">x</a>
+
+                                </div>
+
+                                <hr>
+
+                                <div class="card-header mt-3">
+                                    <div class="card-title">Document images</div>
+                                    <!-- <h3>Vehicle images</h3> -->
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <button type="button" class="btn btn-secondary" (click)="addImg()">
+                                                +
+                                            </button>
+                                    </div>
+                                </div>
+
+                                <!-- 
+                                <button type="button" class="btn btn-primary addImage" (click)="addImg()">
+                                    Add Image
+                                </button> -->
+
+
+                                <!-- <ng-container formArrayName="documentsImages" *ngFor="let item of abc.controls; let i = index">
+                                    <div [formGroupName]="i" class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6  my-3" *ngIf="!isEdit">
+                                        <input name="documentsImages" multiple formControlName="imgName" type="file" placeholder="" (change)="changeListeners1($event, i)">
+                                        <label class="js-labelFile">
+                                            <i class="fa fa-upload imgNo"></i>
+                                         *</label>
+
+                                        <button class="btn btn-danger" (click)="removeItem(i)">Delete</button>
+
+                                    </div>
+
+                                </ng-container> -->
+
+
+                                <ng-container formArrayName="documentsImages" *ngFor="let item of abc.controls; let i = index">
+                                    <div [formGroupName]="i" class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6  my-3">
+
+                                        <input #uploadPic style="display:none" name="documentsImages" formControlName="imgName" multiple type="file" placeholder="" (change)="changeListeners1($event,i)">
+                                        <img style="width: 50px;" (click)="uploadPic.click()" *ngIf="!item?.value?.img" src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+
+                                        <a target="_blank" [href]="item?.value?.img">
+                                            <img style="width: 100px;" *ngIf="item?.value?.img" [src]="item?.value?.img" alt="Image">
+                                        </a>
+                                        <label class="js-labelFile">
+                                        <i class="fa fa-upload imgNo"></i>
+                                    </label>
+
+                                        <button class="btn-danger" (click)="removeItem(i)">x</button>
+
+                                    </div>
+
+                                    <!-- <img src="../../../../assets/img/avatars/01_80x80.png" alt="input-img" class="input-img" /> -->
+                                </ng-container>
+
+                            </div>
+                        </section>
+                        <div class="actions clearfix">
+                            <ul role="menu" aria-label="Pagination">
+                                <button class="btn btn-danger" type="button" routerLink="/employees">Cancel</button>
+
+                                <button class="btn btn-primary" type="submit" *ngIf="!isView">Add</button>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

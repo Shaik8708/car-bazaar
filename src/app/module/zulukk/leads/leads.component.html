@@ -1,0 +1,63 @@
+<ngx-spinner></ngx-spinner>
+
+
+<div class="row">
+    <h4 class="d-flex justify-content-center">Zulukk Leads</h4>
+        <!-- Row start -->
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <ng-container *ngIf="getList?.length > 0 ; else noData">
+                            <div class="table-responsive">
+                                <table id="copy-print-csv" class="table v-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>SL No</th>
+                                            <!-- <th>Lead Id</th> -->
+                                            <th>Phone No</th>
+                                            <th>Created Date</th>
+                                            <th>Status</th>
+                                            <th>Updated Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let abc of getList; let i = index" (click)="navigateTo(abc)">
+
+                                        <tr>
+                                            <td>{{ i+1}}</td>
+                                            <td>{{ abc?.phoneNumber}}</td>
+                                            <td>{{ abc?.createdAt | date:'short' }}</td>
+                                            <td>{{ abc?.status}}</td>
+                                            <td>{{ abc?.updatedAt | date:'short' }}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                
+                            </div>
+                        </ng-container>
+                        <ng-template #noData>
+                            <h4>No Data Found</h4>
+                        </ng-template>
+                        <div class="d-flex justify-content-between mt-3 mb-3 row">
+                            <div class="dataTables_info col-12 col-md-6" id="copy-print-csv_info" role="status"
+                                aria-live="polite">
+                                Showing {{ currentPageLimit * (currentPage - 1) + 1 }} to {{ currentPageLimit *
+                                currentPage }} of {{
+                                totalList }} entries
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit"
+                                    [currentPage]="currentPage" (onPageChange)="getPage($event)"
+                                    [lastPage]="lastpage">
+                                </pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row end -->
+</div>

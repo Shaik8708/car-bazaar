@@ -1,0 +1,226 @@
+<!-- Row start -->
+
+
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">Vehicle Pictures</div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="top-items-container">
+                    <!-- <gallery id="myGallery" [itemTemplate]="itemTemplate" [gestures]="true">    </gallery> -->
+                        <!-- <img src="../../../../assets/img/logo.png" class="logo" alt="Logo"> -->
+                
+                    <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+                            <!-- Your logo HTML goes here -->
+                            <div class="logo">
+                              <img src="../../../../assets/img/logo.png" alt="Logo">
+                            </div>
+                            <!-- Image from ng-gallery -->
+                            <!-- <div class="image-container">
+                              <img [src]="data" alt="Gallery Image">
+                            </div> -->
+                          </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngIf="imagesUser?.length >0">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">User Pictures</div>
+            </div>
+            <div class="card-body">
+                <div class="top-items-container">
+                    <!-- <gallery gallerize selector=".gallery-img"  id="myGalleryUser" [itemTemplate]="itemTemplateUser" [gestures]="true" ></gallery> -->
+                    <ng-template #itemTemplateUser let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngIf="imagesRc?.length >0">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">RC Pictures</div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="top-items-container">
+
+                    <!-- <gallery gallerize selector=".gallery-img"  id="myGalleryRc" [itemTemplate]="itemTemplate2" [gestures]="true" ></gallery> -->
+                    <ng-template #itemTemplate2 let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngIf="imagesChasis?.length >0">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">Chasis Pictures</div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="top-items-container">
+
+                    <!-- <gallery gallerize selector=".gallery-img"  id="myGalleryChasis" [itemTemplate]="itemTemplateChasis" [gestures]="true" ></gallery> -->
+                    <ng-template #itemTemplateChasis let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngIf="imagesTowing?.length >0">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">Towing Pictures</div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="top-items-container">
+
+                    <!-- <gallery gallerize selector=".gallery-img"  id="myGalleryTowing" [itemTemplate]="itemTemplateTowing" [gestures]="true" ></gallery> -->
+                    <ng-template #itemTemplateTowing let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngIf="imagesScrapLetter?.length >0">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">Scrap Letter Pictures</div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="top-items-container">
+
+                    <!-- <gallery gallerize selector=".gallery-img"  id="myGalleryScrapLetter" [itemTemplate]="itemTemplateScrapLetter" [gestures]="true" ></gallery> -->
+                    <ng-template #itemTemplateScrapLetter let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngIf="imagesScrapLetter?.length >0">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">Engine Pictures</div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="top-items-container">
+
+                    <!-- <gallery gallerize selector=".gallery-img"  id="myGalleryEngine" [itemTemplate]="itemTemplateEngine" [gestures]="true" ></gallery> -->
+                    <ng-template #itemTemplateEngine let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngIf="imagesScrapLetter?.length >0">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">Scrapped Pictures</div>
+            </div>
+            <div class="card-body">
+
+
+                <div class="top-items-container">
+
+                    <!-- <gallery gallerize selector=".gallery-img"  id="myGalleryScrapped" [itemTemplate]="itemTemplateScrapped" [gestures]="true" ></gallery> -->
+                    <ng-template #itemTemplateScrapped let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+                        <ng-container *ngIf="type === 'image' && index === currIndex">
+
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card h-320">
+            <div class="card-header">
+                <div class="card-title">Vehicle Details</div>
+            </div>
+            <div class="card-body">
+                <ul class="statistics row">
+                  
+                    <li class=" col-md-6 col-12">
+                        <span class="stat-icon">
+                            <i class="fa-solid fa-b" style="color: #ffffff;"></i>
+                            </span> <b>Brand : </b> {{ leadData?.brandName}}
+                    </li>
+                    <li class=" col-md-6 col-12">
+                        <span class="stat-icon">
+                            <i class="fa-solid fa-m" style="color: #ffffff;"></i>
+                            </span> <b>Model : </b> {{leadData?.modelName}}
+                    </li>
+                    <li class=" col-md-6 col-12">
+                        <span class="stat-icon">
+                                <i class="icon-shopping-bag1"></i>
+                            </span> <b>Mgf Yr :  </b>{{leadData?.manufactureYear}}
+                    </li>
+                    <li class=" col-md-6 col-12">
+                        <span class="stat-icon">
+                            <i class="fa-solid fa-fan" style="color: #ffffff;"></i>
+                            </span> <b>Condition: </b> {{leadData?.condition}}
+                    </li>
+                    <li class=" col-md-6 col-12">
+                        <span class="stat-icon">
+                                <i class="icon-check-circle"></i>
+                            </span> <b>Type :</b> {{leadData?.fuleWhellType}}
+                    </li>
+                    <li class=" col-md-6 col-12">
+                        <span class="stat-icon">
+                            <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
+                            </span> <b>Location : </b>{{leadData?.location}}
+                    </li>
+                </ul>
+
+
+
+                <h6 class="h-0 m-0">&nbsp;</h6>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

@@ -1,0 +1,308 @@
+<ngx-spinner></ngx-spinner>
+
+
+
+
+
+
+<div class="d-flex justify-content-between mt-3 mb-3">
+  <div class="dataTables_info" id="copy-print-csv_info" role="status" aria-live="polite">Showing {{(currentPageLimit*(currentPage-1) +1)}} to {{currentPageLimit*currentPage}} of {{totalList}} entries</div>
+
+
+<pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage">
+</pagination>
+</div>
+
+  <!-- Row start -->
+  <div class="row gutters">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+          <div class="card">
+              <div class="card-body">
+
+                  <div class="table-responsive">
+                      <table id="copy-print-csv" class="table v-middle">
+                          <thead>
+                              <tr>
+                                  <th>SL No</th>
+                                  <th>Phone No</th>
+                                  <th>Lead Date</th>
+
+                                  <th>Customer Response</th>
+                                  <!-- <th>Lead Status</th> -->
+
+                                  <th>Location</th>
+                                  <th>Brand</th>
+                                  <th>Model</th>
+                                  <th>F/W Type</th>
+                                  <th>Condition</th>
+                                  <th>Year</th>
+                                  <th>Amount Shown</th>
+                                  <th>Customer Final Amount</th>
+                                  <th>Dealer Quotation</th>
+                                  <th>Assign Dealer</th>
+
+
+                              </tr>
+                          </thead>
+                          <tbody *ngFor="let abc of getList; let i = index">
+
+                              <!-- <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/pencils.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Pencils</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00878</td>
+                                  <td>2020/10/25</td>
+                                  <td>$87.00</td>
+                                  <td>
+                                      <span class="text-info"><i class="icon-slash"></i> Awaiting</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-info">Processing</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/camera.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Camera</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00370</td>
+                                  <td>2020/10/30</td>
+                                  <td>$65.00</td>
+                                  <td>
+                                      <span class="text-success"><i class="icon-check-circle"></i> Paid</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-success">Delivered</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/shirt.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Shirt</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00983</td>
+                                  <td>2020/10/10</td>
+                                  <td>$55.00</td>
+                                  <td>
+                                      <span class="text-info"><i class="icon-slash"></i> Awaiting</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-info">Processing</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/clock.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Wall Clock</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00760</td>
+                                  <td>2020/10/15</td>
+                                  <td>$74.00</td>
+                                  <td>
+                                      <span class="text-info"><i class="icon-slash"></i> Awaiting</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-info">Processing</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/toy.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Toy</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00435</td>
+                                  <td>2020/10/12</td>
+                                  <td>$88.00</td>
+                                  <td>
+                                      <span class="text-danger"><i class="icon-x-circle"></i> Failed</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-danger">Cancelled</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/shoes.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Shoes</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00878</td>
+                                  <td>2020/10/11</td>
+                                  <td>$87.00</td>
+                                  <td>
+                                      <span class="text-info"><i class="icon-slash"></i> Awaiting</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-info">Processing</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/ring.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Gold Ring</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00435</td>
+                                  <td>2020/09/21</td>
+                                  <td>$46.00</td>
+                                  <td>
+                                      <span class="text-danger"><i class="icon-x-circle"></i> Failed</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-danger">Cancelled</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/shirt.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Pens</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00878</td>
+                                  <td>2020/10/25</td>
+                                  <td>$87.00</td>
+                                  <td>
+                                      <span class="text-info"><i class="icon-slash"></i> Awaiting</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-info">Processing</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <div class="media-box">
+                                          <img src="img/products/shoes.jpeg" class="media-avatar" alt="Products">
+                                          <div class="media-box-body">
+                                              <a href="#" class="text-truncate">Dslr Camera</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>FLM00370</td>
+                                  <td>2020/10/30</td>
+                                  <td>$65.00</td>
+                                  <td>
+                                      <span class="text-success"><i class="icon-check-circle"></i> Paid</span>
+                                  </td>
+                                  <td>
+                                      <span class="badge bg-success">Delivered</span>
+                                  </td>
+                              </tr> -->
+
+
+
+                              <tr [ngClass]="{'bg-primary text-white' : showDate == abc?.createdAtVariable}">
+
+                                <td>{{(currentPageLimit*(currentPage-1))+ (i+1)}}</td>
+                                <td>{{abc?.createdBy?.phoneNumber}}</td>
+                                <td>{{abc?.createdAt | date:'short'}}</td>
+
+                                <!-- {{abc?.teleCaller}} -->
+                                <td>
+
+                                    <span *ngIf="dropdownIndex != i" (click)="showDropdown(i)" [ngClass]="[abc?.teleCaller == 'DealCancelled' ? 'text-danger' : '', abc?.teleCaller == 'AskingHighPrice' ? 'text-danger' : '',  abc?.teleCaller == 'Call me later' ? 'text-info' : '', abc?.teleCaller == 'AssignedToDealer' ? 'text-success' : '', abc?.teleCaller == 'Completed' ? 'text-success' : '', abc?.teleCaller == 'CallMeLater' ? 'text-success' : '', abc?.teleCaller == 'NotResponding' ? 'text-warning' : '',  abc?.teleCaller == 'NotReachable' ? 'text-warning' : '', abc?.teleCaller == 'NEW-DATA' ? 'text-dark' : '']" ><i class="icon-x-circle"></i> {{abc?.teleCaller}}
+                                    </span>
+
+
+                                    <select *ngIf="dropdownIndex == i" class="select-single js-states" (change)="updateList(abc?._id,$event.target)" title="Select Product Category" data-live-search="true">
+                                      <option disabled selected>Select Lead Status</option>
+                                      <option value='NotReachable'>Not reachable</option>
+                                      <option value='CallMeLater'>Call me later</option>
+                                      <option value='AskingHighPrice'>Asking high price</option>
+                                      <option value='NotResponding'>Not responding</option>
+                                      <option value='DealCancelled'>Deal cancelled</option>
+                                      <option value='DealAccepted'>Deal accepted</option>
+                                      <option value='AssignedToDealer'>Assigned to dealer</option>
+                                      <option value='Completed'>Completed</option>
+                                    </select>
+
+                              </td>
+                              <!-- <td>
+                                <span class="badge bg-danger">Cancelled</span>
+                            </td> -->
+                                <td>{{abc?.location}}</td>
+                                <td>{{abc?.brandName}}</td>
+                                <td>{{abc?.modelName}}</td>
+                                <td>{{abc?.fuleWhellType}}</td>
+                                <td>{{abc?.condition}}</td>
+                                <td>{{abc?.manufactureYear}}</td>
+                                <td>{{abc?.price}}</td>
+
+                            <td>
+                              <div class="field-wrapper">
+                                <input *ngIf="!abc?.dealerdata?.userFinalAmount" type="text"  placeholder="Customer Final Amount" [(ngModel)]="userFinalAmount" />
+                                <span *ngIf="abc?.dealerdata?.userFinalAmount">{{abc?.dealerdata?.userFinalAmount}}</span>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div class="field-wrapper">
+                                <input *ngIf="!abc?.dealerdata?.dealerAmount" type="text"  placeholder="Quotation" [(ngModel)]="dealerQuotation" />
+                                <span *ngIf="abc?.dealerdata?.dealerAmount">{{abc?.dealerdata?.dealerAmount}}</span>
+                              </div>
+                            </td>
+                            <td>
+
+                              <span *ngIf="assignIndex != i" [ngClass]="[abc?.dealerdata?.dealerName ? 'text-success' : 'text-danger']" (click)="showDealers(i)" > <span *ngIf="abc?.dealerdata?.dealerName">{{abc?.dealerdata?.dealerName}}</span>
+                              <span *ngIf="!abc?.dealerdata?.dealerName">Assign to Dealer</span>
+                              </span>
+
+
+                              <select *ngIf=" !abc?.dealerdata?.dealerName && assignIndex == i" class="select-single js-states" (change)="assignToDealer(abc?._id,$event.target,abc)" title="Select Product Category" data-live-search="true">
+                                <option disabled selected>Select Dealer</option>
+                                <option *ngFor="let dele of allDealers" [value]='dele?._id' >{{dele?.createdBy?.fullName}}</option>
+                              </select>
+
+                        </td>
+
+
+                            </tr>
+                          </tbody>
+                      </table>
+
+                      <div class="d-flex justify-content-between mt-3 mb-3">
+                        <div class="dataTables_info" id="copy-print-csv_info" role="status" aria-live="polite">Showing 6 to 10 of 10 entries</div>
+
+
+                      <pagination [paginationList]="pagination" [selectedPageLimit]="currentPageLimit" [currentPage]="currentPage" (onPageChange)="getPage($event)" [lastPage]="lastpage">
+                      </pagination>
+                      </div>
+
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <!-- Row end -->

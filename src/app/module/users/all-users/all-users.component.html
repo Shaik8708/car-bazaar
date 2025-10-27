@@ -1,0 +1,77 @@
+<ngx-spinner></ngx-spinner>
+
+<!-- Row start -->
+<div class="row">
+    <div class="col-12">
+        <div class="field-wrapper">
+            <select class="select-single js-states" title="Select Dealer City"
+                (change)="getDealersByCity($event.target)" data-live-search="true">
+                <option selected disabled value="">Select City</option>
+                <option [value]="ci?._id" *ngFor="let ci of cityList">
+                    {{ci?.cityName}}</option>
+            </select>
+            <div class="field-placeholder">Filter Users <span class="text-danger">*</span></div>
+        </div>
+    </div>
+</div>
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <ng-container *ngIf="allUsers?.length > 0; else noDealers">
+                        <table id="copy-print-csv" class="table v-middle">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Phone No</th>
+                                    <th>OTP Verification</th>
+                                    <th>Created At</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Block</th>
+                                </tr>
+                            </thead>
+
+                            <tbody *ngFor="let dele of allUsers;let i= index">
+                                <tr>
+                                    <td>{{i+1}}</td>
+                                    <td>{{dele?.phoneNumber}}</td>
+                                    <td [ngClass]="dele?.phoneisVerified?'text-success':'text-danger'">
+                                        {{dele?.phoneisVerified}}</td>
+
+                                    <td>{{dele?.createdAt | date:'short'}}</td>
+                                    <td>{{dele?.fullName}}</td>
+                                    <td>{{dele?.email}}</td>
+                                    <td>
+                                        <div class="field-wrapper">
+                                            <select class="select-single js-states" title="Verify Dealer"
+                                                (change)="verifyUser(dele?._id,$event?.target)"
+                                                [value]="dele?.isBlocked" data-live-search="true">
+                                                <option selected disabled value="">Verify User</option>
+                                                <option value="true">Block</option>
+                                                <option value="false">Un Block</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+                    </ng-container>
+                    <ng-template #noDealers>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h4>No Users</h4>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

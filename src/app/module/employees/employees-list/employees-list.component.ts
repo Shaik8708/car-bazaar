@@ -1,0 +1,77 @@
+import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from 'src/app/services/api.service';
+import { BaseApiService } from 'src/app/services/base-api/base-api.service';
+import Swal from 'sweetalert2';
+import urlConfig from '../../../config/url.config.json';
+
+
+@Component({
+  selector: 'app-employees-list',
+  templateUrl: './employees-list.component.html',
+  styleUrls: ['./employees-list.component.css']
+})
+export class EmployeesListComponent {
+  allDealers:any;
+loader=false
+  constructor(private api:ApiService, private spinner: NgxSpinnerService,
+    private baseApi: BaseApiService
+  ) {}
+
+  ngOnInit(): void {
+   this.get()
+
+  }
+get(){
+  this.loader=true
+  // this.api.getAllEmployees()
+  this.baseApi.get(`${urlConfig.getAllPath}?collectionName=${urlConfig.staffDetailsList}`)
+  .subscribe((res:any) => {
+   this.loader=false
+    if(res?.status == "success"){
+      this.allDealers = res?.data?.docs;
+      console.log(this.allDealers);
+      
+    }
+    else{
+      alert("Something went wrong, Try again");
+    }
+    this.spinner.hide();
+  },(err:any)=>{
+    this.spinner.hide();
+    alert(err.error.message);
+  }
+  )
+}
+  deleteItem(id:any){
+
+Swal.fire({
+  text: 'Are you sure you want to delete.',
+  showDenyButton: true,
+  showCancelButton: false,
+allowOutsideClick:false,
+  confirmButtonText: 'Ok',
+  denyButtonText: `Cancel`,
+  icon:"warning"
+}).then((result:any) => {
+  if (result.isConfirmed) {
+this.api.deleteEmployees(id)
+let payload ={
+  collectionName :urlConfig.staffDetailsList
+}
+this.baseApi.delete(`${urlConfig.deletePath}/${id}`, payload)
+.subscribe((res:any)=>{
+  if(res?.status == "success"){
+    this.get()
+    Swal.fire({
+      text:'Successfully deleted',
+      icon:'success',
+    })
+  }
+})
+  } else if (result.isDenied) {
+
+  }
+});
+  }
+}

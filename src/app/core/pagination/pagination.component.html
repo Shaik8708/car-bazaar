@@ -1,0 +1,49 @@
+<div
+  class="dataTables_paginate paging_simple_numbers d-flex justify-content-between"
+  id="copy-print-csv_paginate"
+>
+<div class="pagin-sel">
+  <label class="" for="inlineFormSelectPref">Items</label>
+  <select class="select" [(ngModel)]="selectedPageLimit" (change)="getPage(currentPage,selectedPageLimit)">
+    <option *ngFor="let p of PageLimit" [ngValue]="p">{{p}}</option>
+  </select>
+</div>
+
+  <ul class="pagination pagination-sm">
+    <li class="paginate_button page-item previous" id="copy-print-csv_previous" [ngClass]="{ disabled : currentPage === 1}">
+      <a
+        aria-controls="copy-print-csv"
+        data-dt-idx="0"
+        tabindex="0"
+        class="page-link" href="javascript:void(0)" tabindex="-1" (click)="getPage(currentPage - 1,selectedPageLimit)"
+        >Previous</a
+      >
+    </li>
+    <li class="paginate_button page-item" *ngFor="let page of paginationList?.pages">
+      <a
+        aria-controls="copy-print-csv"
+        data-dt-idx="1"
+        tabindex="0"
+        class="page-link"
+        (click)="currentPage != page ? getPage(page,selectedPageLimit):''"  [ngClass]="{ active: currentPage === page}">{{page}}</a>
+    </li>
+
+    <li
+      class="paginate_button page-item next disabled"
+      id="copy-print-csv_next" [ngClass]="{ disabled: currentPage === paginationList?.totalPages}"
+    >
+      <a
+        aria-controls="copy-print-csv"
+        data-dt-idx="3"
+        tabindex="0"
+        class="page-link" (click)="getPage(currentPage + 1,selectedPageLimit)" class="page-link" href="javascript:void(0)">Next</a
+      >
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+

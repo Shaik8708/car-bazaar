@@ -1,0 +1,18 @@
+.visible{
+ display: block;
+}
+
+.hidden{
+  display: none;
+}
+/* @media screen and (max-width: 1024px){
+.page-wrapper.toggled .sidebar-wrapper {
+    left: 10px;
+}
+}
+
+@media screen and (max-width: 1024px){
+.page-wrapper .sidebar-wrapper {
+    left: -350px;
+}
+} */

@@ -1,0 +1,88 @@
+<!-- Row start -->
+<!-- <app-spinner *ngIf="loader"></app-spinner> -->
+<h4>Case Management</h4>
+<div class="row gutters">
+    <!-- <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary w-25 " type="button" routerLink="/add-case">Add New Case</button>
+    </div> -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <ng-container *ngIf="allCase?.length >0; else noCase">
+
+                    <table id="copy-print-csv" class="table v-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Case No</th>
+                                <th>Issue By</th>
+
+                                <th>Lead No</th>
+                                <th>Case Type</th>
+
+                                <th>Created Date</th>
+
+                                <!-- <th>Picture</th> -->
+                                <!-- <th>Phone No</th> -->
+                                <th>Case Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                            <tbody *ngFor="let dele of allCase;let i= index">
+                                <tr>
+                                    <td>{{i+1}}</td>
+                                    <td>{{dele?.caseId}}</td>
+                                    <span *ngFor="let cis of dele?.caseData">
+                                        <td>{{cis?.caseIssueBy}}</td>
+                                    </span>
+                                    <td>{{dele?.leadId}}</td>
+                                    
+                                    
+                                    <!-- <td><img src="{{dele?.photos}}" alt="" width="65" height="60" class="rounded-circle"> </td> -->
+    
+                                    <!-- <td>{{dele?.phoneNumber}}</td> -->
+                                    <span *ngFor="let ct of dele?.caseData">
+                                        <td>{{ct?.caseType}}</td>
+                                    </span>
+                                    <td>{{dele?.createdAt | date:'short'}}</td>
+                                    
+                                    <span *ngFor="let neww of dele?.caseData">
+                                        <td>{{neww?.status}}</td>
+                                    </span>
+                                 
+                                    
+    
+                                    <td>
+                                        <div class="actions d-flex justify-content-between">
+                                            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" [routerLink]="['/add-case',dele?._id]" [queryParams]="{editmode:true}">
+                                                <i data-toggle="tooltip" data-placement="top" title="Edit" tooltip class="icon-edit1 text-info"></i>
+                                            </a>
+                                            <!-- <a data-toggle="tooltip" data-placement="top" title="" data-original-title="View" [routerLink]="['/add-case',dele?._id]" [queryParams]="{viewmode:true}">
+                                                <i data-toggle="tooltip" data-placement="top" title="View" class="icon-eye1 text-success"></i>
+                                            </a> -->
+                                            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" (click)="deleteItem(dele?._id)">
+                                                <i data-toggle="tooltip" data-placement="top" title="Delete" class="icon-x-circle text-danger"></i>
+                                            </a>
+                                            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" (click)="openLead(dele?.leadId)">
+                                                Open lead
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                       
+
+                        
+                    </table>
+                    </ng-container>
+
+                    <ng-template #noCase>
+                        <h3>No Case Created Yet</h3>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

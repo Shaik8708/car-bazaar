@@ -1,0 +1,17 @@
+.accordion-body{
+    display: flex;
+    overflow: auto;
+}
+
+.product-thumbnail{
+    width: 100%;
+    min-height: 250px;
+    max-height: 250px;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.bgColor{
+    background-color: green;
+    color: white;
+}

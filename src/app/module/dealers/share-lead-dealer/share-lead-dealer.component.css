@@ -1,0 +1,25 @@
+.top-items-container .top-item-img {
+    max-height: initial;
+   
+    width: initial;
+}
+
+.carousel-control-prev-icon{
+    background-color: blue !important;
+}
+
+.carousel-control-next-icon{
+    background-color: blue !important;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .logo img {
+    width: 50%; /* Reduce the logo size to half */
+    margin-top: 10px; /* Add margin around the logo */
+    margin-left: 15px; /* Add margin around the logo */
+  }

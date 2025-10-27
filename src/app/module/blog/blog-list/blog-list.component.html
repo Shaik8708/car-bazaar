@@ -1,0 +1,52 @@
+<!-- Row start -->
+<!-- <app-spinner *ngIf="loader"></app-spinner> -->
+
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="copy-print-csv" class="table v-middle">
+                        <thead>
+                            <tr>
+                                <!-- <th>#</th> -->
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Meta Title</th>
+                               
+                                <th>Meta Description</th>
+
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let dele of allDealers;let i= index">
+                            <tr>
+                                <td>{{dele?.title}}</td>
+                                <td>{{dele?.metaDescription}}</td>
+                               
+
+                                <td>{{dele?.metaTitle}}</td>
+                                <td>{{dele?.metaDescription }}</td>
+
+                                <td>
+                                    <div class="actions d-flex justify-content-between">
+                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" [routerLink]="['/edit-blog',dele?._id]"  [queryParams]="{editmode:true}">
+                                            <i data-toggle="tooltip" data-placement="top" title="Edit" tooltip class="icon-edit1 text-info"></i>
+                                        </a>
+                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="View" [routerLink]="['/view-blog',dele?._id]" [queryParams]="{viewmode:true}">
+                                            <i data-toggle="tooltip" data-placement="top" title="View" class="icon-eye1 text-success"></i>
+                                        </a>
+                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" (click)="deleteItem(dele?._id)">
+                                            <i data-toggle="tooltip" data-placement="top" title="Delete" class="icon-x-circle text-danger"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

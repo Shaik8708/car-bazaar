@@ -1,0 +1,1367 @@
+<ngx-spinner></ngx-spinner>
+
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Edit Lead</div>
+                <button class="btn btn-secondary" (click)="goBack()">Back</button>
+            </div>
+            <form [formGroup]="leadForm" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+
+                    <div id="example-form" class="wizard clearfix">
+
+                        <h3>Lead Id : {{productUniqueId}}</h3>
+                        <h3>Lead Status : {{leadStatus}}</h3>
+
+
+                        <section>
+                            <!-- <h6 class="h-0 m-0">&nbsp;</h6> -->
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <button class="btn btn-primary" type="submit">Update Lead</button>
+                                        <!-- *ngIf="vehiclePic?.length > 0" -->
+                                        <button class="btn btn-warning m-3"
+                                        [copy-clipboard]="name"
+                                        (copied)="notify($event)"
+                                        type="button">
+                                  Share lead
+                                  <i class="icon-share text-info"></i>
+                                </button>
+                                        <button type="button" class="btn btn-primary" *ngIf="vehiclePic?.length > 0"
+                                            [routerLink]="['/product-data',leadId]">View</button>
+
+                                            <button class="btn btn-success m-3"
+                                            (click)="openWhatsApp(phoneNumber)"
+                                            type="button">
+                                      Open WhatsApp
+                                      <!-- <i class="icon-share text-info"></i> -->
+                                    </button>
+                                    <button class="btn btn-secondary m-3" [ngClass]="{ 'btn-success': enableEdit }"
+                                        (click)="editPage()"
+                                        type="button">
+                                  <span *ngIf="!enableEdit">Edit Off</span>
+                                  <span *ngIf="enableEdit">Edit On</span>
+                                  <i class="icon-edit text-info"></i>
+                                </button>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="fullName" placeholder="Enetr Customer Full Name" class="border-danger" />
+                                        <div class="field-placeholder">
+                                            Customer Full Name <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="location" placeholder="Enetr Location" [readonly]="!enableEdit"/>
+                                        <div class="field-placeholder">
+                                            City <span *ngIf="!enableEdit">[RO]</span> <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="phoneNumber" placeholder="Enetr Phone No"
+                                            [readonly]="!enableEdit" />
+                                        <div class="field-placeholder">
+                                            Phone No <span *ngIf="!enableEdit">[RO]</span><span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="whatsAppNumber" placeholder="Enetr WhatsApp Number"
+                                             maxlength="10"/>
+                                        <div class="field-placeholder">
+                                            Whats App No
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" [readonly]="!enableEdit" [value]="leadForm.get('createdAt').value | date: 'dd/MM/yyyy, h:mm a'"  
+                                            placeholder="Enetr Lead Date" readonly />
+                                        <div class="field-placeholder">Lead Date [RO]</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="brandName" placeholder="Enetr Brand" [readonly]="!enableEdit"/>
+                                        <div class="field-placeholder">
+                                            Brand <span *ngIf="!enableEdit">[RO]</span><span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="fuleWhellType" placeholder="Enetr fule/Whell Type" [readonly]="!enableEdit"/>
+                                        <div class="field-placeholder">
+                                            Fule/Whell Type <span *ngIf="!enableEdit">[RO]</span><span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="modelName" placeholder="Enetr Model" />
+                                        <div class="field-placeholder">
+                                            Model <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input (keypress)="numberOnly($event)" type="text"
+                                            formControlName="manufactureYear" placeholder="Enetr Year" />
+                                        <div class="field-placeholder">
+                                            Year <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input (keypress)="numberOnly($event)" readonly type="text"
+                                            formControlName="price" placeholder="Shown Price" class="bg-primary text-white" />
+                                        <div class="field-placeholder">
+                                            Shown Price [RO]<span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" (keypress)="numberOnly($event)" valueAsNumber
+                                            formControlName="userFinalAmount" placeholder="Enetr Final Price"
+                                            class="border-danger" [readonly]="!enableEdit" />
+                                        <div class="field-placeholder">
+                                            User Final Price <span *ngIf="!enableEdit">[RO]</span><span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                    <div class="field-wrapper">
+                                        <textarea name="" id="" cols="1" rows="2" placeholder="Enetr Address"
+                                            class="border-danger" formControlName="userAddress"></textarea>
+                                        <div class="field-placeholder">
+                                            Add Address <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                    <div class="field-wrapper">
+                                        <textarea name="" id="" cols="1" rows="2" placeholder="Enetr Comment"
+                                            class="border-danger" formControlName="comment" [readonly]="!enableEdit"></textarea>
+                                        <div class="field-placeholder">
+                                            Add Comment <span *ngIf="!enableEdit">[RO]</span> <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="chasisNumber" placeholder="Enetr Chasis No"
+                                            class="border-danger" />
+                                        <div class="field-placeholder">
+                                            Chasis Number <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <select formControlName="userDocumentType"
+                                            class="select-single border-danger js-states" title="Select Dealer City">
+                                            <option selected disabled>Select Document Type</option>
+                                            <option value="Aadhar">Aadhar</option>
+                                            <option value="Voter Id">Voter Id</option>
+                                            <option value="Driving Licence">Driving Licence</option>
+                                            <option value="Passport">Passport</option>
+                                            <option value="Pancard">Pancard</option>
+                                            <option value="Company id card">Company I'd card</option>
+                                            <option value="Bank Passbook">Bank Passbook</option>
+                                        </select>
+                                        <div class="field-placeholder">
+                                            User Document Type <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input formControlName="userDocumentNumber" type="text" valueAsNumber
+                                            placeholder="Enetr Document No" class="border-danger" />
+                                        <div class="field-placeholder">
+                                            User Document No <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input formControlName="vehicleNumber" type="text" valueAsNumber
+                                            placeholder="Enetr Vehicle No" class="border-danger" />
+                                        <div class="field-placeholder">
+                                            Vehicle Number <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input formControlName="engineNumber" type="text" valueAsNumber
+                                            placeholder="Enetr Engine No" class="border-danger" />
+                                        <div class="field-placeholder">
+                                            Engine Number <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <select formControlName="leadIsVerified"
+                                            class="select-single border-danger js-states" title="Select Verification">
+                                            <option selected disabled>Select verification</option>
+                                            <option value="true">True</option>
+                                            <option value="false">False</option>
+
+                                        </select>
+                                        <div class="field-placeholder">
+                                            Verification (Show To Dealer)<span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <select [(ngModel)]="leadStatus" [ngModelOptions]="{standalone: true}"
+                                            class="select-single border-danger js-states" title="Select Dealer City"
+                                            (change)="leadStatusChange($event.target)">
+                                            <option value="0" disabled selected>Select Status</option>
+                                            <option value="NEW-LEAD">NEW-LEAD</option>
+                                            <option value="PROCESSING">PROCESSING</option>
+                                            <option value="ASSIGNED">ASSIGNED</option>
+                                            <option value="SCHEDULED">SCHEDULED</option>
+                                            <option value="PICKEDUP">PICKEDUP</option>
+                                            <option value="DEAL_CANCELLED">DEAL CANCELLED</option>
+                                            <option value="SCRAPPED">SCRAPPED</option>
+                                            <option *ngIf="scrapedPic" value="CLOSED">Scrapped Verified</option>
+
+                                        </select>
+                                        <div class="field-placeholder">
+                                            Lead Status<span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input [(ngModel)]="teleCallerData" [ngModelOptions]="{standalone: true}"
+                                            type="text" [readonly]="!enableEdit" placeholder="Nobody Updated Yet"
+                                            class="border-danger" />
+                                        <div class="field-placeholder">
+                                            Handled By <span *ngIf="!enableEdit">[RO]</span> <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <input formControlName="userAddressGoogleMapLink"
+                                            type="text" placeholder="Google Map Link"
+                                            class="border-danger" />
+                                        <div class="field-placeholder">
+                                            G-Map Link <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                                    <div class="card-header">
+                                        <div class="card-title">Dealer Quotation :</div>
+                                    </div>
+                                <div class="accordion" id="faqAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseDealerQuotation"
+                                                aria-expanded="false" aria-controls="collapseDealerQuotation">
+                                                Dealer Quotation <span> ({{dealerQuotationList?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseDealerQuotation" class="accordion-collapse collapse"
+                                            aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                            <div class="card-header" *ngIf="!assignedDealerData">
+                                                <div class="card-title">Manually Add Dealers Quotations</div>
+                                                <button style="visibility: hidden;" (click)="addFields()">Add</button>
+        
+                                            </div>
+                                            <div *ngIf="!assignedDealerData">
+                                                <ng-container formArrayName="items"
+                                                    *ngFor="let item of abcd.controls; let i = index">
+                                                    <div [formGroupName]="i" class="add-img-input">
+        
+        
+                                                        <div class="row">
+                                                            <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                                <div class="field-wrapper">
+                                                                    <input type="text" maxlength="10"
+                                                                        [(ngModel)]="delearSingleQuote"
+                                                                        [ngModelOptions]="{standalone: true}"
+                                                                        placeholder="Enetr Quotation" />
+                                                                    <div class="field-placeholder">
+                                                                        Dealer Price <span class="text-danger">*</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                                <div class="field-wrapper">
+                                                                    <select class="select-single js-states"
+                                                                        title="Select Dealer City" data-live-search="true"
+                                                                        (change)="getDealersByCity($event.target)">
+                                                                        <option selected disabled value="">Select City</option>
+                                                                        <option [value]="ci?._id" *ngFor="let ci of cityList">
+                                                                            {{ci?.cityName}}</option>
+                                                                    </select>
+                                                                    <div class="field-placeholder">Dealer City <span
+                                                                            class="text-danger">*</span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                            <div class="field-wrapper">
+                                                                <ng-container *ngIf="allDealers?.length > 0; else noDealers">
+                                                                    <select class="select-single js-states"
+                                                                        (change)="selectDealer($event.target)"
+                                                                        title="Select Dealer City" data-live-search="true">
+                                                                        <option selected disabled value="">Select Dealer
+                                                                        </option>
+                                                                        <option *ngFor="let dele of allDealers"
+                                                                            [value]='dele?._id'>
+                                                                            {{dele?.fullName}}</option>
+        
+                                                                    </select>
+                                                                </ng-container>
+                                                                <ng-template #noDealers>
+                                                                    <p>No Dealers in this city</p>
+                                                                </ng-template>
+                                                                <div class="field-placeholder">Select Dealer <span
+                                                                        class="text-danger">*</span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                            <div class="field-wrapper">
+                                                                <button class="btn btn-secondary"
+                                                                    (click)="createDealerQuotation()" type="button">Add
+                                                                    Quotation</button>
+                                                            </div>
+                                                        </div>
+        
+        
+                                                    </div>
+        
+        
+                                                </ng-container>
+                                            </div>
+        
+                                            <div class="card-body">
+                                                <div class="card-title">Dealers Quotations List</div>
+        
+                                                <div class="table-responsive">
+                                                    <ng-container *ngIf="dealerQuotationList?.length >0; else noQuotaion">
+                                                        <table id="copy-print-csv" class="table v-middle">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>City</th>
+                                                                    <th>Dealer Id</th>
+                                                                    <th>Dealer Name</th>
+                                                                    <th>Quotation</th>
+                                                                    
+                                                                        <th *ngIf="loginType == 'admin' && leadResponse?.vehicleType == 'Bike'">Original Quotation (+15% Bike)</th>
+                                                                        <th *ngIf="loginType == 'admin' && leadResponse?.vehicleType == 'Car'">Original Quotation (+5% Car)</th>
+                                                                  
+
+                                                                    <th *ngIf="!assignedDealerData">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody *ngFor="let dele of dealerQuotationList;let i= index">
+                                                                <tr [ngClass]="{'bgColor':dele?.isAssigned}">
+                                                                    <td>{{i+1}}</td>
+                                                                    <td>{{dele?.dealerCity}}</td>
+                                                                    <td>{{dele?.dealerUserName}}</td>
+                                                                    <td>{{dele?.dealerName}}</td>
+                                                                    
+                                                                                                                                            <!-- <td>₹ {{ dele?.dealerPrice ? (dele.dealerPrice * 0.75).toFixed(2) : '' }}</td> -->
+                                                                    <td *ngIf="loginType == 'admin' && leadResponse?.vehicleType == 'Bike'">₹ {{ dele?.dealerPrice && (dele.dealerPrice * 0.85) }}</td>
+                                                                    <td *ngIf="loginType == 'admin' && leadResponse?.vehicleType == 'Car'">₹ {{ dele?.dealerPrice && (dele.dealerPrice * 0.95) }}</td>
+                                                                    <td>₹ {{dele?.dealerPrice}}</td>
+
+                                                                 
+
+
+
+
+        
+                                                                    <td >
+                                                                        <div class="actions d-flex justify-content-between" *ngIf="!isAssigned">
+        
+                                                                            <div class="field-wrapper">
+        
+                                                                                <div class="dropdown">
+                                                                                    <button
+                                                                                        class="btn btn-secondary dropdown-toggle"
+                                                                                        type="button" id="dropdownMenuButton"
+                                                                                        data-toggle="dropdown"
+                                                                                        aria-haspopup="true"
+                                                                                        aria-expanded="false">
+                                                                                        Action
+                                                                                    </button>
+                                                                                    <div class="dropdown-menu"
+                                                                                        aria-labelledby="dropdownMenuButton">
+                                                                                        <a class="dropdown-item"
+                                                                                            (click)="assignToDealer(dele?.dealerLeadStatusId, dele?.dealerId, i, dele?.quotationId)">Assign
+                                                                                            Lead</a>
+                                                                                        <a class="dropdown-item text-danger"
+                                                                                            (click)="removeQuotation(dele?.dealerLeadStatusId, dele?.dealerId, i, dele?.quotationId)">Delete</a>
+                                                                                    </div>
+                                                                                </div>
+        
+        
+                                                                            </div>
+                                                                        </div>
+        
+                                                                        <div class="actions d-flex justify-content-between" *ngIf="isAssigned && dele?.isAssigned">
+                                                                            <div class="field-wrapper">
+                                                                                <div class="dropdown">
+                                                                                    <button class="btn btn-success dropdown-toggle" type="button"
+                                                                                        id="dropdownMenuButton" data-toggle="dropdown"
+                                                                                        aria-haspopup="true" aria-expanded="false">
+                                                                                        Assigned
+                                                                                    </button>
+                                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                                        <a class="dropdown-item text-danger"
+                                                                                            (click)="assignToDealer(dele?.dealerLeadStatusId, dele?.dealerId, i, dele?.quotationId,'unassign')">Un-Assign
+                                                                                        </a>
+                                                                                        <a class="dropdown-item"
+                                                                                            [routerLink]="['/single-dealer',dele?.dealerId]">Go
+                                                                                            to dealer page
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </ng-container>
+                                                    <ng-template #noQuotaion>
+                                                        <h4>No Quotaion form any dealer</h4>
+                                                    </ng-template>
+        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                               
+                              
+                                <hr>
+
+                                <div class="card-header">
+                                    <div class="card-title">Images By User :</div>
+                                </div>
+                                <ng-container>
+
+                                    
+
+                                    <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                        <div class="field-wrapper">
+                                            <input type="datetime-local" [(ngModel)]="scheduledDate"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="selectDate($event.target)"
+                                                placeholder="Enetr Schecdule time" />
+                                            <div class="field-placeholder">
+                                                Schedule Pick Up <span class="text-danger">*</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                        <div class="field-wrapper">
+                                            <input type="text" formControlName="canclePickupReason"
+                                                placeholder="Enetr Schecdule Reason" />
+                                            <div class="field-placeholder">
+                                                Cancel Schedule Reason <span class="text-danger">*</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                        <div class="field-wrapper">
+
+
+                                            <select class="select-single js-states" [(ngModel)]="confirmedByUser"
+                                                [ngModelOptions]="{standalone: true}" title="Select Dealer City"
+                                                data-live-search="true" (change)="userConfirm($event.target)">
+                                                <option selected disabled value="">Select User Confirm</option>
+                                                <option value="true">True</option>
+                                                <option value="false">False</option>
+                                            </select>
+                                            <div class="field-placeholder">
+                                                User Confirmation <span class="text-danger">*</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                        <div class="field-wrapper">
+                                            <select class="select-single js-states" title="Select Dealer City"
+                                                data-live-search="true" [(ngModel)]="confirmedByDealer"
+                                                [ngModelOptions]="{standalone: true}"
+                                                (change)="dealerConfirm($event.target)">
+                                                <option selected disabled value="">Select Dealer Confirm</option>
+                                                <option value="true">True</option>
+                                                <option value="false">False</option>
+                                            </select>
+                                            <div class="field-placeholder">
+                                                Dealer Confirmation <span class="text-danger">*</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </ng-container>
+
+
+
+                                <div class="accordion" id="faqAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                aria-expanded="false" aria-controls="collapseOne">
+                                                1. Vehicle images <span> ({{vehiclePic?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse"
+                                            aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addImg()">
+                                                            + Add Vehicle images
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <ng-container formArrayName="vehiclePictures"
+                                                    *ngFor="let item of abc.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 my-3">
+                                                        <input #uploadPic style="display:none" name="vehiclePictures"
+                                                            multiple type="file" placeholder=""
+                                                            (change)="changeListeners($event, i)">
+                                                        <a target="_blank" [href]="item?.value?.img" class="effects">
+                                                            <img class="img-fluid product-thumbnail"
+                                                                *ngIf="item?.value?.img" [src]="item?.value?.img"
+                                                                alt="Image">
+                                                        </a>
+                                                        <img style="width: 50px;" (click)="uploadPic.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+
+                                                        <button class="btn-danger" *ngIf="loginType == 'admin'" type="button"
+                                                            (click)="removeItem(i)">x</button>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingFive">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                                aria-expanded="false" aria-controls="collapseFive">
+                                                2. User Document Images <span> ({{userDocPic?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseFive" class="accordion-collapse collapse"
+                                            aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addUserDocImg()">
+                                                            + Add User Images
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <ng-container formArrayName="userDocumentsPictures"
+                                                    *ngFor="let item of abcUserDocPic.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6 my-3">
+                                                        <input #uploadPicUserDoc style="display:none"
+                                                            name="userDocumentsPictures" multiple type="file"
+                                                            placeholder=""
+                                                            (change)="userDocPicChangeListeners($event, i)">
+                                                        <img style="width: 50px;" (click)="uploadPicUserDoc.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                                        <h4>{{i+1}}</h4>
+                                                        <a target="_blank" [href]="item?.value?.img">
+                                                            <img *ngIf="item?.value?.img" class="product-thumbnail"
+                                                                [src]="item?.value?.img" alt="Image">
+                                                        </a>
+                                                        <button class="btn-danger" type="button"
+                                                            (click)="removeUserDocItem(i)" *ngIf="loginType == 'admin'">x</button>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                3. RC Images <span> ({{rcPictures?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                            aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addRcImg()">
+                                                            + Add RC Images
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <ng-container formArrayName="rcPictures"
+                                                    *ngFor="let item of abcRc.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6 my-3">
+
+
+
+
+
+
+                                                        <input #uploadPicRc style="display:none" name="rcPictures"
+                                                            multiple type="file" placeholder=""
+                                                            (change)="rcChangeListeners($event, i)">
+                                                        <img style="width: 50px;" (click)="uploadPicRc.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                                        <h4>{{i+1}}</h4>
+                                                        <a target="_blank" [href]="item?.value?.img">
+                                                            <img *ngIf="item?.value?.img" class="product-thumbnail"
+                                                                [src]="item?.value?.img" alt="Image">
+                                                        </a>
+
+
+
+
+
+                                                        <button class="btn-danger" type="button"
+                                                            (click)="removeRcItem(i)" *ngIf="loginType == 'admin'">x</button>
+
+                                                    </div>
+
+
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingFour">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                aria-expanded="false" aria-controls="collapseFour">
+                                                4. Engine Images : <span> ({{enginePic?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseFour" class="accordion-collapse collapse"
+                                            aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addEngineImg()">
+                                                            + Add Engine Images
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <ng-container formArrayName="enginePictures"
+                                                    *ngFor="let item of abcEnginePic.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6 my-3">
+                                                        <input #uploadPicEngine style="display:none"
+                                                            name="enginePictures" multiple type="file" placeholder=""
+                                                            (change)="enginePicChangeListeners($event, i)">
+                                                        <img style="width: 50px;" (click)="uploadPicEngine.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                                        <h4>{{i+1}}</h4>
+                                                        <a target="_blank" [href]="item?.value?.img">
+                                                            <img *ngIf="item?.value?.img" class="product-thumbnail"
+                                                                [src]="item?.value?.img" alt="Image">
+                                                        </a>
+                                                        <button class="btn-danger" type="button"
+                                                            (click)="removeEngineItem(i)" *ngIf="loginType == 'admin'">x</button>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-header">
+                                        <div class="card-title">Images By Dealer :</div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingSeven">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                                aria-expanded="false" aria-controls="collapseSix">
+                                                5. Dealer Scrap Letter images <span> ({{scrapLetterPic?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseSix" class="accordion-collapse collapse"
+                                            aria-labelledby="headingSeven" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addScrapImages()">
+                                                            + Add Scrap Letter Images
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <ng-container formArrayName="scrapLetterPictures"
+                                                    *ngFor="let item of abcScrap.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6 my-3">
+
+
+
+
+
+
+                                                        <input #uploadPicScrap style="display:none"
+                                                            name="scrapLetterPictures" multiple type="file"
+                                                            placeholder="" (change)="scrapChangeListeners($event, i)">
+                                                        <img style="width: 50px;" (click)="uploadPicScrap.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                                        <h4>{{i+1}}</h4>
+                                                        <a target="_blank" [href]="item?.value?.img">
+                                                            <img *ngIf="item?.value?.img" class="product-thumbnail"
+                                                                [src]="item?.value?.img" alt="Image">
+                                                        </a>
+
+
+
+
+
+                                                        <button class="btn-danger" type="button"
+                                                            (click)="removeScrapItem(i)" *ngIf="loginType == 'admin'">x</button>
+
+                                                    </div>
+
+
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingThree">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                6. Chasis Images <span> ({{chasisPictures?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse"
+                                            aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addChasisImg()">
+                                                            + Add Chasis Images
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <ng-container formArrayName="chasisPictures"
+                                                    *ngFor="let item of abcChasis.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6 my-3">
+
+
+
+
+
+
+                                                        <input #uploadPicChasis style="display:none"
+                                                            name="chasisPictures" multiple type="file" placeholder=""
+                                                            (change)="chasisChangeListeners($event, i)">
+                                                        <img style="width: 50px;" (click)="uploadPicChasis.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                                        <h4>{{i+1}}</h4>
+                                                        <a target="_blank" [href]="item?.value?.img">
+                                                            <img *ngIf="item?.value?.img" class="product-thumbnail"
+                                                                [src]="item?.value?.img" alt="Image">
+                                                        </a>
+
+
+
+
+
+                                                        <button class="btn-danger" type="button"
+                                                            (click)="removeChasisItem(i)" *ngIf="loginType == 'admin'">x</button>
+
+                                                    </div>
+
+
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingEight">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseEight"
+                                                aria-expanded="false" aria-controls="collapseEight">
+                                                7. Towing Images <span> ({{towingPic?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseEight" class="accordion-collapse collapse"
+                                            aria-labelledby="headingEight" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                <div class="card-header">
+                                                    <div class="card-title">Towing Images</div>
+
+                                                </div>
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addTowingImg()">
+                                                            + Add Towing Images
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <ng-container formArrayName="towingPictures"
+                                                    *ngFor="let item of abcTowingPic.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6 my-3">
+
+
+
+
+
+
+                                                        <input #uploadPicRc style="display:none" name="towingPictures"
+                                                            multiple type="file" placeholder=""
+                                                            (change)="towingPicChangeListeners($event, i)">
+                                                        <img style="width: 50px;" (click)="uploadPicRc.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                                        <h4>{{i+1}}</h4>
+                                                        <a target="_blank" [href]="item?.value?.img">
+                                                            <img *ngIf="item?.value?.img" class="product-thumbnail"
+                                                                [src]="item?.value?.img" alt="Image">
+                                                        </a>
+
+
+
+
+
+                                                        <button class="btn-danger" type="button"
+                                                            (click)="removeTowingItem(i)" *ngIf="loginType == 'admin'">x</button>
+
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingSix">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                                aria-expanded="false" aria-controls="collapseSix">
+                                                8. Scarapped Images <span> ({{scrapedPic?.length}})</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseSix" class="accordion-collapse collapse"
+                                            aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+
+                                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                                    <div class="field-wrapper">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            (click)="addScrapedImg()">
+                                                            + Add Scarapped Images
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <ng-container formArrayName="scrapPictures"
+                                                    *ngFor="let item of abcScrapedPic.controls; let i = index">
+                                                    <div [formGroupName]="i"
+                                                        class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6 my-3">
+                                                        <input #uploadPicScrapped style="display:none"
+                                                            name="scrapPictures" multiple type="file" placeholder=""
+                                                            (change)="scrapedPicChangeListeners($event, i)">
+                                                        <h4>{{i+1}}</h4>
+                                                        <img style="width: 50px;" (click)="uploadPicScrapped.click()"
+                                                            *ngIf="!item?.value?.img"
+                                                            src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+                                                        <h4>{{i+1}}</h4>
+                                                        <a target="_blank" [href]="item?.value?.img">
+                                                            <img *ngIf="item?.value?.img" class="product-thumbnail"
+                                                                [src]="item?.value?.img" alt="Image">
+                                                        </a>
+                                                        <button class="btn-danger" type="button"
+                                                            (click)="removeScrapedItem(i)" *ngIf="loginType == 'admin'">x</button>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <button class="btn btn-primary" type="submit">Update Lead</button>
+
+                                        <!-- <button *ngIf="vehiclePic?.length > 0" class="btn btn-warning m-3" -->
+                                            <button class="btn btn-warning m-3"
+                                            [copy-clipboard]="name"
+                                            (copied)="notify($event)"
+                                            type="button">
+                                      Share lead
+                                      <i class="icon-share text-info"></i>
+                                    </button>
+                                    
+                                        <button type="button" class="btn btn-primary" *ngIf="vehiclePic?.length > 0"
+                                            [routerLink]="['/product-data',leadId]">View</button>
+
+                                            <button class="btn btn-success m-3"
+                                            (click)="openWhatsApp(phoneNumber)"
+                                            type="button">
+                                      Open WhatsApp
+                                      <!-- <i class="icon-share text-info"></i> -->
+                                    </button>
+
+                                    </div>
+
+
+
+                                </div>
+
+
+                                <button class="btn btn-secondary" type="button" (click)="goBack()">Back</button>
+
+                            </div>
+
+                        </section>
+
+
+                        <div class="steps clearfix mt-5">
+                            <ul role="tablist">
+                                <li role="tab" class="first current" aria-disabled="false" aria-selected="true"><a
+                                        id="example-form-t-0" aria-controls="example-form-p-0"><span
+                                            class="current-info audible">current
+                                            step: </span><span class="number">1</span> Started </a></li>
+
+                                <li role="tab" [ngClass]="{'current': dealerQuotationList?.length > 0}" class="disabled"
+                                    aria-disabled="true"><a id="example-form-t-1" aria-controls="example-form-p-1"><span
+                                            class="number">2</span> Got Quotation</a></li>
+                                            
+                                <li role="tab" [ngClass]="{'current': isAssigned}" class="disabled last"
+                                    aria-disabled="true"><a id="example-form-t-2" aria-controls="example-form-p-2"><span
+                                            class="number">3</span> Assigned</a></li>
+
+                                <li role="tab" [ngClass]="{'current': scheduledDate}" class="disabled last"
+                                    aria-disabled="true"><a id="example-form-t-2" aria-controls="example-form-p-2"><span
+                                            class="number">4</span> Scheduled</a></li>
+
+                                <li role="tab" [ngClass]="{'current': towingPic?.length > 0}" class="disabled last"
+                                    aria-disabled="true"><a id="example-form-t-2" aria-controls="example-form-p-2"><span
+                                            class="number">5</span> Picked Up</a></li>
+
+                                <li role="tab" [ngClass]="{'current': scrapedPic?.length > 0}" class="disabled last"
+                                    aria-disabled="true"><a id="example-form-t-2" aria-controls="example-form-p-2"><span
+                                            class="number">6</span> Scraped</a></li>
+
+                                <li role="tab" [ngClass]="{'current': leadStatus == 'CLOSED'}" class="disabled last"
+                                    aria-disabled="true"><a id="example-form-t-2" aria-controls="example-form-p-2"><span
+                                            class="number">7</span> Completed</a></li>
+
+                                <li *ngIf="leadStatus == 'DEAL_CANCELLED'" role="tab"
+                                    [ngClass]="{'current': leadStatus == 'DEAL_CANCELLED'}" class="disabled last"
+                                    aria-disabled="true"><a id="example-form-t-2" aria-controls="example-form-p-2"><span
+                                            class="number">X</span> Canceled</a></li>
+                            </ul>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="card-header">
+                        <div class="card-title">Create Case :</div>
+                    </div>
+        
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseCaseStatus"
+                                    aria-expanded="false" aria-controls="collapseCaseStatus">
+                                    Case Status <span> ({{caseTrackingList?.length}})</span>
+                                </button>
+                            </h2>
+                            <div id="collapseCaseStatus" class="accordion-collapse collapse p-1"
+                                aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <!-- <div class="accordion-body"> -->
+                                    <!-- <ng-container> -->
+                                        <!-- <hr> -->
+        
+                                        <div class="card-header">
+                                            
+                                            <h4>Create Case Track </h4>
+                                            
+        
+                                        </div>
+                                        <div>
+                                            <ng-container formArrayName="items"
+                                                *ngFor="let item of abcd.controls; let i = index">
+                                                <div [formGroupName]="i" class="add-img-input">
+        
+        
+                                                    <div class="row">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <textarea name="" id="" cols="3" rows="3" placeholder="Enetr Case Comment"
+                                                                class="border-danger" [(ngModel)]="caseComment"
+                                                                [ngModelOptions]="{standalone: true}"></textarea>
+                                                                <div class="field-placeholder">
+                                                                    Case Comment
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <select
+                                                                class="select-single js-states text-dark"
+                                                                (change)="updateCaseType($event?.target)"
+                                                                [(ngModel)]="caseType"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                title="Select Case Type"
+                                                                data-live-search="true">
+                                                            <option disabled selected>Select Case Type</option>
+                                                            <option *ngFor="let status of caseTypeOptions" [value]="status.value">
+                                                                {{ status.label }}
+                                                            </option>
+                                                        </select>
+                                                                <div class="field-placeholder">
+                                                                    
+                                                                    Case Type <span class="text-danger">*</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <select
+                                                                class="select-single js-states text-dark"
+                                                                (change)="updateCaseStatus($event?.target)"
+                                                                [(ngModel)]="caseTrackingStatus"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                title="Select Case Status"
+                                                                data-live-search="true">
+                                                            <option disabled selected>Select Case Status</option>
+                                                            <option *ngFor="let status of caseStatusOptions" [value]="status.value">
+                                                                {{ status.label }}
+                                                            </option>
+                                                        </select>
+                                                                <div class="field-placeholder">
+                                                                    
+                                                                    Case Status <span class="text-danger">*</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <select
+                                                                class="select-single js-states text-dark"
+                                                                (change)="updateCaseIssueBy($event?.target)"
+                                                                [(ngModel)]="caseIssueBy"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                title="Select Case Issue By"
+                                                                data-live-search="true">
+                                                            <option disabled selected>Select Case Issue By</option>
+                                                            <option value="user">User</option>
+                                                            <option value="dealer">Dealer</option>
+                                                            <option value="dealer">Staff</option>
+
+                                                        </select>
+                                                                    
+                                                                    Case Issue By <span class="text-danger">*</span>
+                                                                </div>
+                                                           
+                                                        </div>
+                                                        <!-- <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                               <input type="text" placeholder="Enter Given Price" [(ngModel)]="givenPrice" [ngModelOptions]="{standalone: true}">
+                                                                <div class="field-placeholder">
+                                                                    
+                                                                    Given Price <span class="text-danger">*</span>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <button class="btn btn-secondary" [disabled]="!caseTrackingStatus"
+                                                                    (click)="updateCaseStatusData()" type="button">Update
+                                                                    Case Track</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+        
+        
+                                                </div>
+        
+        
+                                            </ng-container>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-title">Case Track List</div>
+        
+                                            <div class="table-responsive">
+                                                <ng-container *ngIf="caseTrackingList?.length >0; else noCase">
+                                                    <table id="copy-print-csv" class="table v-middle">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Status</th>
+                                                                <th>Case Type</th>
+                                                                <th>Case Issue By</th>
+                                                                <th>Dealer Name</th>
+                                                                <th>Dealer UserName</th>
+                                                                <th>user Ph</th>
+                                                                <th>Staff Name</th>
+                                                                <th>Staff UserName</th>
+                                                                <th>Called At</th>
+                                                                <th>Comment</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngFor="let dele of caseTrackingList;let i= index">
+                                                            <tr>
+                                                                <td>{{i+1}}</td>
+                                                                <td>{{dele?.status}}</td>
+                                                                <td>{{dele?.caseType}}</td>
+                                                                <td>{{dele?.caseIssueBy}}</td>
+                                                                <td>{{dele?.dealerName}}</td>
+                                                                <td>{{dele?.dealerUserName}}</td>
+                                                                <td>{{dele?.userPhoneNo}}</td>
+                                                                <td>{{dele?.staffName}}</td>
+                                                                <td>{{dele?.staffUserName}}</td>
+                                                                <td>{{dele?.calledDate | date:'short'}}</td>
+                                                                <td>{{dele?.comment}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ng-container>
+                                                <ng-template #noCase>
+                                                    <h4>No Case Created Yet</h4>
+                                                </ng-template>
+        
+                                            </div>
+                                        </div>
+                                    <!-- </ng-container> -->
+                                   
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        </div>
+                   </div>
+
+                <div class="card-body">
+                    <div class="card-header">
+                        <div class="card-title">Call Status :</div>
+                    </div>
+        
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseCallStatus"
+                                    aria-expanded="false" aria-controls="collapseCallStatus">
+                                    Calls Status <span> ({{callTrackingList?.length}})</span>
+                                </button>
+                            </h2>
+                            <div id="collapseCallStatus" class="accordion-collapse collapse p-1"
+                                aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <!-- <div class="accordion-body"> -->
+                                    <!-- <ng-container> -->
+                                        <!-- <hr> -->
+        
+                                        <div class="card-header">
+                                            
+                                            <h4>Add Call Track </h4>
+                                            
+        
+                                        </div>
+                                        <div>
+                                            <ng-container formArrayName="items"
+                                                *ngFor="let item of abcd.controls; let i = index">
+                                                <div [formGroupName]="i" class="add-img-input">
+        
+        
+                                                    <div class="row">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <textarea name="" id="" cols="3" rows="3" placeholder="Enetr Comment"
+                                                                class="border-danger" [(ngModel)]="userComment"
+                                                                [ngModelOptions]="{standalone: true}"></textarea>
+                                                                <div class="field-placeholder">
+                                                                    Comment
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <select
+                                                                class="select-single js-states text-dark"
+                                                                (change)="updateCallingStatus($event?.target)"
+                                                                [(ngModel)]="callTrackingStatus"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                title="Select Product Category"
+                                                                data-live-search="true">
+                                                            <option disabled selected>Select Lead Status</option>
+                                                            <option disabled>NEW-LEAD</option>
+                                                            <option *ngFor="let status of leadStatusOptions" [value]="status.value">
+                                                                {{ status.label }}
+                                                            </option>
+                                                        </select>
+                                                                <div class="field-placeholder">
+                                                                    
+                                                                    Call Status <span class="text-danger">*</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                               <input type="text" placeholder="Enter Asking Price" [(ngModel)]="askingPrice" [ngModelOptions]="{standalone: true}" >
+                                                                <div class="field-placeholder">
+                                                                    
+                                                                    Asking Price <span class="text-danger">*</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                               <input type="text" placeholder="Enter Given Price" [(ngModel)]="givenPrice" [ngModelOptions]="{standalone: true}">
+                                                                <div class="field-placeholder">
+                                                                    
+                                                                    Given Price <span class="text-danger">*</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6  col-6">
+                                                            <div class="field-wrapper">
+                                                                <button class="btn btn-secondary" [disabled]="!callTrackingStatus"
+                                                                    (click)="updateStatusData()" type="button">Update
+                                                                    Call Track</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+        
+        
+                                                </div>
+        
+        
+                                            </ng-container>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-title">Call Track  List</div>
+        
+                                            <div class="table-responsive">
+                                                <ng-container *ngIf="callTrackingList?.length >0; else noCalls">
+                                                    <table id="copy-print-csv" class="table v-middle">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Status</th>
+                                                                <th>Asking Price</th>
+                                                                <th>Given Price</th>
+                                                                <th>Staff Name</th>
+                                                                <th>Staff UserName</th>
+                                                                <th>Called At</th>
+                                                                <th>Comment</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngFor="let dele of callTrackingList;let i= index">
+                                                            <tr>
+                                                                <td>{{i+1}}</td>
+                                                                <td>{{dele?.status}}</td>
+                                                                <td>{{dele?.askingPrice}}</td>
+                                                                <td>{{dele?.givenPrice}}</td>
+                                                                <td>{{dele?.staffName}}</td>
+                                                                <td>{{dele?.staffUserName}}</td>
+                                                                <td>{{dele?.calledDate | date:'short'}}</td>
+                                                                <td>{{dele?.comment}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ng-container>
+                                                <ng-template #noCalls>
+                                                    <h4>No Call Status Yet</h4>
+                                                </ng-template>
+        
+                                            </div>
+                                        </div>
+                                    <!-- </ng-container> -->
+                                   
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        </div>
+                   </div>
+
+            </form>
+        </div>
+    </div>
+
+
+</div>

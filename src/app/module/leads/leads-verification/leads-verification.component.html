@@ -1,0 +1,41 @@
+<ngx-spinner></ngx-spinner>
+
+  <!-- Row start -->
+  <div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="copy-print-csv" class="table v-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Added Date</th>
+                                <th>Phone No</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let abc of getList; let i = index">
+                            <tr [ngClass]="{'bg-primary text-white' : showDate == abc?.createdAtVariable}">
+                                <td>{{i+1}}</td>
+                                <td>{{abc?.createdAt | date:'short'}}</td>
+                                <td>{{abc?.phoneNumber}}</td>
+                                <td>
+                                  <span class="badge" [ngClass]="abc?.phoneisVerified == true ? 'bg-success' : 'bg-danger'">{{abc?.phoneisVerified}}</span>
+                              </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Row end -->

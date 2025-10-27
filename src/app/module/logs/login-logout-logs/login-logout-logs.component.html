@@ -1,0 +1,49 @@
+<!-- Row start -->
+<!-- <app-spinner *ngIf="loader"></app-spinner> -->
+
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="copy-print-csv" class="table v-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Full Name</th>
+                                <th>Log Type</th>
+                                <!-- <th>Picture</th> -->
+                                <th>Account Type</th>
+                                <th>Date/Time</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let dele of allDealers;let i= index">
+                            <tr>
+                                <td>{{i+1}}</td>
+                                <td>{{dele?.fullName}}</td>
+                                <td [ngClass]="{
+                                    'success': dele?.logType === 'login',
+                                    'danger': dele?.logType === 'logout'
+                                  }">{{dele?.logType}}</td>
+                                <!-- <td><img src="{{dele?.photos}}" alt="" width="65" height="60" class="rounded-circle"> </td> -->
+
+                                <td>{{dele?.accountType}}</td>
+                                <td>{{dele?.createdAt | date:'short'}}</td>
+
+                                <td>
+                                    <div class="actions d-flex justify-content-between">
+                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" (click)="deleteItem(dele?._id)">
+                                            <i data-toggle="tooltip" data-placement="top" title="Delete" class="icon-x-circle text-danger"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

@@ -1,0 +1,87 @@
+<ngx-spinner></ngx-spinner>
+
+<!-- Row start -->
+<div class="row">
+  <div class="col-12">
+    <div class="field-wrapper">
+      <select class="select-single js-states" title="Select Dealer City" (change)="getDealersByCity($event.target)"
+        data-live-search="true">
+        <option selected disabled value="">Select City</option>
+        <option value="allCities">All Cities</option>
+        <option value="">No City added</option>
+        <option [value]="ci?.cityName" *ngFor="let ci of cityList">
+          {{ci?.cityName}}</option>
+      </select>
+      <div class="field-placeholder">Filter Dealer By City <span class="text-danger">*</span></div>
+    </div>
+  </div>
+</div>
+<!-- Row start -->
+<!-- <app-spinner *ngIf="loader"></app-spinner> -->
+
+<div class="row gutters">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card">
+          <div class="card-body">
+              <div class="table-responsive">
+                  <table id="copy-print-csv" class="table v-middle">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>Dealer Name</th>
+                              <th>user name</th>
+                              <th>business name</th>
+                              <th>Email</th>
+                              <th>City</th>
+                              <th>Phone No</th>
+                              <th>Created Date</th>
+                              <th>Phone Otp Verified</th>
+                              <th>is Details Verified</th>
+                              <th>Initial Verification</th>
+                              <!-- <th>password</th>
+                              <th>Status</th> -->
+
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngFor="let dele of allDealers;let i= index">
+                          <tr>
+                              <td>{{i+1}}</td>
+                              <td>{{dele?.fullName}}</td>
+                              <td>{{dele?.username}}</td>
+                              <td>{{dele?.businessName}}</td>
+                              <td>{{dele?.email}}</td>
+                              <td>{{dele?.cityName}}</td>
+                              <!-- <td><img src="{{dele?.photos}}" alt="" width="65" height="60" class="rounded-circle"> </td> -->
+
+                              <td>{{dele?.phoneNumber}}</td>
+                              <td>{{dele?.createdAt | date:'short'}}</td>
+                              <td>{{dele?.isOtpVerified}}</td>
+                              <td>{{dele?.isDetailsVerified}}</td>
+                              <td>{{dele?.initialVerification == 'true' ?'Verified':'Not Verified'}}</td>
+                              <!-- <td>{{dele?.password}}</td> -->
+
+                              <!-- <td>{{dele?.status == 'true' ?'Active':'Blocked'}}</td> -->
+
+                              <td>
+                                  <div class="actions d-flex justify-content-between">
+                                      <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" [routerLink]="['/edit-dealer',dele?._id]" [queryParams]="{editmode:true}">
+                                          <i data-toggle="tooltip" data-placement="top" title="Edit" tooltip class="icon-edit1 text-info"></i>
+                                      </a>
+                                      <!-- <a data-toggle="tooltip" data-placement="top" title="" data-original-title="View" [routerLink]="['/view-dealer',dele?._id]" [queryParams]="{viewmode:true}">
+                                          <i data-toggle="tooltip" data-placement="top" title="View" class="icon-eye1 text-success"></i>
+                                      </a> -->
+                                      <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" (click)="deleteDealer(dele?._id)">
+                                          <i data-toggle="tooltip" data-placement="top" title="Delete" class="icon-x-circle text-danger"></i>
+                                      </a>
+                                  </div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Row end -->

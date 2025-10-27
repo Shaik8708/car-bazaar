@@ -1,0 +1,134 @@
+<!-- Row start -->
+<!-- <app-spinner *ngIf="loader"></app-spinner> -->
+
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <!-- <div class="card-title">Add New Employee</div> -->
+            </div>
+            <form [formGroup]="addDealerForm" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+                    <div id="example-form" class="wizard clearfix">
+
+                        <section>
+                            <h6 class="h-0 m-0">&nbsp;</h6>
+                            <div class="row gutters">
+                              
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="title" name="title" placeholder="Enter Title" />
+                                        <div class="field-placeholder">
+                                            Title <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="description" name="description" placeholder="Enter Description" />
+                                        <div class="field-placeholder">
+                                            Description <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="metaTitle" name="metaTitle" placeholder="Enetr Meta Title" />
+                                        <div class="field-placeholder">
+                                            Meta Title <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="metaDescription" name="metaDescription" placeholder="Enetr Meta Description" />
+                                        <div class="field-placeholder">
+                                            Meta Description <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            
+
+                            </div>
+                            <div class="row gutters">
+                             
+                           
+                          
+
+                            
+
+                                <hr>
+
+                                <div class="card-header mt-3">
+                                    <div class="card-title">Document images</div>
+                                    <!-- <h3>Vehicle images</h3> -->
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3  col-6">
+                                    <div class="field-wrapper">
+                                        <button type="button" class="btn btn-secondary" (click)="addImg()">
+                                                +
+                                            </button>
+                                    </div>
+                                </div>
+
+                                <!-- 
+                                <button type="button" class="btn btn-primary addImage" (click)="addImg()">
+                                    Add Image
+                                </button> -->
+
+
+                                <!-- <ng-container formArrayName="blogPictures" *ngFor="let item of abc.controls; let i = index">
+                                    <div [formGroupName]="i" class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6  my-3" *ngIf="!isEdit">
+                                        <input name="documentsImages" multiple formControlName="imgName" type="file" placeholder="" (change)="changeListeners1($event, i)">
+                                        <label class="js-labelFile">
+                                            <i class="fa fa-upload imgNo"></i>
+                                         *</label>
+
+                                        <button class="btn btn-danger" (click)="removeItem(i)">Delete</button>
+
+                                    </div>
+
+                                </ng-container> -->
+
+
+                                <ng-container formArrayName="blogPictures" *ngFor="let item of abc.controls; let i = index">
+                                    <div [formGroupName]="i" class="add-img-input col-xl-3 col-lg-3 col-md-3  col-6  my-3">
+
+                                        <input #uploadPic style="display:none" name="blogPictures" formControlName="imgName" multiple type="file" placeholder="" (change)="changeListeners1($event,i)">
+                                        <img style="width: 50px;" (click)="uploadPic.click()" *ngIf="!item?.value?.img" src="../../../../assets/img/uploadImgIcon.jpg" alt="">
+<input type="text"  name="blogPictures" formControlName="altText">
+                                        <a target="_blank" [href]="item?.value?.img">
+                                            <img style="width: 100px;" *ngIf="item?.value?.img" [src]="item?.value?.img" alt="Image">
+                                        </a>
+                                        <label class="js-labelFile">
+                                        <i class="fa fa-upload imgNo"></i>
+                                    </label>
+
+                                        <button class="btn-danger" (click)="removeItem(i)">x</button>
+
+                                    </div>
+
+                                    <!-- <img src="../../../../assets/img/avatars/01_80x80.png" alt="input-img" class="input-img" /> -->
+                                </ng-container>
+
+                            </div>
+                        </section>
+                        <div class="actions clearfix">
+                            <ul role="menu" aria-label="Pagination">
+                                <button class="btn btn-danger" type="button" routerLink="/employees">Cancel</button>
+
+                                <button class="btn btn-primary" type="submit" *ngIf="!isView">Add</button>
+
+                                <!-- <li aria-hidden="true" style="display: none">
+                  <a href="#finish" role="menuitem">Finish</a>
+                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Row end -->

@@ -1,0 +1,169 @@
+<!-- Row start -->
+<!-- <app-spinner *ngIf="loader"></app-spinner> -->
+
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <!-- <div class="card-title">Add New Staff</div> -->
+            </div>
+            <form [formGroup]="addStaffForm" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+                    <div id="example-form" class="wizard clearfix">
+
+                        <section>
+                            <h6 class="h-0 m-0">&nbsp;</h6>
+                            <div class="row gutters">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="staffName" name="staffName"
+                                            placeholder="Enetr Staff Name" />
+                                        <div class="field-placeholder">
+                                            Staff Name <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="caseType" name="caseType"
+                                            placeholder="Enetr caseType" />
+                                        <div class="field-placeholder">
+                                            caseType <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="caseIssueBy" name="caseIssueBy"
+                                            placeholder="Enetr caseIssueBy" />
+                                        <div class="field-placeholder">
+                                            caseIssueBy <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="userPhoneNo" name="userPhoneNo"
+                                            placeholder="Enetr Phone Number" [maxlength]="10" [readOnly]="editId" />
+                                        <div class="field-placeholder">
+                                            Phone Number <span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="password" name="postalCode"
+                                            placeholder="password" />
+                                        <div class="field-placeholder">
+                                            Password
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="dealerName" formControlName="dealerName" name="dealerName"
+                                            placeholder="Enter dealerName" />
+                                        <div class="field-placeholder">
+                                            dealerName<span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="date" formControlName="calledDate" name="calledDate" placeholder="Enter dealerUserName" />
+                                        <div class="field-placeholder">
+                                            Case Created Date<span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="city" name="city"
+                                            placeholder="Enter City" />
+                                        <div class="field-placeholder">
+                                            City<span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+                                    <div class="field-wrapper">
+
+                                        <select class="select-single js-states" title="Select Dealer City"
+                                            formControlName="status" data-live-search="true">
+                                            <option selected disabled value="">Select Status</option>
+                                            <option value="false">Inactive</option>
+                                            <option value="true">Active</option>
+                                        </select>
+                                        <div class="field-placeholder">Status <span class="text-danger">*</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="comment" name="comment"
+                                            placeholder="Enter comment" />
+                                        <div class="field-placeholder">
+                                            comment<span class="text-danger">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="refferedBy" name="refferedBy"
+                                            placeholder="Enter Reffered By" />
+                                        <div class="field-placeholder">
+                                            Reffered By
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="refferedByPhoneNo" name="refferedByPhoneNo"
+                                            placeholder="Enter Reffered Ph" />
+                                        <div class="field-placeholder">
+                                            Reffered By Phone No
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="editId">
+                                    <div class="field-wrapper">
+                                        <input type="text" formControlName="staffId" name="staffId"
+                                            placeholder="Enter staffId"  readonly/>
+                                        <div class="field-placeholder">
+                                            Staff staffId [Read Only]
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="enableOtpInput">
+                                    <div class="field-wrapper">
+                                        <input type="text" [(ngModel)]="otp" name="otp" placeholder="otp" />
+                                        <div class="field-placeholder">
+                                            OTP
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </section>
+                        <div class="actions clearfix">
+                            <ul role="menu" aria-label="Pagination">
+                                <!-- <button class="btn btn-danger m-2"  [disabled]="!addStaffForm?.valid" type="button" (click)="nativateTo()">Register Staff
+                                </button>
+                                <button class="btn btn-primary"  [disabled]="!addStaffForm?.valid"
+                                    type="submit">Update Staff Details</button> -->
+                                <button class="btn btn-primary m-2" [routerLink]="['/edit-lead', leadId]"
+                                    type="button">Open Lead</button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
