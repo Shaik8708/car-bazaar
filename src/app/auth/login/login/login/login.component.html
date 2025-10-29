@@ -1,36 +1,45 @@
 <loading *ngIf="isLoading">{{ isLoading }}</loading>
 
 <div class="login-container">
-    <div class="container-fluid h-100">
-        <!-- Row start -->
-        <div class="row g-0 h-100">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                <div class="login-about">
-                    <div class="slogan">
-                        <span class="text-white">Car Basket</span>
-                        <!-- <span class="text-white">Admin Panel</span> -->
-                    </div>
-                    <div class="about-desc   text-white">
-                        We are the most trusted Vehicle Scrapping Facilitator (VSF) in PAN India & we do all types of
-                        vehicle scrap bike, car, bus, goods carriages, agri and construction vehicle scrapping as stress
-                        free & transparent to the customer.
-                    </div>
-                    <!-- <a href="crm.html" class="know-more"
+  <div class="container-fluid h-100">
+    <!-- Row start -->
+    <div class="row g-0 h-100">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="login-about">
+          <div class="slogan">
+            <span class="text-white">Car Bazaar</span>
+            <!-- <span class="text-white">Admin Panel</span> -->
+          </div>
+          <div class="about-desc text-white">
+            We are the most trusted Vehicle Scrapping Facilitator (VSF) in PAN
+            India & we do all types of vehicle scrap bike, car, bus, goods
+            carriages, agri and construction vehicle scrapping as stress free &
+            transparent to the customer.
+          </div>
+          <!-- <a href="crm.html" class="know-more"
             >Know More <img src="img/right-arrow.svg" alt="Uni Pro Admin"
           /></a> -->
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                <div class="login-wrapper">
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="user-data-form mt-40 lg-mt-30">
-                        <div class="login-screen">
-                            <div class="login-body">
-                                <a href="#" class="login-logo">
-                                    <img src="../../../../../assets/img/logo.png" style="width: inherit;" alt="iChat" />
-                                </a>
-                                <h6>Welcome back,<br />Please login to your account.</h6>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="login-wrapper">
+          <form
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+            class="user-data-form mt-40 lg-mt-30"
+          >
+            <div class="login-screen">
+              <div class="login-body">
+                <a href="#" class="login-logo">
+                  <img
+                    src="../../../../../assets/img/logo.png"
+                    style="width: inherit"
+                    alt="iChat"
+                  />
+                </a>
+                <h6>Welcome back,<br />Please login to your account.</h6>
 
-                                <!-- <div class="field-wrapper">
+                <!-- <div class="field-wrapper">
                                     <select name="" id="" (change)="changeType($event)" [(ngModel)]="selectedType" [ngModelOptions]="{standalone: true}">
                                         <option value="">Select Type</option>
                                         <option value="staff">Staff</option>
@@ -38,35 +47,43 @@
                                     </select>
                                     <div class="field-placeholder">Type</div>
                                 </div> -->
-                                <div class="field-wrapper">
-                                    <input type="text" formControlName="phoneNumber" placeholder="Phone Number"
-                                        autofocus />
-                                    <div class="field-placeholder">Phone Number</div>
-                                </div>
-                                <!-- <div class="field-wrapper" *ngIf="selectedType == 'staff'">
+                <div class="field-wrapper">
+                  <input
+                    type="text"
+                    formControlName="phoneNumber"
+                    placeholder="Phone Number"
+                    autofocus
+                  />
+                  <div class="field-placeholder">Phone Number</div>
+                </div>
+                <!-- <div class="field-wrapper" *ngIf="selectedType == 'staff'">
                                     <input type="email" formControlName="email" placeholder="email"
                                         autofocus />
                                     <div class="field-placeholder">Email</div>
                                 </div> -->
-                                <div class="field-wrapper mb-3">
-                                    <input type="password" formControlName="password" placeholder="Enter Password"
-                                        class="pass_log_id" />
-                                    <div class="field-placeholder">Password</div>
-                                </div>
-                                <div class="actions">
-                                    <!-- <a href="#">Forgot password?</a> -->
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                </div>
-                            </div>
-                            <!-- <div class="login-footer">
+                <div class="field-wrapper mb-3">
+                  <input
+                    type="password"
+                    formControlName="password"
+                    placeholder="Enter Password"
+                    class="pass_log_id"
+                  />
+                  <div class="field-placeholder">Password</div>
+                </div>
+                <div class="actions">
+                  <!-- <a href="#">Forgot password?</a> -->
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+              </div>
+              <!-- <div class="login-footer">
                                 <span class="additional-link">No Account?
                                     <a href="#" class="btn btn-light">Sign Up</a></span>
                             </div> -->
-                        </div>
-                    </form>
-                </div>
             </div>
+          </form>
         </div>
-        <!-- Row end -->
+      </div>
     </div>
+    <!-- Row end -->
+  </div>
 </div>

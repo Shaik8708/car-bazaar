@@ -1,79 +1,124 @@
-<nav class="sidebar-wrapper" (click)="checkUrl()" [ngClass]="href == '/login' ? 'hidden' : 'visible'">
-
-    <!-- Sidebar content start -->
-    <div class="sidebar-tabs">
-
-        <!-- Tabs nav start -->
-        <div class="nav" role="tablist" aria-orientation="vertical">
-            <!-- <a href="#" class="logo">
+<nav
+  class="sidebar-wrapper"
+  (click)="checkUrl()"
+  [ngClass]="href == '/login' ? 'hidden' : 'visible'"
+>
+  <!-- Sidebar content start -->
+  <div class="sidebar-tabs">
+    <!-- Tabs nav start -->
+    <div class="nav" role="tablist" aria-orientation="vertical">
+      <!-- <a href="#" class="logo">
     <img src="../../../favicon.ico" alt="Uni Pro Admin">
   </a> -->
-            <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#tab-home" role="tab" aria-controls="tab-home"
-                aria-selected="false" *ngIf="loginType == 'admin'">
-                <i class="icon-home2"></i>
-                <span class="nav-link-text">Dashboards</span>
-            </a>
-            <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#tab-product" role="tab"
-                aria-controls="tab-product" aria-selected="true">
-                <i class="icon-layers2"></i>
-                <span class="nav-link-text">Leads</span>
-            </a>
-            <!-- <a class="nav-link" id="pages-tab" data-bs-toggle="tab" href="#tab-pages" role="tab" aria-controls="tab-pages" aria-selected="false">
+      <a
+        class="nav-link"
+        id="home-tab"
+        data-bs-toggle="tab"
+        href="#tab-home"
+        role="tab"
+        aria-controls="tab-home"
+        aria-selected="false"
+        *ngIf="loginType == 'admin'"
+      >
+        <i class="icon-home2"></i>
+        <span class="nav-link-text">Dashboards</span>
+      </a>
+      <a
+        class="nav-link active"
+        id="product-tab"
+        data-bs-toggle="tab"
+        href="#tab-product"
+        role="tab"
+        aria-controls="tab-product"
+        aria-selected="true"
+      >
+        <i class="icon-layers2"></i>
+        <span class="nav-link-text">Leads</span>
+      </a>
+      <!-- <a class="nav-link" id="pages-tab" data-bs-toggle="tab" href="#tab-pages" role="tab" aria-controls="tab-pages" aria-selected="false">
     <i class="icon-book-open"></i>
     <span class="nav-link-text">Pages</span>
   </a> -->
-            <a class="nav-link" id="forms-tab" data-bs-toggle="tab" href="#tab-forms" role="tab"
-                aria-controls="tab-forms" aria-selected="false" *ngIf="loginType == 'admin'">
-                <i class="icon-edit1"></i>
-                <span class="nav-link-text">Data</span>
-            </a>
-            <!-- <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#tab-components" role="tab" aria-controls="tab-components" aria-selected="false">
+      <a
+        class="nav-link"
+        id="forms-tab"
+        data-bs-toggle="tab"
+        href="#tab-forms"
+        role="tab"
+        aria-controls="tab-forms"
+        aria-selected="false"
+        *ngIf="loginType == 'admin'"
+      >
+        <i class="icon-edit1"></i>
+        <span class="nav-link-text">Data</span>
+      </a>
+      <!-- <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#tab-components" role="tab" aria-controls="tab-components" aria-selected="false">
     <i class="icon-box"></i>
     <span class="nav-link-text">Components</span>
   </a> -->
-            <!-- <a class="nav-link" id="graphs-tab" data-bs-toggle="tab" href="#tab-graphs" role="tab" aria-controls="tab-graphs" aria-selected="false">
+      <!-- <a class="nav-link" id="graphs-tab" data-bs-toggle="tab" href="#tab-graphs" role="tab" aria-controls="tab-graphs" aria-selected="false">
     <i class="icon-pie-chart1"></i>
     <span class="nav-link-text">Graphs</span>
   </a> -->
-            <a class="nav-link" id="authentication-tab" data-bs-toggle="tab" href="#tab-authentication" role="tab"
-                aria-controls="tab-authentication" aria-selected="false" *ngIf="loginType == 'admin'">
-                <i class="icon-unlock"></i>
-                <span class="nav-link-text">Authentication</span>
-            </a>
-            <a class="nav-link settings" id="settings-tab" data-bs-toggle="tab" href="#tab-settings" role="tab"
-                aria-controls="tab-authentication" aria-selected="false">
-                <i class="icon-settings1"></i>
-                <span class="nav-link-text">Settings</span>
-            </a>
-        </div>
-        <!-- Tabs nav end -->
+      <a
+        class="nav-link"
+        id="authentication-tab"
+        data-bs-toggle="tab"
+        href="#tab-authentication"
+        role="tab"
+        aria-controls="tab-authentication"
+        aria-selected="false"
+        *ngIf="loginType == 'admin'"
+      >
+        <i class="icon-unlock"></i>
+        <span class="nav-link-text">Authentication</span>
+      </a>
+      <a
+        class="nav-link settings"
+        id="settings-tab"
+        data-bs-toggle="tab"
+        href="#tab-settings"
+        role="tab"
+        aria-controls="tab-authentication"
+        aria-selected="false"
+      >
+        <i class="icon-settings1"></i>
+        <span class="nav-link-text">Settings</span>
+      </a>
+    </div>
+    <!-- Tabs nav end -->
 
-        <!-- Tabs content start -->
-        <div class="tab-content">
+    <!-- Tabs content start -->
+    <div class="tab-content">
+      <!-- Chat tab -->
+      <div
+        class="tab-pane fade"
+        id="tab-home"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">Dashboards</div>
+        <!-- Tab content header end -->
 
-            <!-- Chat tab -->
-            <div class="tab-pane fade" id="tab-home" role="tabpanel" aria-labelledby="home-tab">
-
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    Dashboards
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Sidebar menu starts -->
-                <div class="sidebarMenuScroll">
-                    <div class="sidebar-menu">
-                        <ul>
-                            <li (click)="close()">
-                                <a routerLink="/dashboard" routerLinkActive="current-page">Dashboard</a>
-                            </li>
-                            <li (click)="close()">
-                                <a routerLink="/analytics" routerLinkActive="current-page">Analytics</a>
-                            </li>
-                            <li (click)="close()">
-                                <a routerLink="/sales" routerLinkActive="current-page">Sales</a>
-                            </li>
-                            <!-- <li (click)="close()">
+        <!-- Sidebar menu starts -->
+        <div class="sidebarMenuScroll">
+          <div class="sidebar-menu">
+            <ul>
+              <li (click)="close()">
+                <a routerLink="/dashboard" routerLinkActive="current-page"
+                  >Dashboard</a
+                >
+              </li>
+              <li (click)="close()">
+                <a routerLink="/analytics" routerLinkActive="current-page"
+                  >Analytics</a
+                >
+              </li>
+              <li (click)="close()">
+                <a routerLink="/sales" routerLinkActive="current-page">Sales</a>
+              </li>
+              <!-- <li (click)="close()">
                               <a href="crm.html">CRM</a>
                           </li>
                           <li (click)="close()">
@@ -88,8 +133,8 @@
                           <li (click)="close()">
                               <a href="profile.html">Profile</a>
                           </li> -->
-                        </ul>
-                        <!-- <ul>
+            </ul>
+            <!-- <ul>
                           <li class="list-heading">Layouts</li>
                           <li (click)="close()">
                               <a href="starter-page.html">Starter Page</a>
@@ -134,12 +179,12 @@
                               <a href="layout-scroll-cards.html">Scroll Cards</a>
                           </li>
                       </ul> -->
-                    </div>
-                </div>
-                <!-- Sidebar menu ends -->
+          </div>
+        </div>
+        <!-- Sidebar menu ends -->
 
-                <!-- Sidebar actions starts -->
-                <!-- <div class="sidebar-actions">
+        <!-- Sidebar actions starts -->
+        <!-- <div class="sidebar-actions">
                     <a href="orders.html" class="red">
                         <div class="bg-avatar">12</div>
                         <h5>New Orders</h5>
@@ -149,45 +194,57 @@
                         <h5>Bills Pending</h5>
                     </a>
                 </div> -->
-                <!-- Sidebar actions ends -->
+        <!-- Sidebar actions ends -->
+      </div>
 
-            </div>
+      <!-- Pages tab -->
+      <div
+        class="tab-pane fade show active"
+        id="tab-product"
+        role="tabpanel"
+        aria-labelledby="product-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">All Leads</div>
+        <!-- Tab content header end -->
 
-            <!-- Pages tab -->
-            <div class="tab-pane fade show active" id="tab-product" role="tabpanel" aria-labelledby="product-tab">
+        <!-- Sidebar menu starts -->
+        <div class="sidebarMenuScroll">
+          <div class="sidebar-menu">
+            <ul>
+              <li class="list-heading">Carbazaar</li>
 
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    All Leads
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Sidebar menu starts -->
-                <div class="sidebarMenuScroll">
-                    <div class="sidebar-menu">
-                        <ul>
-                            <li class="list-heading">Carbasket</li>
-
-                            <!-- <li (click)="close()">
+              <!-- <li (click)="close()">
                                 <a routerLink="/leads-verification" routerLinkActive="current-page">Leads
                                     Verification</a>
                             </li> -->
-                            <li (click)="close()">
-                                <a routerLink="/leads" routerLinkActive="current-page">All Leads</a>
-                            </li>
-                            <li (click)="close()">
-                                <a routerLink="/dealer-quotations-leads" routerLinkActive="current-page">Dealer Quotations</a>
-                            </li>
-                            <li (click)="close()">
-                                <a [routerLink]="['/leads', userId]" routerLinkActive="current-page">My Leads</a>
-                            </li>
-                            <li (click)="close()">
-                                <a [routerLink]="['/all-case']" routerLinkActive="current-page">Case Management</a>
-                            </li>
+              <li (click)="close()">
+                <a routerLink="/leads" routerLinkActive="current-page"
+                  >All Leads</a
+                >
+              </li>
+              <li (click)="close()">
+                <a
+                  routerLink="/dealer-quotations-leads"
+                  routerLinkActive="current-page"
+                  >Dealer Quotations</a
+                >
+              </li>
+              <li (click)="close()">
+                <a
+                  [routerLink]="['/leads', userId]"
+                  routerLinkActive="current-page"
+                  >My Leads</a
+                >
+              </li>
+              <li (click)="close()">
+                <a [routerLink]="['/all-case']" routerLinkActive="current-page"
+                  >Case Management</a
+                >
+              </li>
 
-
-                            <!-- <div *ngIf="loginType == 'other'"> -->
-                                <!-- <li (click)="close()">
+              <!-- <div *ngIf="loginType == 'other'"> -->
+              <!-- <li (click)="close()">
                                     <a routerLink="/new-lead" routerLinkActive="current-page">New Lead</a>
                                 </li>
                                 <li (click)="parameters('vp=1')">
@@ -270,10 +327,10 @@
                                     <a routerLinkActive="current-page">dealerdata is empty</a>
                                 </li> -->
 
-                                <!-- <li (click)="close()">
+              <!-- <li (click)="close()">
           <a href="add-product.html"  class="current-page">Add Product</a>
       </li> -->
-                                <!-- <li (click)="close()">
+              <!-- <li (click)="close()">
           <a href="orders.html" >Orders</a>
       </li>
       <li (click)="close()">
@@ -282,21 +339,25 @@
       <li (click)="close()">
           <a href="products-reviews.html">Reviews</a>
       </li> -->
-                            <!-- </div> -->
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Zulukk</li>
-                            <li (click)="close()">
-                                <a routerLink="/zulukk-leads" routerLinkActive="current-page">Zulukk Leads</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Spare Parts</li>
-                            <li (click)="close()">
-                                <a routerLink="/parts-leads" routerLinkActive="current-page">Spare Parts Leads</a>
-                            </li>
-                        </ul>
-                        <!-- <ul>
+              <!-- </div> -->
+            </ul>
+            <ul>
+              <li class="list-heading">Zulukk</li>
+              <li (click)="close()">
+                <a routerLink="/zulukk-leads" routerLinkActive="current-page"
+                  >Zulukk Leads</a
+                >
+              </li>
+            </ul>
+            <ul>
+              <li class="list-heading">Spare Parts</li>
+              <li (click)="close()">
+                <a routerLink="/parts-leads" routerLinkActive="current-page"
+                  >Spare Parts Leads</a
+                >
+              </li>
+            </ul>
+            <!-- <ul>
                           <li class="list-heading">Calendars</li>
                           <li (click)="close()">
                               <a href="calendar-daygrid-view.html">Daygrid View</a>
@@ -314,31 +375,36 @@
                               <a href="calendar-selectable.html">Selectable</a>
                           </li>
                       </ul> -->
-                    </div>
-                </div>
-                <!-- Sidebar menu ends -->
+          </div>
+        </div>
+        <!-- Sidebar menu ends -->
 
-                <!-- Sidebar actions starts -->
-                <div class="sidebar-actions">
-                    <div class="support-tile">
-                        <img src="../../../assets/img/logo.png" style="width: inherit;" alt="">
-                    </div>
-                </div>
-                <!-- Sidebar actions ends -->
+        <!-- Sidebar actions starts -->
+        <div class="sidebar-actions">
+          <div class="support-tile">
+            <img
+              src="../../../assets/img/logo.png"
+              style="width: inherit"
+              alt=""
+            />
+          </div>
+        </div>
+        <!-- Sidebar actions ends -->
+      </div>
 
-            </div>
+      <!-- Pages tab -->
+      <div
+        class="tab-pane fade"
+        id="tab-pages"
+        role="tabpanel"
+        aria-labelledby="pages-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">Pages</div>
+        <!-- Tab content header end -->
 
-            <!-- Pages tab -->
-            <div class="tab-pane fade" id="tab-pages" role="tabpanel" aria-labelledby="pages-tab">
-
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    Pages
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Sidebar menu starts -->
-                <!-- <div class="sidebarMenuScroll">
+        <!-- Sidebar menu starts -->
+        <!-- <div class="sidebarMenuScroll">
                     <div class="sidebar-menu">
                         <ul>
                             <li (click)="close()">
@@ -389,114 +455,148 @@
                         </ul>
                     </div>
                 </div> -->
-                <!-- Sidebar menu ends -->
+        <!-- Sidebar menu ends -->
 
-                <!-- Sidebar actions starts -->
-                <div class="sidebar-actions">
-                    <div class="support-tile green">
-                        <img src="../../../assets/img/logo.png" style="width: inherit;" alt="">
+        <!-- Sidebar actions starts -->
+        <div class="sidebar-actions">
+          <div class="support-tile green">
+            <img
+              src="../../../assets/img/logo.png"
+              style="width: inherit"
+              alt=""
+            />
+          </div>
+        </div>
+        <!-- Sidebar actions ends -->
+      </div>
 
-                    </div>
-                </div>
-                <!-- Sidebar actions ends -->
+      <!-- Forms tab -->
+      <div
+        class="tab-pane fade"
+        id="tab-forms"
+        role="tabpanel"
+        aria-labelledby="forms-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">Data</div>
+        <!-- Tab content header end -->
 
-            </div>
-
-            <!-- Forms tab -->
-            <div class="tab-pane fade" id="tab-forms" role="tabpanel" aria-labelledby="forms-tab">
-
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    Data
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Sidebar menu starts -->
-                <div class="sidebarMenuScroll">
-                    <div class="sidebar-menu">
-                        <ul>
-                            <li class="list-heading">User Layouts</li>
-                            <li (click)="close()">
-                                <a routerLink="/users" routerLinkActive="current-page">User's List</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Dealers Layouts</li>
-                            <li (click)="close()">
-                                <a routerLink="/dealer-list" routerLinkActive="current-page">Dealers List</a>
-                            </li>
-                            <!-- <li (click)="close()">
+        <!-- Sidebar menu starts -->
+        <div class="sidebarMenuScroll">
+          <div class="sidebar-menu">
+            <ul>
+              <li class="list-heading">User Layouts</li>
+              <li (click)="close()">
+                <a routerLink="/users" routerLinkActive="current-page"
+                  >User's List</a
+                >
+              </li>
+            </ul>
+            <ul>
+              <li class="list-heading">Dealers Layouts</li>
+              <li (click)="close()">
+                <a routerLink="/dealer-list" routerLinkActive="current-page"
+                  >Dealers List</a
+                >
+              </li>
+              <!-- <li (click)="close()">
                                 <a routerLink="/add-dealer-details" routerLinkActive="current-page">Add Dealer Details</a>
                             </li> -->
-                            <li (click)="close()">
-                                <a routerLink="/dealer-details-list" routerLinkActive="current-page">Dealer Details List</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Logs</li>
-                            <li (click)="close()">
-                                <a routerLink="/login-logout-logs" routerLinkActive="current-page">Login/Logout Logs</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Staff Layouts</li>
-                            <li (click)="close()">
-                                <a routerLink="/add-employees" routerLinkActive="current-page">Add Staff</a>
-                            </li>
-                            <li (click)="close()">
-                                <a routerLink="/employees" routerLinkActive="current-page">Staff's List</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Admin Layouts</li>
-                            <li (click)="close()">
-                                <a routerLink="/add-employees" routerLinkActive="current-page">Add Admin</a>
-                            </li>
-                            <li (click)="close()">
-                                <a routerLink="/employees" routerLinkActive="current-page">Admin's List</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Location Layouts</li>
-                            <li (click)="close()">
-                                <a routerLink="/add-city" routerLinkActive="current-page">Add City</a>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="list-heading">Blog</li>
-                            <li (click)="close()">
-                                <a routerLink="/add-blog" routerLinkActive="current-page">Add Blog</a>
-                            </li>
-                            <li (click)="close()">
-                                <a routerLink="/blog" routerLinkActive="current-page">Blog List</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Sidebar menu ends -->
+              <li (click)="close()">
+                <a
+                  routerLink="/dealer-details-list"
+                  routerLinkActive="current-page"
+                  >Dealer Details List</a
+                >
+              </li>
+            </ul>
+            <ul>
+              <li class="list-heading">Logs</li>
+              <li (click)="close()">
+                <a
+                  routerLink="/login-logout-logs"
+                  routerLinkActive="current-page"
+                  >Login/Logout Logs</a
+                >
+              </li>
+            </ul>
+            <ul>
+              <li class="list-heading">Staff Layouts</li>
+              <li (click)="close()">
+                <a routerLink="/add-employees" routerLinkActive="current-page"
+                  >Add Staff</a
+                >
+              </li>
+              <li (click)="close()">
+                <a routerLink="/employees" routerLinkActive="current-page"
+                  >Staff's List</a
+                >
+              </li>
+            </ul>
+            <ul>
+              <li class="list-heading">Admin Layouts</li>
+              <li (click)="close()">
+                <a routerLink="/add-employees" routerLinkActive="current-page"
+                  >Add Admin</a
+                >
+              </li>
+              <li (click)="close()">
+                <a routerLink="/employees" routerLinkActive="current-page"
+                  >Admin's List</a
+                >
+              </li>
+            </ul>
+            <ul>
+              <li class="list-heading">Location Layouts</li>
+              <li (click)="close()">
+                <a routerLink="/add-city" routerLinkActive="current-page"
+                  >Add City</a
+                >
+              </li>
+            </ul>
+            <ul>
+              <li class="list-heading">Blog</li>
+              <li (click)="close()">
+                <a routerLink="/add-blog" routerLinkActive="current-page"
+                  >Add Blog</a
+                >
+              </li>
+              <li (click)="close()">
+                <a routerLink="/blog" routerLinkActive="current-page"
+                  >Blog List</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Sidebar menu ends -->
 
-                <!-- Sidebar actions starts -->
-                <div class="sidebar-actions">
-                    <div class="support-tile red">
-                        <img src="../../../assets/img/logo.png" style="width: inherit;" alt="">
+        <!-- Sidebar actions starts -->
+        <div class="sidebar-actions">
+          <div class="support-tile red">
+            <img
+              src="../../../assets/img/logo.png"
+              style="width: inherit"
+              alt=""
+            />
+          </div>
+        </div>
+        <!-- Sidebar actions ends -->
+      </div>
 
-                    </div>
-                </div>
-                <!-- Sidebar actions ends -->
+      <!-- Components tab -->
+      <div
+        class="tab-pane fade"
+        id="tab-components"
+        role="tabpanel"
+        aria-labelledby="components-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">Components</div>
+        <!-- Tab content header end -->
 
-            </div>
-
-            <!-- Components tab -->
-            <div class="tab-pane fade" id="tab-components" role="tabpanel" aria-labelledby="components-tab">
-
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    Components
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Sidebar menu starts -->
-                <!-- <div class="sidebarMenuScroll">
+        <!-- Sidebar menu starts -->
+        <!-- <div class="sidebarMenuScroll">
                     <div class="sidebar-menu">
                         <ul>
                             <li (click)="close()">
@@ -547,29 +647,31 @@
                         </ul>
                     </div>
                 </div> -->
-                <!-- Sidebar menu ends -->
+        <!-- Sidebar menu ends -->
 
-                <!-- Sidebar actions starts -->
-                <div class="sidebar-actions">
-                    <div class="support-tile yellow">
-                        <i class="icon-arrow-down-circle"></i><a href="#">Download Reports</a>
-                    </div>
-                </div>
-                <!-- Sidebar actions ends -->
+        <!-- Sidebar actions starts -->
+        <div class="sidebar-actions">
+          <div class="support-tile yellow">
+            <i class="icon-arrow-down-circle"></i
+            ><a href="#">Download Reports</a>
+          </div>
+        </div>
+        <!-- Sidebar actions ends -->
+      </div>
 
-            </div>
+      <!-- Graphs tab -->
+      <div
+        class="tab-pane fade"
+        id="tab-graphs"
+        role="tabpanel"
+        aria-labelledby="graphs-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">Graphs &amp; Tables</div>
+        <!-- Tab content header end -->
 
-            <!-- Graphs tab -->
-            <div class="tab-pane fade" id="tab-graphs" role="tabpanel" aria-labelledby="graphs-tab">
-
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    Graphs &amp; Tables
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Sidebar menu starts -->
-                <!-- <div class="sidebarMenuScroll">
+        <!-- Sidebar menu starts -->
+        <!-- <div class="sidebarMenuScroll">
                     <div class="sidebar-menu">
                         <ul>
                             <li class="list-heading">Graphs</li>
@@ -598,30 +700,34 @@
                         </ul>
                     </div>
                 </div> -->
-                <!-- Sidebar menu ends -->
+        <!-- Sidebar menu ends -->
 
-                <!-- Sidebar actions starts -->
-                <div class="sidebar-actions">
-                    <div class="support-tile pink">
-                        <img src="../../../assets/img/logo.png" style="width: inherit;" alt="">
+        <!-- Sidebar actions starts -->
+        <div class="sidebar-actions">
+          <div class="support-tile pink">
+            <img
+              src="../../../assets/img/logo.png"
+              style="width: inherit"
+              alt=""
+            />
+          </div>
+        </div>
+        <!-- Sidebar actions ends -->
+      </div>
 
-                    </div>
-                </div>
-                <!-- Sidebar actions ends -->
+      <!-- Authentication tab -->
+      <div
+        class="tab-pane fade"
+        id="tab-authentication"
+        role="tabpanel"
+        aria-labelledby="authentication-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">Authentication</div>
+        <!-- Tab content header end -->
 
-            </div>
-
-            <!-- Authentication tab -->
-            <div class="tab-pane fade" id="tab-authentication" role="tabpanel" aria-labelledby="authentication-tab">
-
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    Authentication
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Sidebar menu starts -->
-                <!-- <div class="sidebarMenuScroll">
+        <!-- Sidebar menu starts -->
+        <!-- <div class="sidebarMenuScroll">
                     <div class="sidebar-menu">
                         <ul>
                             <li (click)="close()">
@@ -654,160 +760,217 @@
                         </ul>
                     </div>
                 </div> -->
-                <!-- Sidebar menu ends -->
+        <!-- Sidebar menu ends -->
 
-                <!-- Sidebar actions starts -->
-                <div class="sidebar-actions">
-                    <div class="support-tile blue">
-                        <img src="../../../assets/img/logo.png" style="width: inherit;" alt="">
-
-                    </div>
-                </div>
-                <!-- Sidebar actions ends -->
-
-            </div>
-
-            <!-- Settings tab -->
-            <div class="tab-pane fade" id="tab-settings" role="tabpanel" aria-labelledby="settings-tab">
-
-                <!-- Tab content header start -->
-                <div class="tab-pane-header">
-                    Settings
-                </div>
-                <!-- Tab content header end -->
-
-                <!-- Settings start -->
-                <div class="sidebarMenuScroll">
-                    <div class="sidebar-settings">
-                        <div class="accordion" id="settingsAccordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="genInfo">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#genCollapse" aria-expanded="true" aria-controls="genCollapse">
-                                        General Info
-                                    </button>
-                                </h2>
-                                <div id="genCollapse" class="accordion-collapse collapse show" aria-labelledby="genInfo"
-                                    data-bs-parent="#settingsAccordion">
-                                    <div class="accordion-body">
-                                        <div class="field-wrapper">
-                                            <input type="text" value="Jeivxezer Lopexz" />
-                                            <div class="field-placeholder">Full Name</div>
-                                        </div>
-
-                                        <div class="field-wrapper">
-                                            <input type="email" value="jeivxezer-lopexz@email.com" />
-                                            <div class="field-placeholder">Email</div>
-                                        </div>
-
-                                        <div class="field-wrapper">
-                                            <input type="text" value="0 0000 00000" />
-                                            <div class="field-placeholder">Contact</div>
-                                        </div>
-                                        <div class="field-wrapper m-0">
-                                            <button class="btn btn-primary stripes-btn">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="chngPwd">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#chngPwdCollapse" aria-expanded="false"
-                                        aria-controls="chngPwdCollapse">
-                                        Change Password
-                                    </button>
-                                </h2>
-                                <div id="chngPwdCollapse" class="accordion-collapse collapse" aria-labelledby="chngPwd"
-                                    data-bs-parent="#settingsAccordion">
-                                    <div class="accordion-body">
-                                        <div class="field-wrapper">
-                                            <input type="text" value="">
-                                            <div class="field-placeholder">Current Password</div>
-                                        </div>
-                                        <div class="field-wrapper">
-                                            <input type="password" value="">
-                                            <div class="field-placeholder">New Password</div>
-                                        </div>
-                                        <div class="field-wrapper">
-                                            <input type="password" value="">
-                                            <div class="field-placeholder">Confirm Password</div>
-                                        </div>
-                                        <div class="field-wrapper m-0">
-                                            <button class="btn btn-primary stripes-btn">Save</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="sidebarNotifications">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#notiCollapse" aria-expanded="false"
-                                        aria-controls="notiCollapse">
-                                        Notifications
-                                    </button>
-                                </h2>
-                                <div id="notiCollapse" class="accordion-collapse collapse"
-                                    aria-labelledby="sidebarNotifications" data-bs-parent="#settingsAccordion">
-                                    <div class="accordion-body">
-                                        <div class="list-group m-0">
-                                            <div class="noti-container">
-                                                <div class="noti-block">
-                                                    <div>Alerts</div>
-                                                    <div class="form-switch">
-                                                        <input class="form-check-input" type="checkbox" id="showAlertss"
-                                                            checked>
-                                                        <label class="form-check-label" for="showAlertss"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="noti-block">
-                                                    <div>Enable Sound</div>
-                                                    <div class="form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="soundEnable">
-                                                        <label class="form-check-label" for="soundEnable"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="noti-block">
-                                                    <div>Allow Chat</div>
-                                                    <div class="form-switch">
-                                                        <input class="form-check-input" type="checkbox" id="allowChat">
-                                                        <label class="form-check-label" for="allowChat"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="noti-block">
-                                                    <div>Desktop Messages</div>
-                                                    <div class="form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="desktopMessages">
-                                                        <label class="form-check-label" for="desktopMessages"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Settings end -->
-
-                <!-- Sidebar actions starts -->
-                <div class="sidebar-actions">
-                    <div class="support-tile blue">
-                        <img src="../../../assets/img/logo.png" style="width: inherit;" alt="">
-
-                    </div>
-                </div>
-                <!-- Sidebar actions ends -->
-            </div>
-
+        <!-- Sidebar actions starts -->
+        <div class="sidebar-actions">
+          <div class="support-tile blue">
+            <img
+              src="../../../assets/img/logo.png"
+              style="width: inherit"
+              alt=""
+            />
+          </div>
         </div>
-        <!-- Tabs content end -->
+        <!-- Sidebar actions ends -->
+      </div>
 
+      <!-- Settings tab -->
+      <div
+        class="tab-pane fade"
+        id="tab-settings"
+        role="tabpanel"
+        aria-labelledby="settings-tab"
+      >
+        <!-- Tab content header start -->
+        <div class="tab-pane-header">Settings</div>
+        <!-- Tab content header end -->
+
+        <!-- Settings start -->
+        <div class="sidebarMenuScroll">
+          <div class="sidebar-settings">
+            <div class="accordion" id="settingsAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="genInfo">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#genCollapse"
+                    aria-expanded="true"
+                    aria-controls="genCollapse"
+                  >
+                    General Info
+                  </button>
+                </h2>
+                <div
+                  id="genCollapse"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="genInfo"
+                  data-bs-parent="#settingsAccordion"
+                >
+                  <div class="accordion-body">
+                    <div class="field-wrapper">
+                      <input type="text" value="Jeivxezer Lopexz" />
+                      <div class="field-placeholder">Full Name</div>
+                    </div>
+
+                    <div class="field-wrapper">
+                      <input type="email" value="jeivxezer-lopexz@email.com" />
+                      <div class="field-placeholder">Email</div>
+                    </div>
+
+                    <div class="field-wrapper">
+                      <input type="text" value="0 0000 00000" />
+                      <div class="field-placeholder">Contact</div>
+                    </div>
+                    <div class="field-wrapper m-0">
+                      <button class="btn btn-primary stripes-btn">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="chngPwd">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#chngPwdCollapse"
+                    aria-expanded="false"
+                    aria-controls="chngPwdCollapse"
+                  >
+                    Change Password
+                  </button>
+                </h2>
+                <div
+                  id="chngPwdCollapse"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="chngPwd"
+                  data-bs-parent="#settingsAccordion"
+                >
+                  <div class="accordion-body">
+                    <div class="field-wrapper">
+                      <input type="text" value="" />
+                      <div class="field-placeholder">Current Password</div>
+                    </div>
+                    <div class="field-wrapper">
+                      <input type="password" value="" />
+                      <div class="field-placeholder">New Password</div>
+                    </div>
+                    <div class="field-wrapper">
+                      <input type="password" value="" />
+                      <div class="field-placeholder">Confirm Password</div>
+                    </div>
+                    <div class="field-wrapper m-0">
+                      <button class="btn btn-primary stripes-btn">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="sidebarNotifications">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#notiCollapse"
+                    aria-expanded="false"
+                    aria-controls="notiCollapse"
+                  >
+                    Notifications
+                  </button>
+                </h2>
+                <div
+                  id="notiCollapse"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="sidebarNotifications"
+                  data-bs-parent="#settingsAccordion"
+                >
+                  <div class="accordion-body">
+                    <div class="list-group m-0">
+                      <div class="noti-container">
+                        <div class="noti-block">
+                          <div>Alerts</div>
+                          <div class="form-switch">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="showAlertss"
+                              checked
+                            />
+                            <label
+                              class="form-check-label"
+                              for="showAlertss"
+                            ></label>
+                          </div>
+                        </div>
+                        <div class="noti-block">
+                          <div>Enable Sound</div>
+                          <div class="form-switch">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="soundEnable"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="soundEnable"
+                            ></label>
+                          </div>
+                        </div>
+                        <div class="noti-block">
+                          <div>Allow Chat</div>
+                          <div class="form-switch">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="allowChat"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="allowChat"
+                            ></label>
+                          </div>
+                        </div>
+                        <div class="noti-block">
+                          <div>Desktop Messages</div>
+                          <div class="form-switch">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="desktopMessages"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="desktopMessages"
+                            ></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Settings end -->
+
+        <!-- Sidebar actions starts -->
+        <div class="sidebar-actions">
+          <div class="support-tile blue">
+            <img
+              src="../../../assets/img/logo.png"
+              style="width: inherit"
+              alt=""
+            />
+          </div>
+        </div>
+        <!-- Sidebar actions ends -->
+      </div>
     </div>
-    <!-- Sidebar content end -->
-
+    <!-- Tabs content end -->
+  </div>
+  <!-- Sidebar content end -->
 </nav>

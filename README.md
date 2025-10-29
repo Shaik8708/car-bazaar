@@ -1,4 +1,4 @@
-# CarbasketAdmin
+# CarbazaarAdmin
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
 
@@ -52,4 +52,4 @@ https://stackblitz.com/edit/angular-6-sort-array-of-object-by-date?file=src%2Fap
 
 ## autoComplete
 
-http://mukeshkumar.net/articles/angular/3-ways-to-implement-autocomplete-textbox-in-angular-with-typescript-on-large-data 
+http://mukeshkumar.net/articles/angular/3-ways-to-implement-autocomplete-textbox-in-angular-with-typescript-on-large-data

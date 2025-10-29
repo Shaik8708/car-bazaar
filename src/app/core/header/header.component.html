@@ -1,52 +1,40 @@
 <!-- [ngClass]="href == '/login' ? 'visible' : 'hidden'" -->
 
-<div *ngIf="href == '/login' else showHeader">
+<div *ngIf="href == '/login'; else showHeader">
   <router-outlet></router-outlet>
 </div>
 
 <!-- [ngClass]="href != '/login' ? 'visible' : 'hidden'" -->
 <ng-template #showHeader>
   <div class="main-container">
-
     <!-- Page header starts -->
-    <div class="page-header" >
+    <div class="page-header">
+      <!-- Row start -->
+      <div class="row gutters">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-6 col-9">
+          <div class="search-container">
+            <div class="toggle-sidebar" id="toggle-sidebar">
+              <i class="icon-menu"></i>
+            </div>
 
-        <!-- Row start -->
-        <div class="row gutters">
-            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-6 col-9">
-
-
-                <div class="search-container">
-
-
-                    <div class="toggle-sidebar" id="toggle-sidebar">
-                        <i class="icon-menu"></i>
-                    </div>
-
-
-
-<div class="">
-    <h2>{{accType | uppercase}} PANEL</h2>
-</div>
-                    <!-- <div class="ui fluid category search">
+            <div class="">
+              <h2>{{ accType | uppercase }} PANEL</h2>
+            </div>
+            <!-- <div class="ui fluid category search">
                         <div class="ui icon input">
                             <input class="prompt" type="text" placeholder="Search">
                             <i class="search icon icon-search1"></i>
                         </div>
                         <div class="results"></div>
                     </div> -->
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-3">
+          <!-- Header actions start -->
+          <ul class="header-actions">
+            <h4 class="ml-4">{{ fullName }}</h4>
 
-                </div>
-
-
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-3">
-
-                <!-- Header actions start -->
-                <ul class="header-actions">
-                    <h4 class="ml-4"> {{fullName}}</h4>
-
-                    <!-- <li class="dropdown">
+            <!-- <li class="dropdown">
                         <a href="#" id="taskss" data-toggle="dropdown" aria-haspopup="true">
             <i class="icon-check-square"></i>
           </a>
@@ -108,7 +96,7 @@
                             </div>
                         </div>
                     </li> -->
-                    <!-- <li class="dropdown">
+            <!-- <li class="dropdown">
                         <a href="#" id="notifications" data-toggle="dropdown" aria-haspopup="true">
             <i class="icon-alert-triangle"></i>
           </a>
@@ -183,54 +171,55 @@
                         </div>
                     </li> -->
 
-                    <li class="dropdown">
-                        <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-            <span class="avatar">
-              <img src="../../../assets/img/user.svg" alt="User Avatar">
-              <span class="status busy"></span>
-            </span>
-          </a>
-                        <div class="dropdown-menu dropdown-menu-end md" aria-labelledby="userSettings">
-                            <div class="header-profile-actions">
-                                <a><i class="icon-user1"></i>{{fullName}}</a>
-                                <!-- <a href="account-settings.html"><i class="icon-settings1"></i>Settings</a> -->
-                                <a routerLink="/login" (click)="clear()"><i class="icon-log-out1"></i>Logout</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <!-- Header actions end -->
-
-            </div>
+            <li class="dropdown">
+              <a
+                href="#"
+                id="userSettings"
+                class="user-settings"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+              >
+                <span class="avatar">
+                  <img src="../../../assets/img/user.svg" alt="User Avatar" />
+                  <span class="status busy"></span>
+                </span>
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-end md"
+                aria-labelledby="userSettings"
+              >
+                <div class="header-profile-actions">
+                  <a><i class="icon-user1"></i>{{ fullName }}</a>
+                  <!-- <a href="account-settings.html"><i class="icon-settings1"></i>Settings</a> -->
+                  <a routerLink="/login" (click)="clear()"
+                    ><i class="icon-log-out1"></i>Logout</a
+                  >
+                </div>
+              </div>
+            </li>
+          </ul>
+          <!-- Header actions end -->
         </div>
-        <!-- Row end -->
-
+      </div>
+      <!-- Row end -->
     </div>
     <!-- Page header ends -->
 
     <!-- Content wrapper scroll start -->
 
-
     <div class="content-wrapper-scroll">
-
       <!-- Content wrapper start -->
       <div class="content-wrapper">
-
         <router-outlet></router-outlet>
-
       </div>
 
       <!-- Content wrapper end -->
 
       <!-- App footer start -->
-      <div class="app-footer">© Carbasket Admin 2023</div>
+      <div class="app-footer">© Carbazaar Admin 2023</div>
       <!-- App footer end -->
-
     </div>
 
     <!-- Content wrapper scroll end -->
-
   </div>
 </ng-template>
-
-
