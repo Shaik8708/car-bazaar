@@ -223,25 +223,38 @@
                   >All Leads</a
                 >
               </li>
-              <li (click)="close()">
+              <!-- <li (click)="close()">
                 <a
                   routerLink="/dealer-quotations-leads"
                   routerLinkActive="current-page"
                   >Dealer Quotations</a
                 >
+              </li> -->
+              <li (click)="close()">
+                <a routerLink="/drivers" routerLinkActive="current-page"
+                  >Drivers</a
+                >
               </li>
               <li (click)="close()">
+                <a routerLink="/agencies" routerLinkActive="current-page"
+                  >Agencies</a
+                >
+              </li>
+              <li (click)="close()">
+                <a routerLink="/users" routerLinkActive="current-page">Users</a>
+              </li>
+              <!-- <li (click)="close()">
                 <a
                   [routerLink]="['/leads', userId]"
                   routerLinkActive="current-page"
                   >My Leads</a
                 >
-              </li>
-              <li (click)="close()">
+              </li> -->
+              <!-- <li (click)="close()">
                 <a [routerLink]="['/all-case']" routerLinkActive="current-page"
                   >Case Management</a
                 >
-              </li>
+              </li> -->
 
               <!-- <div *ngIf="loginType == 'other'"> -->
               <!-- <li (click)="close()">
