@@ -15,7 +15,6 @@ import { PaginationService } from 'src/app/services/pagination.service';
 import { environment } from 'src/environments/environment';
 import urlConfig from '../../../config/url.config.json';
 import { catchError, finalize } from 'rxjs';
-import { ColDef, GridReadyEvent } from 'ag-grid-community';
 
 @Component({
   selector: 'app-all-leads',
@@ -390,65 +389,83 @@ export class AllLeadsComponent {
       forColumn: true,
     },
     {
-      col: 'Brand',
-      name: 'brandName',
+      col: 'Trip Type',
+      name: 'tripType',
       forFilter: false,
       forColumn: true,
     },
     {
-      col: 'Model',
-      name: 'modelName',
+      col: 'Locations',
+      name: 'locations',
       forFilter: true,
       forColumn: true,
     },
     {
-      col: 'Condition',
-      name: 'condition',
+      col: 'Total Km',
+      name: 'totalKm',
       forFilter: true,
       forColumn: true,
     },
     {
-      col: 'Type',
-      name: 'fuleWhellType',
-      forFilter: true,
-      forColumn: true,
-    },
-    {
-      col: 'Mfg Year',
-      name: 'manufactureYear',
-      forFilter: false,
-      forColumn: true,
-    },
-    {
-      col: 'City',
-      name: 'location',
-      forFilter: false,
-      forColumn: true,
-    },
-    {
-      col: 'Customer Response',
-      name: 'teleCaller',
-      forFilter: false,
-      forColumn: true,
-    },
-    {
-      col: 'Lead Date',
-      name: 'createdAt',
+      col: 'Total Amount',
+      name: 'totalAmount',
       forFilter: true,
       forColumn: true,
     },
     {
       col: 'Vehicle Type',
       name: 'vehicleType',
+      forFilter: false,
+      forColumn: true,
+    },
+    {
+      col: 'Pick Up Date',
+      name: 'pickUpDate',
+      forFilter: false,
+      forColumn: true,
+    },
+    {
+      col: 'Pick Up Time',
+      name: 'pickUpTime',
+      forFilter: false,
+      forColumn: true,
+    },
+    {
+      col: 'User City',
+      name: 'userCity',
+      forFilter: false,
+      forColumn: true,
+    },
+    {
+      col: 'Lead Status',
+      name: 'leadStatus',
+      forFilter: false,
+      forColumn: true,
+    },
+    {
+      col: 'Created At',
+      name: 'createdAt',
       forFilter: true,
       forColumn: true,
     },
     {
-      col: 'Attempts',
-      name: 'guestUserCount',
+      col: 'Created Date',
+      name: 'createdDate',
       forFilter: true,
       forColumn: true,
     },
+    // {
+    //   col: 'Vehicle Type',
+    //   name: 'vehicleType',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Attempts',
+    //   name: 'guestUserCount',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
     // {
     //   col: "Amount Due",
     //   name: "dueAmount",
@@ -462,14 +479,97 @@ export class AllLeadsComponent {
     //   forColumn: true,
     // },
   ];
+  // column = [
+  //   {
+  //     col: 'Phone No',
+  //     name: 'phoneNumber',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Unique Id',
+  //     name: 'uniqueProductName',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Brand',
+  //     name: 'brandName',
+  //     forFilter: false,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Model',
+  //     name: 'modelName',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Condition',
+  //     name: 'condition',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Type',
+  //     name: 'fuleWhellType',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Mfg Year',
+  //     name: 'manufactureYear',
+  //     forFilter: false,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'City',
+  //     name: 'location',
+  //     forFilter: false,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Customer Response',
+  //     name: 'teleCaller',
+  //     forFilter: false,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Lead Date',
+  //     name: 'createdAt',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Vehicle Type',
+  //     name: 'vehicleType',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   {
+  //     col: 'Attempts',
+  //     name: 'guestUserCount',
+  //     forFilter: true,
+  //     forColumn: true,
+  //   },
+  //   // {
+  //   //   col: "Amount Due",
+  //   //   name: "dueAmount",
+  //   //   forFilter: false,
+  //   //   forColumn: true,
+  //   // },
+  //   // {
+  //   //   col: "Payment Status",
+  //   //   name: "eventStatus",
+  //   //   forFilter: false,
+  //   //   forColumn: true,
+  //   // },
+  // ];
 
   value: any;
   createdDate: string | null = '';
   originalCreatedDateSelected: string | null = '';
   phoneNoSearch: any = '';
-  colDefs;
-  rowData: any;
-  gridApi: any;
 
   constructor(
     private api: ApiService,
@@ -480,71 +580,7 @@ export class AllLeadsComponent {
     private spinner: NgxSpinnerService,
     private fetch: ObservableService,
     private baseApi: BaseApiService
-  ) {
-    this.colDefs = [
-      { headerName: 'User ID', field: 'userId', sortable: true, filter: true },
-      {
-        headerName: 'Phone Number',
-        field: 'phoneNumber',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Trip Type',
-        field: 'tripType',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Locations',
-        field: 'locations',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Total Km',
-        field: 'totalKm',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Total Amount',
-        field: 'totalAmount',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Vehicle Type',
-        field: 'vehicleType',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Pick Up Date',
-        field: 'pickUpDate',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Pick Up Time',
-        field: 'pickUpDate',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'Drop Date',
-        field: 'dropDate',
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: 'User City',
-        field: 'userCity',
-        sortable: true,
-        filter: true,
-      },
-    ];
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getFilterLeads();
@@ -865,12 +901,10 @@ export class AllLeadsComponent {
     const collectionName = this.apiUrlFromOther
       ? `?collectionName=${this.apiUrlPathFromOther}`
       : `?collectionName=${urlConfig.leads}`;
-    // : `?collectionName=${urlConfig.products}`;
     const url = `${urlConfig.getAllPath}${collectionName}${teleCaller}${phoneNumber}${this.myLeadsId}${query}${customSelectedDates}${byDate}&page=${params.page}&limit=${params.limit}`;
     this.spinner.show();
     this.getList = [];
     this.totalList = [];
-    console.log(url);
 
     this.baseApi
       .get(url)
@@ -901,9 +935,6 @@ export class AllLeadsComponent {
           this.isData = true;
 
           this.getList = res?.data?.docs;
-          this.rowData = res?.data?.docs;
-          console.log(this.getList);
-
           this.totalList = res?.data?.totalDocs;
 
           this.getList.forEach((element) => {
@@ -1099,7 +1130,7 @@ export class AllLeadsComponent {
 
     this.spinner.show();
     // this.api.getNewFormDataByDate(params, ty)
-    const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.products}&${ty}&page=${params.page}&limit=${params.limit}`;
+    const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.leads}&${ty}&page=${params.page}&limit=${params.limit}`;
 
     this.baseApi.get(url).subscribe(
       (res: any) => {
@@ -1384,10 +1415,5 @@ export class AllLeadsComponent {
     this.phoneNoSearch = cleaned;
 
     this.getAllLeads();
-  }
-
-  onGridReady(params: GridReadyEvent) {
-    this.gridApi = params.api;
-    this.gridApi.sizeColumnsToFit();
   }
 }

@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <h4 class="d-flex justify-content-center">
-  {{ myLeadsId ? "Carbazaar (Staff Leads)" : "Carbazaar Leads" }}
+  {{ myLeadsId ? "Carbasket (Staff Leads)" : "Carbasket Leads" }}
 </h4>
 
 <div class="container">
@@ -214,45 +214,6 @@ Add OR Filter
   </div>
 </div>
 
-<!-- app.component.html -->
-<div
-  class="ag-theme-alpine grid-container table-wrapper"
-  *ngIf="rowData.length > 0"
->
-  <ag-grid-angular
-    style="width: 100%; height: 400px"
-    [rowData]="rowData"
-    [columnDefs]="colDefs"
-  >
-  </ag-grid-angular>
-
-  <div class="d-flex justify-content-between mt-3 mb-3 row">
-    <div
-      class="dataTables_info col-12 col-md-6"
-      id="copy-print-csv_info"
-      role="status"
-      aria-live="polite"
-    >
-      Showing {{ currentPageLimit * (currentPage - 1) + 1 }} to
-      {{ currentPageLimit * currentPage }} of {{ totalList }} entries
-    </div>
-
-    <div class="col-12 col-md-6">
-      <pagination
-        [paginationList]="pagination"
-        [selectedPageLimit]="currentPageLimit"
-        [currentPage]="currentPage"
-        (onPageChange)="getPage($event)"
-        [lastPage]="lastpage"
-      >
-      </pagination>
-    </div>
-  </div>
-</div>
-<div *ngIf="rowData.length == 0">
-  <h4>No Data Found</h4>
-</div>
-
 <div class="container mt-2">
   <div class="visitor-addmission-inner">
     <mat-accordion class="example-headers-align accordion-class" multi>
@@ -412,7 +373,7 @@ Add OR Filter
     ></i>
   </div>
 
-  <!-- <div class="d-flex justify-content-between mt-3 mb-3 row">
+  <div class="d-flex justify-content-between mt-3 mb-3 row">
     <div
       class="dataTables_info col-12 col-md-6"
       id="copy-print-csv_info"
@@ -433,7 +394,7 @@ Add OR Filter
       >
       </pagination>
     </div>
-  </div> -->
+  </div>
 
   <!-- <div *ngFor="let item of sortData">
         {{item?.updatedAt}} -- {{item?.createdBy?.phoneNumber}}
@@ -449,20 +410,33 @@ Add OR Filter
                 <table id="copy-print-csv" class="table v-middle">
                   <thead>
                     <tr>
-                      <th>phoneNumber</th>
-                      <th>userId</th>
+                      <th>SL No</th>
+                      <th>Lead Id</th>
                       <th>Phone No</th>
-                      <th *ngIf="checkColumn('guestUserCount')">tripType</th>
-                      <th *ngIf="checkColumn('createdAt')">locations</th>
-                      <th *ngIf="checkColumn('teleCaller')">totalKm</th>
-                      <th *ngIf="checkColumn('condition')">totalAmount</th>
-                      <th *ngIf="checkColumn('vehicleType')">vehicleType</th>
-                      <th *ngIf="checkColumn('location')">pickUpDate</th>
-                      <th *ngIf="checkColumn('brandName')">pickUpTime</th>
-                      <th *ngIf="checkColumn('modelName')">dropDate</th>
-                      <th *ngIf="checkColumn('fuleWhellType')">userCity</th>
+                      <th>Trip Type</th>
+                      <!-- <th *ngIf="checkColumn('guestUserCount')">Attempts</th> -->
+                      <th>Locations</th>
+                      <!-- <th *ngIf="checkColumn('createdAt')">Lead Date</th> -->
+                      <th>Total Km</th>
+                      <!-- <th *ngIf="checkColumn('teleCaller')">
+                        Customer Response
+                      </th> -->
+                      <th>Total Amount</th>
+                      <!-- <th *ngIf="checkColumn('condition')">Condition</th> -->
+                      <th>Vehicle Type</th>
+                      <!-- <th *ngIf="checkColumn('vehicleType')">Vehicle Type</th> -->
+                      <th>Pick Up Date</th>
+                      <!-- <th *ngIf="checkColumn('location')">Location</th> -->
+                      <th>Pick Up Time</th>
+                      <!-- <th *ngIf="checkColumn('brandName')">Brand</th> -->
+                      <th>User City</th>
+                      <!-- <th *ngIf="checkColumn('modelName')">Model</th> -->
+                      <th>Lead Status</th>
+                      <!-- <th *ngIf="checkColumn('fuleWhellType')">F/W Type</th> -->
                       <!-- <th>Condition</th> -->
-                      <th *ngIf="checkColumn('manufactureYear')">Year</th>
+                      <th>Created At</th>
+                      <!-- <th *ngIf="checkColumn('manufactureYear')">Year</th> -->
+                      <th>Created Date</th>
                       <!-- <th>Amount Shown</th> -->
                       <!-- <th>Customer Final Amount</th>
                                       <th>Dealer Quotation</th>
@@ -511,22 +485,23 @@ Add OR Filter
                           'bg-danger text-white':
                             abc?.dealerQuotationId?.length > 0
                         }"
-                        *ngIf="!abc?.phoneNumber"
                       >
-                        {{ abc?.createdBy?.phoneNumber }}
+                        <!-- *ngIf="!abc?.phoneNumber" -->
+                        {{ abc?.tripType }}
+                        <!-- {{ abc?.createdBy?.phoneNumber }} -->
                       </td>
                       <td
                         (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('guestUserCount')"
                         [ngClass]="{ 'bg-success': abc?.comment }"
                       >
-                        {{ abc?.guestUserCount }}
+                        <!-- *ngIf="checkColumn('guestUserCount')" -->
+                        {{ abc?.tripType }}
+                        <!-- {{ abc?.guestUserCount }} -->
                       </td>
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('createdAt')"
-                      >
-                        {{ abc?.createdAt | date : "short" }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('createdAt')" -->
+                        {{ abc?.totalKm }}
+                        <!-- {{ abc?.createdAt | date : "short" }} -->
                       </td>
 
                       {{
@@ -568,47 +543,42 @@ Add OR Filter
                                                     <option value="Completed">Completed</option>
                                                 </select>
                                             </td> -->
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('condition')"
-                      >
-                        {{ abc?.condition }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('condition')" -->
+                        {{ abc?.totalAmount }}
+                        <!-- {{ abc?.condition }} -->
                       </td>
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('vehicleType')"
-                      >
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('vehicleType')" -->
                         {{ abc?.vehicleType }}
                       </td>
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('location')"
-                      >
-                        {{ abc?.location }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('location')" -->
+                        {{ abc?.pickUpDate }}
+                        <!-- {{ abc?.location }} -->
                       </td>
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('brandName')"
-                      >
-                        {{ abc?.brandName }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('brandName')" -->
+                        {{ abc?.pickUpTime | date : "short" }}
+                        <!-- {{ abc?.brandName }} -->
                       </td>
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('modelName')"
-                      >
-                        {{ abc?.modelName }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('modelName')" -->
+                        {{ abc?.userCity }}
+                        <!-- {{ abc?.modelName }} -->
                       </td>
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('fuleWhellType')"
-                      >
-                        {{ abc?.fuleWhellType }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('fuleWhellType')" -->
+                        {{ abc?.leadStatus }}
+                        <!-- {{ abc?.fuleWhellType }} -->
                       </td>
-                      <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        *ngIf="checkColumn('manufactureYear')"
-                      >
-                        {{ abc?.manufactureYear }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('manufactureYear')" -->
+                        {{ abc?.createdAt | date : "short" }}
+                        <!-- {{ abc?.manufactureYear }} -->
+                      </td>
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.createdDate }}
                       </td>
 
                       <td>
