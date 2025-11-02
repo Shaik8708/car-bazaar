@@ -18,12 +18,6 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./module/driver/drivers.module').then((m) => m.DriversModule),
-  },
-  {
-    path: '',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
       import('./module/logs/logs.module').then((m) => m.LogsModule),
   },
   {

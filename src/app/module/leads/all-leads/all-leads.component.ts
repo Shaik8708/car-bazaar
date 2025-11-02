@@ -1335,7 +1335,7 @@ export class AllLeadsComponent {
       };
       this.spinner.show();
       // this.api.getNewFormDataByDate(params, ty)
-      const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.products}&uniqueProductName=${uniqueCode}&page=${params.page}&limit=${params.limit}`;
+      const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.leads}&uniqueProductName=${uniqueCode}&page=${params.page}&limit=${params.limit}`;
 
       this.baseApi.get(url).subscribe(
         (res: any) => {

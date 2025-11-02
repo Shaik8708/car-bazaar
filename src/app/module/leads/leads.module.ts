@@ -20,7 +20,6 @@ import { PartsLeadsComponent } from '../spare-parts/parts-leads/parts-leads.comp
 import { DealerQuotationLeadsComponent } from './dealer-quotation-leads/dealer-quotation-leads.component';
 
 const routes: Routes = [
-
   {
     path: 'leads',
     component: AllLeadsComponent,
@@ -84,22 +83,16 @@ const routes: Routes = [
   {
     path: 'parts-leads',
     component: PartsLeadsComponent,
-  }
-
+  },
 ];
 
 @NgModule({
-  declarations: [
-
-
-
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     NgxSpinnerModule,
     ClipboardModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-
-export class LeadsModule { }
+export class LeadsModule {}
