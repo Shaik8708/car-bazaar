@@ -18,6 +18,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { LeadsComponent } from '../zulukk/leads/leads.component';
 import { PartsLeadsComponent } from '../spare-parts/parts-leads/parts-leads.component';
 import { DealerQuotationLeadsComponent } from './dealer-quotation-leads/dealer-quotation-leads.component';
+import { DriversComponent } from './drivers/drivers.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,14 @@ const routes: Routes = [
   {
     path: 'dealer-quotations-leads',
     component: DealerQuotationLeadsComponent,
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+  },
+  {
+    path: 'drivers',
+    component: DriversComponent,
   },
   {
     path: 'leads/:id',

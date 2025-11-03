@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <h4 class="d-flex justify-content-center">
-  {{ myLeadsId ? "Carbasket (Staff Leads)" : "Carbazaar Leads" }}
+  {{ myLeadsId ? "Carbazaar (Staff Leads)" : "Drivers" }}
 </h4>
 
 <div class="container">
@@ -411,32 +411,26 @@ Add OR Filter
                   <thead>
                     <tr>
                       <th>SL No</th>
-                      <th>Lead Id</th>
+                      <!-- <th>Lead Id</th> -->
+                      <th>Username</th>
                       <th>Phone No</th>
-                      <th>Trip Type</th>
                       <!-- <th *ngIf="checkColumn('guestUserCount')">Attempts</th> -->
-                      <th>Locations</th>
+                      <th>Email</th>
                       <!-- <th *ngIf="checkColumn('createdAt')">Lead Date</th> -->
-                      <th>Total Km</th>
+                      <th>Account Type</th>
                       <!-- <th *ngIf="checkColumn('teleCaller')">
                         Customer Response
                       </th> -->
-                      <th>Total Amount</th>
+                      <th>Created At</th>
                       <!-- <th *ngIf="checkColumn('condition')">Condition</th> -->
-                      <th>Vehicle Type</th>
+                      <th>Updated At</th>
                       <!-- <th *ngIf="checkColumn('vehicleType')">Vehicle Type</th> -->
-                      <th>Pick Up Date</th>
                       <!-- <th *ngIf="checkColumn('location')">Location</th> -->
-                      <th>Pick Up Time</th>
                       <!-- <th *ngIf="checkColumn('brandName')">Brand</th> -->
-                      <th>User City</th>
                       <!-- <th *ngIf="checkColumn('modelName')">Model</th> -->
-                      <th>Lead Status</th>
                       <!-- <th *ngIf="checkColumn('fuleWhellType')">F/W Type</th> -->
                       <!-- <th>Condition</th> -->
-                      <th>Created At</th>
                       <!-- <th *ngIf="checkColumn('manufactureYear')">Year</th> -->
-                      <th>Created Date</th>
                       <!-- <th>Amount Shown</th> -->
                       <!-- <th>Customer Final Amount</th>
                                       <th>Dealer Quotation</th>
@@ -445,11 +439,12 @@ Add OR Filter
                     </tr>
                   </thead>
                   <tbody *ngFor="let abc of getList; let i = index">
-                    <tr
+                    <!-- <tr
                       [ngClass]="{
                         'bg-dark text-white': abc?.vehiclePictures?.length > 0
                       }"
-                    >
+                    > -->
+                    <tr>
                       <td
                         [ngClass]="{
                           'bg-primary text-white': showDate == abc?.createdAt
@@ -459,7 +454,7 @@ Add OR Filter
                       >
                         <span
                           class="position-absolute p-1 bg-danger border border-light rounded-circle"
-                          *ngIf="abc?.adminSeen == false"
+                          *ngIf="abc?.adminHasSeenQuotation == false"
                         >
                           <span class="visually-hidden">New alerts</span>
                         </span>
@@ -467,9 +462,9 @@ Add OR Filter
                         {{ currentPageLimit * (currentPage - 1) + (i + 1) }}
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.uniqueProductName }}
+                        {{ abc?.username }}
                       </td>
-                      <td
+                      <!-- <td
                         (click)="navigation('/edit-lead', abc?._id)"
                         [ngClass]="{
                           'bg-danger text-white':
@@ -478,35 +473,48 @@ Add OR Filter
                         *ngIf="abc?.phoneNumber"
                       >
                         {{ abc?.phoneNumber }}
+                      </td> -->
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.phoneNumber }}
                       </td>
-                      <td
+                      <!-- <td
                         (click)="navigation('/edit-lead', abc?._id)"
                         [ngClass]="{
                           'bg-danger text-white':
                             abc?.dealerQuotationId?.length > 0
                         }"
+                        *ngIf="!abc?.phoneNumber"
                       >
-                        <!-- *ngIf="!abc?.phoneNumber" -->
-                        {{ abc?.tripType }}
-                        <!-- {{ abc?.createdBy?.phoneNumber }} -->
-                      </td>
-                      <td
+                        {{ abc?.createdBy?.phoneNumber }}
+                      </td> -->
+                      <!-- <td
                         (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('guestUserCount')"
                         [ngClass]="{ 'bg-success': abc?.comment }"
                       >
-                        <!-- *ngIf="checkColumn('guestUserCount')" -->
-                        {{ abc?.tripType }}
-                        <!-- {{ abc?.guestUserCount }} -->
+                        {{ abc?.guestUserCount }}
+                      </td> -->
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.email }}
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('createdAt')" -->
-                        {{ abc?.totalKm }}
-                        <!-- {{ abc?.createdAt | date : "short" }} -->
+                        {{ abc?.accountType }}
+                      </td>
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                      >
+                        {{ abc?.createdAt | date : "short" }}
+                      </td> -->
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.createdAt | date : "short" }}
+                      </td>
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.updatedAt | date : "short" }}
                       </td>
 
-                      {{
+                      <!-- {{
                         abc?.teleCaller
-                      }}
+                      }} -->
                       <!-- <td class="text-dark" *ngIf="checkColumn('teleCaller')">
                                                 <span *ngIf="dropdownIndex != i" (click)="showDropdown(i)"
                                                     class="text-primary" [ngClass]="[
@@ -543,43 +551,48 @@ Add OR Filter
                                                     <option value="Completed">Completed</option>
                                                 </select>
                                             </td> -->
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('condition')" -->
-                        {{ abc?.totalAmount }}
-                        <!-- {{ abc?.condition }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('vehicleType')" -->
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('condition')"
+                      >
+                        {{ abc?.condition }}
+                      </td> -->
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('vehicleType')"
+                      >
                         {{ abc?.vehicleType }}
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('location')" -->
-                        {{ abc?.pickUpDate }}
-                        <!-- {{ abc?.location }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('brandName')" -->
-                        {{ abc?.pickUpTime | date : "short" }}
-                        <!-- {{ abc?.brandName }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('modelName')" -->
-                        {{ abc?.userCity }}
-                        <!-- {{ abc?.modelName }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('fuleWhellType')" -->
-                        {{ abc?.leadStatus }}
-                        <!-- {{ abc?.fuleWhellType }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('manufactureYear')" -->
-                        {{ abc?.createdAt | date : "short" }}
-                        <!-- {{ abc?.manufactureYear }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.createdDate }}
-                      </td>
+                      </td> -->
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('location')"
+                      >
+                        {{ abc?.location }}
+                      </td> -->
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('brandName')"
+                      >
+                        {{ abc?.brandName }}
+                      </td> -->
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('modelName')"
+                      >
+                        {{ abc?.modelName }}
+                      </td> -->
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('fuleWhellType')"
+                      >
+                        {{ abc?.fuleWhellType }}
+                      </td> -->
+                      <!-- <td
+                        (click)="navigation('/edit-lead', abc?._id)"
+                        *ngIf="checkColumn('manufactureYear')"
+                      >
+                        {{ abc?.manufactureYear }}
+                      </td> -->
 
                       <td>
                         <div class="actions d-flex justify-content-between">

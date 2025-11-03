@@ -6,11 +6,11 @@
   <!-- Sidebar content start -->
   <div class="sidebar-tabs">
     <!-- Tabs nav start -->
-    <div class="nav" role="tablist" aria-orientation="vertical">
-      <!-- <a href="#" class="logo">
+    <!-- <div class="nav" role="tablist" aria-orientation="vertical"> -->
+    <!-- <a href="#" class="logo">
     <img src="../../../favicon.ico" alt="Uni Pro Admin">
   </a> -->
-      <a
+    <!-- <a
         class="nav-link"
         id="home-tab"
         data-bs-toggle="tab"
@@ -34,12 +34,12 @@
       >
         <i class="icon-layers2"></i>
         <span class="nav-link-text">Leads</span>
-      </a>
-      <!-- <a class="nav-link" id="pages-tab" data-bs-toggle="tab" href="#tab-pages" role="tab" aria-controls="tab-pages" aria-selected="false">
+      </a> -->
+    <!-- <a class="nav-link" id="pages-tab" data-bs-toggle="tab" href="#tab-pages" role="tab" aria-controls="tab-pages" aria-selected="false">
     <i class="icon-book-open"></i>
     <span class="nav-link-text">Pages</span>
   </a> -->
-      <a
+    <!-- <a
         class="nav-link"
         id="forms-tab"
         data-bs-toggle="tab"
@@ -51,16 +51,16 @@
       >
         <i class="icon-edit1"></i>
         <span class="nav-link-text">Data</span>
-      </a>
-      <!-- <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#tab-components" role="tab" aria-controls="tab-components" aria-selected="false">
+      </a> -->
+    <!-- <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#tab-components" role="tab" aria-controls="tab-components" aria-selected="false">
     <i class="icon-box"></i>
     <span class="nav-link-text">Components</span>
   </a> -->
-      <!-- <a class="nav-link" id="graphs-tab" data-bs-toggle="tab" href="#tab-graphs" role="tab" aria-controls="tab-graphs" aria-selected="false">
+    <!-- <a class="nav-link" id="graphs-tab" data-bs-toggle="tab" href="#tab-graphs" role="tab" aria-controls="tab-graphs" aria-selected="false">
     <i class="icon-pie-chart1"></i>
     <span class="nav-link-text">Graphs</span>
   </a> -->
-      <a
+    <!-- <a
         class="nav-link"
         id="authentication-tab"
         data-bs-toggle="tab"
@@ -85,7 +85,7 @@
         <i class="icon-settings1"></i>
         <span class="nav-link-text">Settings</span>
       </a>
-    </div>
+    </div> -->
     <!-- Tabs nav end -->
 
     <!-- Tabs content start -->
@@ -105,7 +105,7 @@
         <div class="sidebarMenuScroll">
           <div class="sidebar-menu">
             <ul>
-              <li (click)="close()">
+              <!-- <li (click)="close()">
                 <a routerLink="/dashboard" routerLinkActive="current-page"
                   >Dashboard</a
                 >
@@ -117,7 +117,7 @@
               </li>
               <li (click)="close()">
                 <a routerLink="/sales" routerLinkActive="current-page">Sales</a>
-              </li>
+              </li> -->
               <!-- <li (click)="close()">
                               <a href="crm.html">CRM</a>
                           </li>
@@ -205,14 +205,14 @@
         aria-labelledby="product-tab"
       >
         <!-- Tab content header start -->
-        <div class="tab-pane-header">All Leads</div>
+        <div class="tab-pane-header">Car Bazaar</div>
         <!-- Tab content header end -->
 
         <!-- Sidebar menu starts -->
         <div class="sidebarMenuScroll">
           <div class="sidebar-menu">
             <ul>
-              <li class="list-heading">Carbazaar</li>
+              <!-- <li class="list-heading">Carbazaar</li> -->
 
               <!-- <li (click)="close()">
                                 <a routerLink="/leads-verification" routerLinkActive="current-page">Leads
@@ -223,17 +223,18 @@
                   >All Leads</a
                 >
               </li>
-              <li (click)="close()">
+              <!-- <li (click)="close()">
                 <a
                   routerLink="/dealer-quotations-leads"
                   routerLinkActive="current-page"
-                  >Users</a
+                  >Dealer Quotations Leads</a
                 >
+              </li> -->
+              <li (click)="close()">
+                <a routerLink="/users" routerLinkActive="current-page">Users</a>
               </li>
               <li (click)="close()">
-                <a
-                  routerLink="/dealer-quotations-leads"
-                  routerLinkActive="current-page"
+                <a routerLink="/drivers" routerLinkActive="current-page"
                   >Drivers</a
                 >
               </li>
@@ -254,11 +255,11 @@
                   >My Leads</a
                 >
               </li> -->
-              <li (click)="close()">
+              <!-- <li (click)="close()">
                 <a [routerLink]="['/all-case']" routerLinkActive="current-page"
                   >Case Management</a
                 >
-              </li>
+              </li> -->
 
               <!-- <div *ngIf="loginType == 'other'"> -->
               <!-- <li (click)="close()">
@@ -358,22 +359,22 @@
       </li> -->
               <!-- </div> -->
             </ul>
-            <ul>
+            <!-- <ul>
               <li class="list-heading">Zulukk</li>
               <li (click)="close()">
                 <a routerLink="/zulukk-leads" routerLinkActive="current-page"
                   >Zulukk Leads</a
                 >
               </li>
-            </ul>
-            <ul>
+            </ul> -->
+            <!-- <ul>
               <li class="list-heading">Spare Parts</li>
               <li (click)="close()">
                 <a routerLink="/parts-leads" routerLinkActive="current-page"
                   >Spare Parts Leads</a
                 >
               </li>
-            </ul>
+            </ul> -->
             <!-- <ul>
                           <li class="list-heading">Calendars</li>
                           <li (click)="close()">
@@ -399,11 +400,12 @@
         <!-- Sidebar actions starts -->
         <div class="sidebar-actions">
           <div class="support-tile">
-            <img
+            <!-- <img
               src="../../../assets/img/logo.png"
               style="width: inherit"
               alt=""
-            />
+            /> -->
+            <h1>Car Bazaar</h1>
           </div>
         </div>
         <!-- Sidebar actions ends -->

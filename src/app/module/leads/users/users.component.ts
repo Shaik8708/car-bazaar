@@ -17,12 +17,12 @@ import urlConfig from '../../../config/url.config.json';
 import { catchError, finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-dealer-quotation-leads',
+  selector: 'app-users',
   standalone: false,
-  templateUrl: './dealer-quotation-leads.component.html',
-  styleUrl: './dealer-quotation-leads.component.scss',
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.scss',
 })
-export class DealerQuotationLeadsComponent {
+export class UsersComponent {
   loginType: any;
   @Input()
   @Input()
@@ -383,72 +383,96 @@ export class DealerQuotationLeadsComponent {
       forFilter: true,
       forColumn: true,
     },
+    // {
+    //   col: 'Unique Id',
+    //   name: 'uniqueProductName',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
     {
-      col: 'Unique Id',
-      name: 'uniqueProductName',
+      col: 'Email',
+      name: 'email',
       forFilter: true,
       forColumn: true,
     },
     {
-      col: 'Brand',
-      name: 'brandName',
+      col: 'Username',
+      name: 'username',
       forFilter: false,
       forColumn: true,
     },
+    // {
+    //   col: 'Brand',
+    //   name: 'brandName',
+    //   forFilter: false,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Model',
+    //   name: 'modelName',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Condition',
+    //   name: 'condition',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Type',
+    //   name: 'fuleWhellType',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Mfg Year',
+    //   name: 'manufactureYear',
+    //   forFilter: false,
+    //   forColumn: true,
+    // },
     {
-      col: 'Model',
-      name: 'modelName',
-      forFilter: true,
-      forColumn: true,
-    },
-    {
-      col: 'Condition',
-      name: 'condition',
-      forFilter: true,
-      forColumn: true,
-    },
-    {
-      col: 'Type',
-      name: 'fuleWhellType',
-      forFilter: true,
-      forColumn: true,
-    },
-    {
-      col: 'Mfg Year',
-      name: 'manufactureYear',
-      forFilter: false,
-      forColumn: true,
-    },
-    {
-      col: 'City',
-      name: 'location',
-      forFilter: false,
-      forColumn: true,
-    },
-    {
-      col: 'Customer Response',
-      name: 'teleCaller',
-      forFilter: false,
-      forColumn: true,
-    },
-    {
-      col: 'Lead Date',
+      col: 'Created At',
       name: 'createdAt',
-      forFilter: true,
+      forFilter: false,
       forColumn: true,
     },
     {
-      col: 'Vehicle Type',
-      name: 'vehicleType',
-      forFilter: true,
+      col: 'Updated At',
+      name: 'updatedAt',
+      forFilter: false,
       forColumn: true,
     },
-    {
-      col: 'Attempts',
-      name: 'guestUserCount',
-      forFilter: true,
-      forColumn: true,
-    },
+    // {
+    //   col: 'City',
+    //   name: 'location',
+    //   forFilter: false,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Customer Response',
+    //   name: 'teleCaller',
+    //   forFilter: false,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Lead Date',
+    //   name: 'createdAt',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Vehicle Type',
+    //   name: 'vehicleType',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
+    // {
+    //   col: 'Attempts',
+    //   name: 'guestUserCount',
+    //   forFilter: true,
+    //   forColumn: true,
+    // },
     // {
     //   col: "Amount Due",
     //   name: "dueAmount",
@@ -797,8 +821,9 @@ export class DealerQuotationLeadsComponent {
 
     const collectionName = this.apiUrlFromOther
       ? `?collectionName=${this.apiUrlPathFromOther}`
-      : `?collectionName=${urlConfig.products}`;
-    const url = `${urlConfig.getAllPathDealerLatestQuotations}${collectionName}${teleCaller}${phoneNumber}${this.myLeadsId}${query}${customSelectedDates}${byDate}&page=${params.page}&limit=${params.limit}`;
+      : `?collectionName=${urlConfig.user}`;
+    const url = `${urlConfig.getAllPath}${collectionName}${teleCaller}${phoneNumber}${this.myLeadsId}${query}${customSelectedDates}${byDate}&page=${params.page}&limit=${params.limit}`;
+    // const url = `${urlConfig.getAllPathDealerLatestQuotations}${collectionName}${teleCaller}${phoneNumber}${this.myLeadsId}${query}${customSelectedDates}${byDate}&page=${params.page}&limit=${params.limit}`;
     this.spinner.show();
     this.getList = [];
     this.totalList = [];
@@ -832,7 +857,7 @@ export class DealerQuotationLeadsComponent {
           this.isData = true;
 
           // this.getList = res?.data?.docs;
-          this.getList = res?.data;
+          this.getList = res?.data.docs;
           this.totalList = res?.data?.totalDocs;
 
           this.getList.forEach((element) => {
@@ -1028,7 +1053,7 @@ export class DealerQuotationLeadsComponent {
 
     this.spinner.show();
     // this.api.getNewFormDataByDate(params, ty)
-    const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.products}&${ty}&page=${params.page}&limit=${params.limit}`;
+    const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.user}&${ty}&page=${params.page}&limit=${params.limit}`;
 
     this.baseApi.get(url).subscribe(
       (res: any) => {

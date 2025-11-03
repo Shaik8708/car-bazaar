@@ -98,6 +98,8 @@ import { UpdateDealerDetailsComponent } from './module/dealers/dealer-details/up
 import { LeadsComponent } from './module/zulukk/leads/leads.component';
 import { PartsLeadsComponent } from './module/spare-parts/parts-leads/parts-leads.component';
 import { DealerQuotationLeadsComponent } from './module/leads/dealer-quotation-leads/dealer-quotation-leads.component';
+import { DriversComponent } from './module/leads/drivers/drivers.component';
+import { UsersComponent } from './module/leads/users/users.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +137,8 @@ import { DealerQuotationLeadsComponent } from './module/leads/dealer-quotation-l
     AllUsersComponent,
     LeadsComponent,
     PartsLeadsComponent,
+    DriversComponent,
+    UsersComponent,
   ],
   exports: [CopyClipboardDirective],
   bootstrap: [AppComponent],
