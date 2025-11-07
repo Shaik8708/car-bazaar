@@ -20,7 +20,7 @@ import { catchError, finalize } from 'rxjs';
 @Component({
   selector: 'app-edit-lead',
   templateUrl: './edit-lead.component.html',
-  styleUrls: ['./edit-lead.component.css']
+  styleUrls: ['./edit-lead.component.css'],
 })
 export class EditLeadComponent implements OnInit {
   loginType: any;
@@ -32,12 +32,12 @@ export class EditLeadComponent implements OnInit {
 
   leadForm: FormGroup = new FormGroup({});
   cityList: any;
-  citySelected: string = "";
+  citySelected: string = '';
   allDealers: any;
   assignIndex: any;
   vehiclePic: any;
   scrapLetterPic: any;
-  teleCallerData: any = "Nobody update yet";
+  teleCallerData: any = 'Nobody update yet';
   assignedDealerData: any;
   callTrackingId: any;
   rcPictures: any;
@@ -53,9 +53,9 @@ export class EditLeadComponent implements OnInit {
 
   delearSingleQuote: any;
   dealerQuotation: any;
-  userFinalAmount: any = "";
-  leadIsVerified: any = "";
-  dealerName: any = "";
+  userFinalAmount: any = '';
+  leadIsVerified: any = '';
+  dealerName: any = '';
   leadId: any;
   dealerToAddInQuotation: any;
   dealerId: any;
@@ -63,7 +63,7 @@ export class EditLeadComponent implements OnInit {
   vehImage: any;
   rcImage: any;
   chasisImage: any;
-  scrapGetImages: any
+  scrapGetImages: any;
   towingImage: any;
   scrapedImage: any;
   engineImage: any;
@@ -77,33 +77,39 @@ export class EditLeadComponent implements OnInit {
   userComment: any;
   callTrackingList: any[] = [];
   caseTrackingList: any[] = [];
-  callTrackingStatus: any="";
-  caseTrackingStatus: any="";
-  caseIssueBy: any="";
-  caseType: any="";
-  caseComment: any="";
+  callTrackingStatus: any = '';
+  caseTrackingStatus: any = '';
+  caseIssueBy: any = '';
+  caseType: any = '';
+  caseComment: any = '';
   askingPrice: any;
   givenPrice: any;
-  leadResponse:any=[];
-  dealerQuotationId:any=[];
-  caseTrackingId:any;
-  assignedTo:any;
-  phoneNumber:any;
-  enableEdit:boolean = false;
+  leadResponse: any = [];
+  dealerQuotationId: any = [];
+  caseTrackingId: any;
+  assignedTo: any;
+  phoneNumber: any;
+  enableEdit: boolean = false;
 
-  caseTypeOptions: { value: string, label: string }[] = [
-    { value: 'VehicleSoledInsteadOfScrapping', label: 'Vehicle Soled Instead Of Scrapping' },
-    { value: 'VehicleScrappingDelayByDealer', label: 'Vehicle Scrapping Delay By Dealer' },
+  caseTypeOptions: { value: string; label: string }[] = [
+    {
+      value: 'VehicleSoledInsteadOfScrapping',
+      label: 'Vehicle Soled Instead Of Scrapping',
+    },
+    {
+      value: 'VehicleScrappingDelayByDealer',
+      label: 'Vehicle Scrapping Delay By Dealer',
+    },
     { value: 'ChasisNotGivenByDealer', label: 'Chasis Not Given By Dealer' },
-    { value: 'Other', label: 'Other' }
+    { value: 'Other', label: 'Other' },
   ];
-  caseStatusOptions: { value: string, label: string }[] = [
+  caseStatusOptions: { value: string; label: string }[] = [
     { value: 'Active', label: 'Active' },
     { value: 'Reopened', label: 'Reopened' },
-    { value: 'Closed', label: 'Closed' }
+    { value: 'Closed', label: 'Closed' },
   ];
 
-  leadStatusOptions: { value: string, label: string }[] = [
+  leadStatusOptions: { value: string; label: string }[] = [
     { value: 'NotReachable', label: 'Not reachable' },
     { value: 'DuplicateLead', label: 'Duplicate Lead' },
     { value: 'SoldToOthers', label: 'Sold To Others' },
@@ -123,32 +129,51 @@ export class EditLeadComponent implements OnInit {
     { value: 'SCHEDULED', label: 'Scheduled' },
     { value: 'PICKEDUP', label: 'Pickedup' },
     { value: 'SCRAPPED', label: 'Scrapped' },
-    { value: 'ReceivedScrappedImagesVideos', label: 'Received Scrapped Images/videos' },
-    { value: 'ScrappedVerified', label: 'Scrapped Verified'},
-    { value: 'SentScrappedImagesVideosToCustomer', label: 'Sent Scrapped Images/videos to Customer' },
-    { value: 'SentDeclarationCertificateToCustomer', label: 'Sent Declaration Certificate to Customer' },
+    {
+      value: 'ReceivedScrappedImagesVideos',
+      label: 'Received Scrapped Images/videos',
+    },
+    { value: 'ScrappedVerified', label: 'Scrapped Verified' },
+    {
+      value: 'SentScrappedImagesVideosToCustomer',
+      label: 'Sent Scrapped Images/videos to Customer',
+    },
+    {
+      value: 'SentDeclarationCertificateToCustomer',
+      label: 'Sent Declaration Certificate to Customer',
+    },
     { value: 'Completed', label: 'Completed' },
-    { value: 'OTHER', label: 'Other' }
+    { value: 'OTHER', label: 'Other' },
   ];
 
-  constructor(private fb: FormBuilder, private api: ApiService, private _activated: ActivatedRoute, private http: HttpClient,
-    private spinner: NgxSpinnerService, private route: ActivatedRoute,
+  constructor(
+    private fb: FormBuilder,
+    private api: ApiService,
+    private _activated: ActivatedRoute,
+    private http: HttpClient,
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
     private location: Location,
     private toastr: ToastrService,
-    private baseApi: BaseApiService,) {
-
-
+    private baseApi: BaseApiService
+  ) {
     this.leadForm = this.fb.group({
       username: [''],
       phoneNumber: [''],
       createdAt: [''],
-      brandName: [''],
+      pickUpDate: [''],
+      pickUpTime: [''],
+      locationList: [''],
+      // brandName: [''],
       condition: [''],
-      fuleWhellType: [''],
+      totalKm: [''],
+      // fuleWhellType: [''],
       guestUserCount: [''],
-      location: [''],
+      userCity: [''],
+      // location: [''],
       manufactureYear: [''],
-      modelName: [''],
+      totalAmount: [''],
+      // modelName: [''],
       price: [''],
       teleCaller: [''],
       vehicleType: [''],
@@ -186,21 +211,17 @@ export class EditLeadComponent implements OnInit {
       engineNumber: [''],
       userAddressGoogleMapLink: [''],
       callTrackingId: '',
-      whatsAppNumber: '',
+      tripType: '',
+      // whatsAppNumber: '',
       fullName: '',
       assignedTo: '',
 
       items: this.fb.array([this.newFeilds()]),
     });
-
-
-
-
-
   }
 
   ngOnInit(): void {
-    this.loginType = localStorage?.getItem('loiu0ac')
+    this.loginType = localStorage?.getItem('loiu0ac');
     // this.getDealerList();
     this.getLeadById();
     this.getCityList();
@@ -218,33 +239,35 @@ export class EditLeadComponent implements OnInit {
   }
 
   getCityList() {
-
-    this.baseApi.get(`${urlConfig.getAllPath}?collectionName=${urlConfig.locations}`)
+    this.baseApi
+      .get(`${urlConfig.getAllPath}?collectionName=${urlConfig.locations}`)
       // this.api.getCityList()
-      .subscribe((res: any) => {
-        if (res?.status == "success") {
-          this.cityList = res?.data?.docs;
+      .subscribe(
+        (res: any) => {
+          if (res?.status == 'success') {
+            this.cityList = res?.data?.docs;
+          } else {
+            alert('Something went wrong, Try again');
+          }
+        },
+        (err: any) => {
+          alert(err.error.message);
         }
-        else {
-          alert("Something went wrong, Try again");
-        }
-
-
-
-      }, (err: any) => {
-        alert(err.error.message);
-      }
-      )
+      );
   }
 
-  removeQuotation(id: any,dealerId:any, index: any,quotationId:any, unAssign?: any) {
+  removeQuotation(
+    id: any,
+    dealerId: any,
+    index: any,
+    quotationId: any,
+    unAssign?: any
+  ) {
     let isAssigned = unAssign ? false : true;
-
 
     // this.getLeadById();
 
     // console.log('id',id)
-
 
     Swal.fire({
       text: 'Are you sure you want to delete Quotation.',
@@ -253,34 +276,32 @@ export class EditLeadComponent implements OnInit {
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
-        let payload ={
-          collectionName :urlConfig.dealerLeadStatus
-        }
-        this.baseApi.delete(`${urlConfig.deletePath}/${id}`, payload)
-        .subscribe((res: any) => {
-
-          if(res?.status == "success"){
-            this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, isAssigned, true);
-
-
-          } else {
-            alert(res?.message)
-          }
-        },
+        let payload = {
+          collectionName: urlConfig.dealerLeadStatus,
+        };
+        this.baseApi.delete(`${urlConfig.deletePath}/${id}`, payload).subscribe(
+          (res: any) => {
+            if (res?.status == 'success') {
+              this.updateDealerQuotationStatusInMainApi(
+                dealerId,
+                quotationId,
+                isAssigned,
+                true
+              );
+            } else {
+              alert(res?.message);
+            }
+          },
           (err: any) => {
-            alert(err?.error?.message)
+            alert(err?.error?.message);
           }
-        )
-
-
+        );
       } else if (result.isDenied) {
-
       }
     });
-
   }
 
   getLeadById() {
@@ -290,225 +311,251 @@ export class EditLeadComponent implements OnInit {
     this.spinner.show();
     // this.api.getLeadById(this.leadId)
     let payload = {
-      collectionName: urlConfig.products,
-      id: this.leadId
-    }
-    this.baseApi.post(urlConfig.getOnePath, payload)
+      collectionName: urlConfig.leads,
+      id: this.leadId,
+    };
+    this.baseApi
+      .post(urlConfig.getOnePath, payload)
       .pipe(
-        finalize(() => {
-
-        }),
-        catchError(error => {
+        finalize(() => {}),
+        catchError((error) => {
           throw error;
         })
       )
-      .subscribe((res: any) => {
-        this.spinner.hide();
-        if (res?.status == "success") {
-          this.productUniqueId = res?.data?.uniqueProductName;
-          this.leadResponse = res?.data;
-          const data = {
-            username: res?.data?.username,
-            phoneNumber: res?.data?.phoneNumber,
-            createdAt: res?.data?.createdAt,
-            brandName: res?.data?.brandName,
-            condition: res?.data?.condition,
-            fuleWhellType: res?.data?.fuleWhellType,
-            guestUserCount: res?.data?.guestUserCount,
-            location: res?.data?.location,
-            manufactureYear: res?.data?.manufactureYear,
-            modelName: res?.data?.modelName,
-            price: res?.data?.price,
-            teleCaller: res?.data?.teleCaller,
-            vehicleType: res?.data?.vehicleType,
-            dealerQuotationId: res?.data?.dealerQuotationId,
-            userFinalAmount: res?.data?.userFinalAmount,
-            leadIsVerified: res?.data?.leadIsVerified,
-            vehiclePictures: res?.data?.vehiclePictures,
-            rcPictures: res?.data?.rcPictures,
-            towingPictures: res?.data?.towingPictures,
-            userDocumentsPictures: res?.data?.userDocumentsPictures,
-            scrapPictures: res?.data?.scrapPictures,
-            enginePictures: res?.data?.enginePictures,
-            chasisPictures: res?.data?.chasisPictures,
-            scrapLetterPictures: res?.data?.scrapLetterPictures,
-            dealerdata: res?.data?.dealerdata,
-
-            chasisNumber: res?.data?.chasisNumber,
-            userAddress: res?.data?.userAddress,
-            userDocumentType: res?.data?.userDocumentType,
-            userDocumentNumber: res?.data?.userDocumentNumber,
-            vehicleNumber: res?.data?.vehicleNumber,
-            comment: res?.data?.comment,
-            engineNumber: res?.data?.engineNumber,
-            userAddressGoogleMapLink: res?.data?.userAddressGoogleMapLink,
-            canclePickupReason: res?.data?.canclePickupReason,
-            schedulePickUp: res?.data?.schedulePickUp,
-            leadStatus: res?.data?.leadStatus,
-            isAssigned: res?.data?.isAssigned,
-            assignedTo: res?.data?.assignedTo,
-            teleCallerData: res?.data?.teleCallerData,
-            adminSeen: res?.data?.adminSeen,
-            adminHasSeenQuotation: res?.data?.adminHasSeenQuotation,
-            items: res?.data?.items,
-            callTrackingId: res?.data?.callTrackingId,
-            caseTrackingId: res?.data?.caseTrackingId,
-            whatsAppNumber: res?.data?.whatsAppNumber,
-            fullName: res?.data?.fullName,
-            clientId: res?.data?.clientId,
-            clientUsername: res?.data?.clientUsername,
-          }
-
-      this.name = `https://partner.carbasket.in/v/${
-        encodeURIComponent(res?.data?.modelName).replace(/%20/g, '-')
-      }-${res?.data?.manufactureYear}-${
-        encodeURIComponent(res?.data?.location).replace(/%20/g, '-')
-      }-${encodeURIComponent(res?.data?.uniqueProductName).replace(/%20/g, '-')}`;
-      
-          this.adminSeen = data?.adminSeen;
-          this.adminHasSeenQuotation = data?.adminHasSeenQuotation;
-          this.leadStatus = data?.leadStatus;
-          this.teleCallerData = res?.data?.teleCallerData?.fullName,
-            this.isAssigned = data?.isAssigned;
-            this.assignedTo = data?.assignedTo;
-          this.scheduledDate = data?.schedulePickUp?.date;
-          this.confirmedByDealer = data?.schedulePickUp?.confirmedByDealer;
-          this.confirmedByUser = data?.schedulePickUp?.confirmedByUser;
-          this.userFinalAmount = data?.userFinalAmount;
-          this.leadIsVerified = data?.leadIsVerified;
-          this.vehiclePic = data?.vehiclePictures;
-          this.rcPictures = data?.rcPictures;
-          this.towingPic = data?.towingPictures;
-          this.userDocPic = data?.userDocumentsPictures;
-          this.enginePic = data?.enginePictures;
-          this.scrapedPic = data?.scrapPictures;
-          this.chasisPictures = data?.chasisPictures;
-          this.scrapLetterPic = data?.scrapLetterPictures;
-          this.assignedDealerData = data?.isAssigned;
-          this.callTrackingId = data?.callTrackingId;
-          this.caseTrackingId = data?.caseTrackingId;
-          this.askingPrice = data?.userFinalAmount;
-          this.callTrackingStatus = data?.teleCaller;
-          this.dealerQuotationId = data?.dealerQuotationId;
-          this.phoneNumber = data?.phoneNumber;
-          if (data?.callTrackingId) {
-            this.getCallTrackingData()
-          }
-          if (data?.caseTrackingId) {
-            this.getCaseTrackingData()
-          }
-
-          if (this.chasisPictures) {
-            const imagesArray = this.leadForm.get('chasisPictures') as FormArray;
-            this.chasisPictures.forEach((imageUrl: any) => {
-              imagesArray.push(this.fb.control(imageUrl?.img));
-            });
-          }
-
-          if (this.vehiclePic) {
-            const imagesArray = this.leadForm.get('vehiclePictures') as FormArray;
-            this.vehiclePic.forEach((imageUrl: any) => {
-              imagesArray.push(this.fb.control(imageUrl?.img));
-            });
-          }
-
-          if (this.scrapLetterPic) {
-            const imagesArray = this.leadForm.get('scrapLetterPictures') as FormArray;
-            this.scrapLetterPic.forEach((imageUrl: any) => {
-              imagesArray.push(this.fb.control(imageUrl?.img));
-            });
-          }
-
-          if (this.rcPictures) {
-            const rcImagesArray = this.leadForm.get('rcPictures') as FormArray;
-            this.rcPictures.forEach((rcUrl: any) => {
-              rcImagesArray.push(this.fb.control(rcUrl?.img));
-            });
-          }
-          if (this.towingPic) {
-            const rcImagesArray = this.leadForm.get('towingPictures') as FormArray;
-            this.towingPic.forEach((rcUrl: any) => {
-              rcImagesArray.push(this.fb.control(rcUrl?.img));
-            });
-          }
-          if (this.scrapedPic) {
-            const rcImagesArray = this.leadForm.get('scrapPictures') as FormArray;
-            this.scrapedPic.forEach((rcUrl: any) => {
-              rcImagesArray.push(this.fb.control(rcUrl?.img));
-            });
-          }
-          if (this.enginePic) {
-            const rcImagesArray = this.leadForm.get('enginePictures') as FormArray;
-            this.enginePic.forEach((rcUrl: any) => {
-              rcImagesArray.push(this.fb.control(rcUrl?.img));
-            });
-          }
-          if (this.userDocPic) {
-            const rcImagesArray = this.leadForm.get('userDocumentsPictures') as FormArray;
-            this.userDocPic.forEach((rcUrl: any) => {
-              rcImagesArray.push(this.fb.control(rcUrl?.img));
-            });
-          }
-
-
-
-
-          // vehiclePic.forEach(imageUrl => {
-          //   this.addImageControl(imageUrl); 
-          // });
-
-
-
-
-          // vehiclePic.forEach((ele: any) => {
-          //             this.leadForm.newImage({
-          //               src: ele,
-          //               thumb: ele,
-          //             });
-          //           });
-          // this.dealerQuotationList = data?.items;
-          this.leadForm.patchValue(data);
-          if (this.adminSeen == false || this.adminHasSeenQuotation == false) {
-            this.leadStatus = "PROCESSING";
-            this.onSubmit();
-          }
-          // if(data.leadStatus == "CLOSED"){
-          //   this.leadStatus= 'CLOSED'
-          // }
-          // else if(data.leadStatus == "DEAL_CANCELLED"){
-          //   this.leadStatus= 'DEAL_CANCELLED'
-          // }
-          // else if(data.towingPictures?.length > 0 && data.scrapPictures?.length == 0){
-          //   this.leadStatus= 'PICKEDUP'
-          // }
-          // else if(data.scrapPictures?.length > 0){
-          //   this.leadStatus= 'SCRAPPED'
-          // }
-          // else if(data.dealerdata && this.scheduledDate){
-          //   this.leadStatus= 'SCHEDULED'
-          // }
-          // else{
-          //   this.leadStatus = data.leadStatus;
-          // }
-          this.getLeadQuotationStatus();
-
-        } else {
+      .subscribe(
+        (res: any) => {
           this.spinner.hide();
-          alert(res?.message)
-        }
+          if (res?.status == 'success') {
+            this.productUniqueId = res?.data?.uniqueProductName;
+            this.leadResponse = res?.data;
+            const data = {
+              username: res?.data?.username,
+              phoneNumber: res?.data?.phoneNumber,
+              createdAt: res?.data?.createdAt,
+              locationList: res?.data?.locations.join('\n'),
+              // brandName: res?.data?.brandName,
+              pickUpDate: res?.data?.pickUpDate,
+              pickUpTime: res?.data?.pickUpTime,
+              condition: res?.data?.condition,
+              totalKm: res?.data?.totalKm,
+              // fuleWhellType: res?.data?.fuleWhellType,
+              guestUserCount: res?.data?.guestUserCount,
+              userCity: res?.data?.userCity,
+              // location: res?.data?.location,
+              // manufactureYear: res?.data?.manufactureYear,
+              totalAmount: res?.data?.totalAmount,
+              // modelName: res?.data?.modelName,
+              price: res?.data?.price,
+              teleCaller: res?.data?.teleCaller,
+              vehicleType: res?.data?.vehicleType,
+              dealerQuotationId: res?.data?.dealerQuotationId,
+              userFinalAmount: res?.data?.userFinalAmount,
+              leadIsVerified: res?.data?.leadIsVerified,
+              vehiclePictures: res?.data?.vehiclePictures,
+              rcPictures: res?.data?.rcPictures,
+              towingPictures: res?.data?.towingPictures,
+              userDocumentsPictures: res?.data?.userDocumentsPictures,
+              scrapPictures: res?.data?.scrapPictures,
+              enginePictures: res?.data?.enginePictures,
+              chasisPictures: res?.data?.chasisPictures,
+              scrapLetterPictures: res?.data?.scrapLetterPictures,
+              dealerdata: res?.data?.dealerdata,
 
-      },
+              chasisNumber: res?.data?.chasisNumber,
+              userAddress: res?.data?.userAddress,
+              userDocumentType: res?.data?.userDocumentType,
+              userDocumentNumber: res?.data?.userDocumentNumber,
+              vehicleNumber: res?.data?.vehicleNumber,
+              comment: res?.data?.comment,
+              engineNumber: res?.data?.engineNumber,
+              userAddressGoogleMapLink: res?.data?.userAddressGoogleMapLink,
+              canclePickupReason: res?.data?.canclePickupReason,
+              schedulePickUp: res?.data?.schedulePickUp,
+              leadStatus: res?.data?.leadStatus,
+              isAssigned: res?.data?.isAssigned,
+              assignedTo: res?.data?.assignedTo,
+              teleCallerData: res?.data?.teleCallerData,
+              adminSeen: res?.data?.adminSeen,
+              adminHasSeenQuotation: res?.data?.adminHasSeenQuotation,
+              items: res?.data?.items,
+              callTrackingId: res?.data?.callTrackingId,
+              caseTrackingId: res?.data?.caseTrackingId,
+              tripType: res?.data?.tripType,
+              // whatsAppNumber: res?.data?.whatsAppNumber,
+              fullName: res?.data?.fullName,
+              clientId: res?.data?.clientId,
+              clientUsername: res?.data?.clientUsername,
+            };
+
+            this.name = `https://partner.carbasket.in/v/${encodeURIComponent(
+              res?.data?.totalAmount
+            ).replace(/%20/g, '-')}-${
+              res?.data?.manufactureYear
+            }-${encodeURIComponent(res?.data?.userCity).replace(
+              /%20/g,
+              '-'
+            )}-${encodeURIComponent(res?.data?.uniqueProductName).replace(
+              /%20/g,
+              '-'
+            )}`;
+
+            this.adminSeen = data?.adminSeen;
+            this.adminHasSeenQuotation = data?.adminHasSeenQuotation;
+            this.leadStatus = data?.leadStatus;
+            (this.teleCallerData = res?.data?.teleCallerData?.fullName),
+              (this.isAssigned = data?.isAssigned);
+            this.assignedTo = data?.assignedTo;
+            this.scheduledDate = data?.schedulePickUp?.date;
+            this.confirmedByDealer = data?.schedulePickUp?.confirmedByDealer;
+            this.confirmedByUser = data?.schedulePickUp?.confirmedByUser;
+            this.userFinalAmount = data?.userFinalAmount;
+            this.leadIsVerified = data?.leadIsVerified;
+            this.vehiclePic = data?.vehiclePictures;
+            this.rcPictures = data?.rcPictures;
+            this.towingPic = data?.towingPictures;
+            this.userDocPic = data?.userDocumentsPictures;
+            this.enginePic = data?.enginePictures;
+            this.scrapedPic = data?.scrapPictures;
+            this.chasisPictures = data?.chasisPictures;
+            this.scrapLetterPic = data?.scrapLetterPictures;
+            this.assignedDealerData = data?.isAssigned;
+            this.callTrackingId = data?.callTrackingId;
+            this.caseTrackingId = data?.caseTrackingId;
+            this.askingPrice = data?.userFinalAmount;
+            this.callTrackingStatus = data?.teleCaller;
+            this.dealerQuotationId = data?.dealerQuotationId;
+            this.phoneNumber = data?.phoneNumber;
+            if (data?.callTrackingId) {
+              this.getCallTrackingData();
+            }
+            if (data?.caseTrackingId) {
+              this.getCaseTrackingData();
+            }
+
+            if (this.chasisPictures) {
+              const imagesArray = this.leadForm.get(
+                'chasisPictures'
+              ) as FormArray;
+              this.chasisPictures.forEach((imageUrl: any) => {
+                imagesArray.push(this.fb.control(imageUrl?.img));
+              });
+            }
+
+            if (this.vehiclePic) {
+              const imagesArray = this.leadForm.get(
+                'vehiclePictures'
+              ) as FormArray;
+              this.vehiclePic.forEach((imageUrl: any) => {
+                imagesArray.push(this.fb.control(imageUrl?.img));
+              });
+            }
+
+            if (this.scrapLetterPic) {
+              const imagesArray = this.leadForm.get(
+                'scrapLetterPictures'
+              ) as FormArray;
+              this.scrapLetterPic.forEach((imageUrl: any) => {
+                imagesArray.push(this.fb.control(imageUrl?.img));
+              });
+            }
+
+            if (this.rcPictures) {
+              const rcImagesArray = this.leadForm.get(
+                'rcPictures'
+              ) as FormArray;
+              this.rcPictures.forEach((rcUrl: any) => {
+                rcImagesArray.push(this.fb.control(rcUrl?.img));
+              });
+            }
+            if (this.towingPic) {
+              const rcImagesArray = this.leadForm.get(
+                'towingPictures'
+              ) as FormArray;
+              this.towingPic.forEach((rcUrl: any) => {
+                rcImagesArray.push(this.fb.control(rcUrl?.img));
+              });
+            }
+            if (this.scrapedPic) {
+              const rcImagesArray = this.leadForm.get(
+                'scrapPictures'
+              ) as FormArray;
+              this.scrapedPic.forEach((rcUrl: any) => {
+                rcImagesArray.push(this.fb.control(rcUrl?.img));
+              });
+            }
+            if (this.enginePic) {
+              const rcImagesArray = this.leadForm.get(
+                'enginePictures'
+              ) as FormArray;
+              this.enginePic.forEach((rcUrl: any) => {
+                rcImagesArray.push(this.fb.control(rcUrl?.img));
+              });
+            }
+            if (this.userDocPic) {
+              const rcImagesArray = this.leadForm.get(
+                'userDocumentsPictures'
+              ) as FormArray;
+              this.userDocPic.forEach((rcUrl: any) => {
+                rcImagesArray.push(this.fb.control(rcUrl?.img));
+              });
+            }
+
+            // vehiclePic.forEach(imageUrl => {
+            //   this.addImageControl(imageUrl);
+            // });
+
+            // vehiclePic.forEach((ele: any) => {
+            //             this.leadForm.newImage({
+            //               src: ele,
+            //               thumb: ele,
+            //             });
+            //           });
+            // this.dealerQuotationList = data?.items;
+            this.leadForm.patchValue(data);
+            if (
+              this.adminSeen == false ||
+              this.adminHasSeenQuotation == false
+            ) {
+              this.leadStatus = 'PROCESSING';
+              this.onSubmit();
+            }
+            // if(data.leadStatus == "CLOSED"){
+            //   this.leadStatus= 'CLOSED'
+            // }
+            // else if(data.leadStatus == "DEAL_CANCELLED"){
+            //   this.leadStatus= 'DEAL_CANCELLED'
+            // }
+            // else if(data.towingPictures?.length > 0 && data.scrapPictures?.length == 0){
+            //   this.leadStatus= 'PICKEDUP'
+            // }
+            // else if(data.scrapPictures?.length > 0){
+            //   this.leadStatus= 'SCRAPPED'
+            // }
+            // else if(data.dealerdata && this.scheduledDate){
+            //   this.leadStatus= 'SCHEDULED'
+            // }
+            // else{
+            //   this.leadStatus = data.leadStatus;
+            // }
+            this.getLeadQuotationStatus();
+          } else {
+            this.spinner.hide();
+            alert(res?.message);
+          }
+        },
         (err: any) => {
           this.spinner.hide();
-          alert(err?.error?.message)
+          alert(err?.error?.message);
         }
-      )
+      );
   }
 
-
   getLeadQuotationStatus() {
-
-    this.baseApi.get(urlConfig.getAllPath + `?collectionName=${urlConfig.dealerLeadStatus}&productId=${this.leadId}`)
+    this.baseApi
+      .get(
+        urlConfig.getAllPath +
+          `?collectionName=${urlConfig.dealerLeadStatus}&productId=${this.leadId}`
+      )
       .subscribe((res: any) => {
         this.originalQuotaionStatusData = res?.data?.docs;
         this.dealerQuotationList = res?.data?.docs.flatMap((doc: any) => {
@@ -522,22 +569,22 @@ export class EditLeadComponent implements OnInit {
             quotationId: quotation?.id,
             dealerLeadStatusId: doc?._id,
             quotationGivenTime: quotation?.quotationGivenTime,
-            isAssigned: quotation?.isAssigned
+            isAssigned: quotation?.isAssigned,
           }));
         });
-
-
-      })
+      });
   }
 
   prepareUpdatedData(unAssign: any) {
     const updatedDocs = this.originalQuotaionStatusData.map((doc: any) => {
       // Update the quotations with isAssigned flag
-      unAssign ? doc.leadStatus = "QUOTED" : doc.leadStatus = "ASSIGNED";
+      unAssign ? (doc.leadStatus = 'QUOTED') : (doc.leadStatus = 'ASSIGNED');
       const updatedQuotations = doc.quotations.map((quotation: any) => {
         // Find the matching quotation from dealerQuotationList based on dealerId and dealerPrice
-        const matchingQuotation = this.dealerQuotationList.find((q: any) =>
-          q.dealerId === doc.dealerId && q.dealerPrice === quotation.dealerPrice
+        const matchingQuotation = this.dealerQuotationList.find(
+          (q: any) =>
+            q.dealerId === doc.dealerId &&
+            q.dealerPrice === quotation.dealerPrice
         );
         // If found, add the isAssigned property
         if (matchingQuotation) {
@@ -548,7 +595,7 @@ export class EditLeadComponent implements OnInit {
 
       // Filter the updated quotations to only keep those where isAssigned is true
       // const filteredQuotations = updatedQuotations.filter((quotation: any) => quotation.isAssigned === true);
-      const filteredQuotations = updatedQuotations
+      const filteredQuotations = updatedQuotations;
 
       // Return the document with updated quotations (keeping other properties intact)
       return { ...doc, quotations: filteredQuotations };
@@ -557,56 +604,50 @@ export class EditLeadComponent implements OnInit {
     return updatedDocs;
   }
 
-
-
-
-
-
-
   newImage(): FormGroup {
     return this.fb.group({
-      img: [""],
+      img: [''],
       title: 'title',
     });
   }
 
   newTowingImage(): FormGroup {
     return this.fb.group({
-      img: [""]
+      img: [''],
     });
   }
 
   newRcImage(): FormGroup {
     return this.fb.group({
-      img: [""],
+      img: [''],
       title: 'title',
     });
   }
 
   newChasisImage(): FormGroup {
     return this.fb.group({
-      img: [""],
+      img: [''],
       title: 'title',
     });
   }
 
   newScrapImageFields(): FormGroup {
     return this.fb.group({
-      img: [""],
+      img: [''],
       title: 'title',
     });
   }
 
   newFeilds(): FormGroup {
     return this.fb.group({
-      dealerCity: [""],
-      dealerCityId: [""],
-      dealerId: [""],
-      dealerLeadStatusId: [""],
-      dealerName: [""],
-      dealerPrice: [""],
-      dealerUserName: [""],
-      productId: [""]
+      dealerCity: [''],
+      dealerCityId: [''],
+      dealerId: [''],
+      dealerLeadStatusId: [''],
+      dealerName: [''],
+      dealerPrice: [''],
+      dealerUserName: [''],
+      productId: [''],
     });
   }
   showDealers(i: any) {
@@ -632,7 +673,6 @@ export class EditLeadComponent implements OnInit {
     //       this.spinner.hide();
     //       this.delearSingleQuote = "";
 
-
     //       alert("Successfully Dealer Quotation Created");
     //       window.location.reload()
     //     } else {
@@ -650,30 +690,17 @@ export class EditLeadComponent implements OnInit {
     //   alert("All the fields required")
     // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     let isDealerExist: any;
     let dealerLeadStatusId: any;
-    
-    this.leadResponse.dealerQuotationId = this.leadResponse?.dealerQuotationId || []; // Initialize if not present
+
+    this.leadResponse.dealerQuotationId =
+      this.leadResponse?.dealerQuotationId || []; // Initialize if not present
     this.leadResponse?.dealerQuotationId.find((res: any) => {
       if (this.dealerId == res?.dealerId) {
         isDealerExist = res;
-        dealerLeadStatusId = res?.dealerLeadStatusId
+        dealerLeadStatusId = res?.dealerLeadStatusId;
       }
-    })
+    });
 
     // let cityId = this.cookieService.get('dp_ci');
     if (this.delearSingleQuote) {
@@ -683,23 +710,24 @@ export class EditLeadComponent implements OnInit {
       const businessDetailsCityId = this.dealerToAddInQuotation?.cityId;
 
       if (this.dealerId) {
-
         this.spinner.show();
 
         let leadStatusPayload = {
           collectionName: urlConfig.dealerLeadStatus,
           leadStatus: 'QUOTED',
-          quotations: [{
-            dealerPrice: this.delearSingleQuote,
-            quotationGivenTime: new Date(),
-            isAssigned: false
-          }],
+          quotations: [
+            {
+              dealerPrice: this.delearSingleQuote,
+              quotationGivenTime: new Date(),
+              isAssigned: false,
+            },
+          ],
           dealerId: this.dealerId,
           dealerName: businessDetailsFullName,
           dealerUserName: businessDetailsUserName,
           productId: this.leadId,
           dealerCity: businessDetailsCity,
-          dealerCityId: businessDetailsCityId
+          dealerCityId: businessDetailsCityId,
         };
 
         let postOrPatch;
@@ -707,146 +735,152 @@ export class EditLeadComponent implements OnInit {
           if (this.dealerId == res?.dealerId) {
             postOrPatch = res;
           }
-        })
+        });
 
-
-        let path = postOrPatch ? urlConfig.updatePath + postOrPatch?.dealerLeadStatusId : urlConfig.createPath;
-        let urlMethod: any = postOrPatch ? this.baseApi.patch.bind(this.baseApi) : this.baseApi.post.bind(this.baseApi);
-
+        let path = postOrPatch
+          ? urlConfig.updatePath + postOrPatch?.dealerLeadStatusId
+          : urlConfig.createPath;
+        let urlMethod: any = postOrPatch
+          ? this.baseApi.patch.bind(this.baseApi)
+          : this.baseApi.post.bind(this.baseApi);
 
         if (postOrPatch) {
           let payload = {
             collectionName: urlConfig.dealerLeadStatus,
-            id: dealerLeadStatusId
-          }
-          this.baseApi.post(urlConfig.getOnePath, payload).subscribe((response: any) => {
-            let existingQuotations = response?.data?.quotations || [];
+            id: dealerLeadStatusId,
+          };
+          this.baseApi
+            .post(urlConfig.getOnePath, payload)
+            .subscribe((response: any) => {
+              let existingQuotations = response?.data?.quotations || [];
 
+              existingQuotations.push({
+                dealerPrice: this.delearSingleQuote,
+                quotationGivenTime: new Date(),
+                isAssigned: false,
+              });
 
-            existingQuotations.push({
-              dealerPrice: this.delearSingleQuote,
-              quotationGivenTime: new Date(),
-              isAssigned: false
+              leadStatusPayload.quotations = existingQuotations;
+
+              urlMethod(path, leadStatusPayload)
+                .pipe(
+                  finalize(() => {
+                    this.spinner.hide();
+                  }),
+                  catchError((err) => {
+                    alert(err?.error?.message);
+
+                    throw err;
+                  })
+                )
+                .subscribe((response: any) => {
+                  if (response?.status == 'success') {
+                    alert('Successfully Dealer Quotation Created');
+
+                    window.location.reload();
+                  }
+                });
             });
-
-
-            leadStatusPayload.quotations = existingQuotations;
-
-
-            urlMethod(path, leadStatusPayload)
-              .pipe(
-                finalize(() => {
-                  this.spinner.hide();
-
-                }),
-                catchError(err => {
-                  alert(err?.error?.message)
-
-                  throw err;
-                })
-              )
-              .subscribe((response: any) => {
-                if (response?.status == "success") {
-
-                  alert("Successfully Dealer Quotation Created");
-
-                  window.location.reload();
-
-                }
-              })
-          });
         } else {
-
           urlMethod(path, leadStatusPayload)
             .pipe(
               finalize(() => {
                 this.spinner.hide();
               }),
-              catchError(err => {
-                alert(err?.error?.message)
+              catchError((err) => {
+                alert(err?.error?.message);
 
                 throw err;
               })
             )
             .subscribe((response: any) => {
-              if (response?.status == "success") {
-                !isDealerExist ? this.leadResponse.dealerQuotationId.push({ dealerId: this.dealerId, dealerLeadStatusId: response?.data?._id }) : this.leadResponse.dealerQuotationId; // Just push, don't assign back
+              if (response?.status == 'success') {
+                !isDealerExist
+                  ? this.leadResponse.dealerQuotationId.push({
+                      dealerId: this.dealerId,
+                      dealerLeadStatusId: response?.data?._id,
+                    })
+                  : this.leadResponse.dealerQuotationId; // Just push, don't assign back
 
-                this.baseApi.patch(urlConfig.updatePath + this.leadId, this.leadResponse)
+                this.baseApi
+                  .patch(urlConfig.updatePath + this.leadId, this.leadResponse)
                   .pipe(
                     finalize(() => {
                       //this.spinner.hide();
-
                     }),
-                    catchError(err => {
-                      alert(err?.error?.message)
+                    catchError((err) => {
+                      alert(err?.error?.message);
 
                       throw err;
                     })
                   )
                   .subscribe((res: any) => {
-                    if (res?.status == "success") {
-                      alert("Successfully Dealer Quotation Created");
-                      window.location.reload()
+                    if (res?.status == 'success') {
+                      alert('Successfully Dealer Quotation Created');
+                      window.location.reload();
                     } else {
-                      alert(res?.message)
+                      alert(res?.message);
                     }
-                  }
-                  )
+                  });
               }
-            })
+            });
         }
-
       }
-
-
-  }
-
-
-
-}
-
-
-
-  getDealersByCity(id: any) {
-
-    this.citySelected = id?.value;
-
-    this.baseApi.get(`${urlConfig.getAllPath}?collectionName=${urlConfig.dealerDetails}&cityId=${id?.value}`).subscribe((res: any) => {
-
-      this.allDealers = res?.data?.docs;
-    })
-  }
-
-  selectDealer(id: any) {
-
-    this.dealerId = id?.value;
-
-    // if(this.dealerQuotation){
-    if(this.delearSingleQuote){
-      this.allDealers.filter((res:any) => {
-        if(res._id == id?.value ){
-          console.log(res)
-          this.dealerToAddInQuotation = res
-        }
-      })
-
-
-
-    }else{
-      alert("Add the amounts");
     }
   }
 
-  assignToDealer(dealerLeadStatusId: any,dealerId:any, index: any,quotationId:any, unAssign?: any, leadStatus?: any) {
-    this.dealerQuotationList.forEach((quotation: any) => quotation.isAssigned = false);
+  getDealersByCity(id: any) {
+    this.citySelected = id?.value;
+
+    this.baseApi
+      .get(
+        `${urlConfig.getAllPath}?collectionName=${urlConfig.dealerDetails}&cityId=${id?.value}`
+      )
+      .subscribe((res: any) => {
+        this.allDealers = res?.data?.docs;
+      });
+  }
+
+  selectDealer(id: any) {
+    this.dealerId = id?.value;
+
+    // if(this.dealerQuotation){
+    if (this.delearSingleQuote) {
+      this.allDealers.filter((res: any) => {
+        if (res._id == id?.value) {
+          console.log(res);
+          this.dealerToAddInQuotation = res;
+        }
+      });
+    } else {
+      alert('Add the amounts');
+    }
+  }
+
+  assignToDealer(
+    dealerLeadStatusId: any,
+    dealerId: any,
+    index: any,
+    quotationId: any,
+    unAssign?: any,
+    leadStatus?: any
+  ) {
+    this.dealerQuotationList.forEach(
+      (quotation: any) => (quotation.isAssigned = false)
+    );
 
     this.dealerQuotationList[index].isAssigned = unAssign ? false : true;
     // this.dealerQuotationList[index].assignedTo =  unAssign ? dealerId : '';
 
-    this.dealerQuotationList[index].leadStatus = unAssign ? this.dealerQuotationList[index].leadStatus : "ASSIGNED";
+    this.dealerQuotationList[index].leadStatus = unAssign
+      ? this.dealerQuotationList[index].leadStatus
+      : 'ASSIGNED';
 
-    this.leadStatus = unAssign ? leadStatus ? leadStatus : 'PROCESSING' : 'ASSIGNED';
+    this.leadStatus = unAssign
+      ? leadStatus
+        ? leadStatus
+        : 'PROCESSING'
+      : 'ASSIGNED';
 
     const updatedData = this.prepareUpdatedData(unAssign);
     let dataToSend: any;
@@ -856,69 +890,83 @@ export class EditLeadComponent implements OnInit {
       }
     });
 
-    this.baseApi.patch(urlConfig.updatePath + dealerLeadStatusId, dataToSend)
+    this.baseApi
+      .patch(urlConfig.updatePath + dealerLeadStatusId, dataToSend)
       .subscribe((res: any) => {
-        if (res?.status == "success") {
+        if (res?.status == 'success') {
           this.isAssigned = unAssign ? false : true;
-this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned, false);
+          this.updateDealerQuotationStatusInMainApi(
+            dealerId,
+            quotationId,
+            this.isAssigned,
+            false
+          );
         }
-      })
-
+      });
   }
 
-  updateDealerQuotationStatusInMainApi(dealerId, quotationId, unAssign, remove){
-    const dealer = this.dealerQuotationId.find(d => d.dealerId === dealerId);
-    const quotationIndex = dealer.quotations.findIndex((q: any) => q.id === quotationId);
-    const dealerIndex = this.dealerQuotationId.findIndex(d => d.dealerId === dealerId);
+  updateDealerQuotationStatusInMainApi(
+    dealerId,
+    quotationId,
+    unAssign,
+    remove
+  ) {
+    const dealer = this.dealerQuotationId.find((d) => d.dealerId === dealerId);
+    const quotationIndex = dealer.quotations.findIndex(
+      (q: any) => q.id === quotationId
+    );
+    const dealerIndex = this.dealerQuotationId.findIndex(
+      (d) => d.dealerId === dealerId
+    );
 
-    console.log("dealer2", dealer, quotationIndex);
+    console.log('dealer2', dealer, quotationIndex);
     if (dealer && Array.isArray(dealer.quotations)) {
-      const quotation = dealer.quotations.find((q: any) => q.id === quotationId);
+      const quotation = dealer.quotations.find(
+        (q: any) => q.id === quotationId
+      );
       if (quotationIndex !== -1) {
-      if (remove) {
-        dealer.quotations.splice(quotationIndex, 1); // remove the quotation
-        this.dealerQuotationId[dealerIndex] = { ...dealer };
-        console.log('this.dealerQuotationId', this.dealerQuotationId);
-        this.assignedTo =  "";
+        if (remove) {
+          dealer.quotations.splice(quotationIndex, 1); // remove the quotation
+          this.dealerQuotationId[dealerIndex] = { ...dealer };
+          console.log('this.dealerQuotationId', this.dealerQuotationId);
+          this.assignedTo = '';
 
-        alert("Quotation Removed");
-        this.onSubmit();
+          alert('Quotation Removed');
+          this.onSubmit();
           // window.location.reload();
-      } else {
-      if (quotation) {
-        quotation.isAssigned = unAssign;
-        console.log('Updated quotation:', quotation, unAssign);
-        this.assignedTo = unAssign ? dealerId : "";
+        } else {
+          if (quotation) {
+            quotation.isAssigned = unAssign;
+            console.log('Updated quotation:', quotation, unAssign);
+            this.assignedTo = unAssign ? dealerId : '';
 
-        this.onSubmit();
-          alert("Assigned to Dealer");
-          // window.location.reload();
-      } else {
-        console.warn('Quotation not found for given ID:', quotationId);
+            this.onSubmit();
+            alert('Assigned to Dealer');
+            // window.location.reload();
+          } else {
+            console.warn('Quotation not found for given ID:', quotationId);
+          }
+        }
       }
-    }
-  }
     } else {
       console.warn('Dealer not found for given ID:', dealerId);
     }
   }
 
-
   getDealerList() {
-    this.api.getAllDealers().subscribe((res: any) => {
-      if (res?.message == "Successfully Dealer fetched") {
-        this.allDealers = res?.data;
+    this.api.getAllDealers().subscribe(
+      (res: any) => {
+        if (res?.message == 'Successfully Dealer fetched') {
+          this.allDealers = res?.data;
+        } else {
+          alert('Something went wrong, Try again');
+        }
+      },
+      (err: any) => {
+        alert(err.error.message);
       }
-      else {
-        alert("Something went wrong, Try again");
-      }
-    }, (err: any) => {
-      alert(err.error.message);
-    }
-    )
+    );
   }
-
-
 
   userConfirm(event: any) {
     this.confirmedByUser = event.value;
@@ -929,30 +977,36 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
   }
 
   selectDate(event: any) {
-    this.leadStatus = "SCHEDULED"
+    this.leadStatus = 'SCHEDULED';
     this.scheduledDate = event.value;
-
   }
 
   leadStatusChange(event: any) {
     this.leadStatus = event?.value;
-    if (this.leadStatus == "DEAL_CANCELLED") {
-      const index = this.dealerQuotationList.findIndex((res: any) => res?.isAssigned == true);
-      const isAssignedDealerDetailsId = this.dealerQuotationList.find((res: any) => res?.isAssigned == true);
+    if (this.leadStatus == 'DEAL_CANCELLED') {
+      const index = this.dealerQuotationList.findIndex(
+        (res: any) => res?.isAssigned == true
+      );
+      const isAssignedDealerDetailsId = this.dealerQuotationList.find(
+        (res: any) => res?.isAssigned == true
+      );
       if (isAssignedDealerDetailsId) {
-        this.assignToDealer(isAssignedDealerDetailsId?.dealerLeadStatusId, index, 'unassign', 'DEAL_CANCELLED')
+        this.assignToDealer(
+          isAssignedDealerDetailsId?.dealerLeadStatusId,
+          index,
+          'unassign',
+          'DEAL_CANCELLED'
+        );
       }
     }
   }
 
-
-
-
   onSubmit() {
     const data = this.leadForm.value;
-    data.collectionName = "products";
+    data.collectionName = 'leads';
+    // data.collectionName = 'products';
     data.adminSeen = true;
-    data.adminHasSeenQuotation = true
+    data.adminHasSeenQuotation = true;
     // data.mainPicture = data?.vehiclePictures[0];
     data.callTrackingId = this.callTrackingId;
     data.caseTrackingId = this.caseTrackingId;
@@ -967,15 +1021,14 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
         dealerId: this.assignedDealerId,
         date: this.scheduledDate,
         confirmedByDealer: this.confirmedByDealer,
-        confirmedByUser: this.confirmedByUser
+        confirmedByUser: this.confirmedByUser,
       };
-    }
-    else {
+    } else {
       data.schedulePickUp = {
         dealerId: null,
         date: this.scheduledDate,
         confirmedByDealer: false,
-        confirmedByUser: this.confirmedByUser
+        confirmedByUser: this.confirmedByUser,
       };
     }
     data.teleCallerData = {
@@ -985,8 +1038,8 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       accountType: localStorage?.getItem('loiu0ac'),
     };
 
-    if (this.leadStatus == "DEAL_CANCELLED") {
-      data.leadIsVerified = "false"
+    if (this.leadStatus == 'DEAL_CANCELLED') {
+      data.leadIsVerified = 'false';
     }
 
     //     if(this.leadStatus == "CLOSED"){
@@ -1012,79 +1065,78 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     //     data.username = data.username;
     // data.city = this.citySelected;
 
-    
     if (!this.leadForm.valid) {
       // this.leadForm.markAllAsTouched();
-      alert("You have missed our some fieds");
-    }
-    else {
-      console.log("data",data)
+      alert('You have missed our some fieds');
+    } else {
+      console.log('data', data);
       this.spinner.show();
       if (this.adminSeen == false || this.adminHasSeenQuotation == false) {
-        this.baseApi.patch(urlConfig.updatePath + this.leadId, data)
+        this.baseApi
+          .patch(urlConfig.updatePath + this.leadId, data)
           .pipe(
             finalize(async () => {
               this.spinner.hide();
             }),
-            catchError(error => {
+            catchError((error) => {
               throw error;
             })
           )
           .subscribe((res: any) => {
             this.adminSeen = true;
             this.adminHasSeenQuotation = true;
-          })
+          });
       } else {
-        this.baseApi.patch(urlConfig.updatePath + this.leadId, data)
+        this.baseApi
+          .patch(urlConfig.updatePath + this.leadId, data)
           .pipe(
             finalize(async () => {
               this.spinner.hide();
             }),
-            catchError(err => {
+            catchError((err) => {
               alert(err.error.message);
               throw err;
             })
           )
           .subscribe((res: any) => {
-            if (res?.status == "success") {
-              alert("Successfully Lead Updated");
-              window.location.reload()
-
+            if (res?.status == 'success') {
+              alert('Successfully Lead Updated');
+              window.location.reload();
             } else {
               alert(res?.message);
             }
-          })
+          });
       }
     }
   }
 
   get abc(): FormArray {
-    return this.leadForm.get("vehiclePictures") as FormArray;
+    return this.leadForm.get('vehiclePictures') as FormArray;
   }
   get abcTowingPic(): FormArray {
-    return this.leadForm.get("towingPictures") as FormArray;
+    return this.leadForm.get('towingPictures') as FormArray;
   }
   get abcScrapedPic(): FormArray {
-    return this.leadForm.get("scrapPictures") as FormArray;
+    return this.leadForm.get('scrapPictures') as FormArray;
   }
   get abcEnginePic(): FormArray {
-    return this.leadForm.get("enginePictures") as FormArray;
+    return this.leadForm.get('enginePictures') as FormArray;
   }
   get abcUserDocPic(): FormArray {
-    return this.leadForm.get("userDocumentsPictures") as FormArray;
+    return this.leadForm.get('userDocumentsPictures') as FormArray;
   }
   get abcRc(): FormArray {
-    return this.leadForm.get("rcPictures") as FormArray;
+    return this.leadForm.get('rcPictures') as FormArray;
   }
   get abcChasis(): FormArray {
-    return this.leadForm.get("chasisPictures") as FormArray;
+    return this.leadForm.get('chasisPictures') as FormArray;
   }
 
   get abcd(): FormArray {
-    return this.leadForm.get("items") as FormArray;
+    return this.leadForm.get('items') as FormArray;
   }
   get abcScrap(): FormArray {
-    return this.leadForm.get("scrapLetterPictures") as FormArray;
+    return this.leadForm.get('scrapLetterPictures') as FormArray;
   }
 
   removeItem(index: number): void {
@@ -1095,18 +1147,14 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abc.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
-
-
   }
-
 
   removeScrapItem(index: number): void {
     Swal.fire({
@@ -1116,20 +1164,16 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abcScrap.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
   }
 
-
-
   removeRcItem(index: number): void {
-
     Swal.fire({
       text: 'Are you sure you want to delete image.',
       showDenyButton: true,
@@ -1137,18 +1181,16 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abcRc.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
   }
 
   removeScrapedItem(index: number): void {
-
     Swal.fire({
       text: 'Are you sure you want to delete image.',
       showDenyButton: true,
@@ -1156,18 +1198,16 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abcScrapedPic.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
   }
 
   removeEngineItem(index: number): void {
-
     Swal.fire({
       text: 'Are you sure you want to delete image.',
       showDenyButton: true,
@@ -1175,18 +1215,16 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abcEnginePic.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
   }
 
   removeUserDocItem(index: number): void {
-
     Swal.fire({
       text: 'Are you sure you want to delete image.',
       showDenyButton: true,
@@ -1194,18 +1232,16 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abcUserDocPic.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
   }
 
   removeTowingItem(index: number): void {
-
     Swal.fire({
       text: 'Are you sure you want to delete image.',
       showDenyButton: true,
@@ -1213,18 +1249,16 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abcTowingPic.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
   }
 
   removeChasisItem(index: number): void {
-
     Swal.fire({
       text: 'Are you sure you want to delete image.',
       showDenyButton: true,
@@ -1232,12 +1266,11 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.abcChasis.removeAt(index);
       } else if (result.isDenied) {
-
       }
     });
   }
@@ -1277,7 +1310,6 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     this.abcScrap.push(this.newScrapImageFields());
   }
 
-
   addFields() {
     this.abcd.push(this.newFeilds());
   }
@@ -1303,7 +1335,6 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     this.readThiss($event.target, i);
   }
 
-
   scrapChangeListeners($event: any, i: any): void {
     this.scrapImagesReadThiss($event.target, i);
   }
@@ -1313,28 +1344,20 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.vehImage = myReader.result;
-
 
       let a: any = this.leadForm.controls['vehiclePictures'];
 
       a['controls'][i].patchValue({
         img: this.vehImage,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
 
-
-
   userDocPicReadThiss(inputValue: any, i: any) {
     var file: File = inputValue.files[0];
     if (!file) {
-
       return;
     }
     // Check file size (in bytes)
@@ -1349,18 +1372,13 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.userDocImage = myReader.result;
-
 
       let a: any = this.leadForm.controls['userDocumentsPictures'];
 
       a['controls'][i].patchValue({
         img: this.userDocImage,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
@@ -1368,7 +1386,6 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
   enginePicReadThiss(inputValue: any, i: any) {
     var file: File = inputValue.files[0];
     if (!file) {
-
       return;
     }
     // Check file size (in bytes)
@@ -1383,18 +1400,13 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.engineImage = myReader.result;
-
 
       let a: any = this.leadForm.controls['enginePictures'];
 
       a['controls'][i].patchValue({
         img: this.engineImage,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
@@ -1402,7 +1414,6 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
   scrapedPicReadThiss(inputValue: any, i: any) {
     var file: File = inputValue.files[0];
     if (!file) {
-
       return;
     }
     // Check file size (in bytes)
@@ -1417,18 +1428,13 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.scrapedImage = myReader.result;
-
 
       let a: any = this.leadForm.controls['scrapPictures'];
 
       a['controls'][i].patchValue({
         img: this.scrapedImage,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
@@ -1436,7 +1442,6 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
   towingPicReadThiss(inputValue: any, i: any) {
     var file: File = inputValue.files[0];
     if (!file) {
-
       return;
     }
     // Check file size (in bytes)
@@ -1451,27 +1456,20 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.towingImage = myReader.result;
-
 
       let a: any = this.leadForm.controls['towingPictures'];
 
       a['controls'][i].patchValue({
         img: this.towingImage,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
 
-
   rcReadThiss(inputValue: any, i: any) {
     var file: File = inputValue.files[0];
     if (!file) {
-
       return;
     }
     // Check file size (in bytes)
@@ -1486,18 +1484,13 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.rcImage = myReader.result;
-
 
       let a: any = this.leadForm.controls['rcPictures'];
 
       a['controls'][i].patchValue({
         img: this.rcImage,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
@@ -1505,7 +1498,6 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
   chasisReadThiss(inputValue: any, i: any) {
     var file: File = inputValue.files[0];
     if (!file) {
-
       return;
     }
     // Check file size (in bytes)
@@ -1520,29 +1512,20 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.chasisImage = myReader.result;
-
 
       let a: any = this.leadForm.controls['chasisPictures'];
 
       a['controls'][i].patchValue({
         img: this.chasisImage,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
 
-
-
-
   scrapImagesReadThiss(inputValue: any, i: any) {
     var file: File = inputValue.files[0];
     if (!file) {
-
       return;
     }
     // Check file size (in bytes)
@@ -1557,39 +1540,28 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
     var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-
       this.scrapGetImages = myReader.result;
-
 
       let a: any = this.leadForm.controls['scrapLetterPictures'];
 
       a['controls'][i].patchValue({
         img: this.scrapGetImages,
       });
-
-
-
     };
     myReader.readAsDataURL(file);
   }
 
-
-
-
-
   numberOnly(event: any): boolean {
-    const charCode = (event.which) ? event.which : event.keyCode;
+    const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
     return true;
-
   }
 
   removeAssignLeadToDealer(id: any) {
-
     let data = {
-      productId: this.leadId
+      productId: this.leadId,
     };
 
     Swal.fire({
@@ -1599,52 +1571,49 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       allowOutsideClick: false,
       confirmButtonText: 'Ok',
       denyButtonText: `Cancel`,
-      icon: "warning"
+      icon: 'warning',
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.api.removeAssignLeadToDealer(id, data).subscribe((res: any) => {
-
-          if (res?.message == "Successfully Assigned Product Removed ") {
-            this.toastr.success(res?.message);
-            this.leadStatus = "Processing";
-            this.isAssigned = false;
-            this.assignedDealerId = null;
-            this.assignedDealerData = [];
-            this.onSubmit();
-            window.location.reload()
-          } else {
-            this.toastr.error('Try again');
+        this.api.removeAssignLeadToDealer(id, data).subscribe(
+          (res: any) => {
+            if (res?.message == 'Successfully Assigned Product Removed ') {
+              this.toastr.success(res?.message);
+              this.leadStatus = 'Processing';
+              this.isAssigned = false;
+              this.assignedDealerId = null;
+              this.assignedDealerData = [];
+              this.onSubmit();
+              window.location.reload();
+            } else {
+              this.toastr.error('Try again');
+            }
+          },
+          (err: any) => {
+            this.toastr.error(err.error.message);
           }
-        }, (err: any) => {
-          this.toastr.error(err.error.message)
-        }
-        )
-
-
+        );
       } else if (result.isDenied) {
-
       }
     });
-
   }
 
   updateCallingStatus(selectedStatus: any) {
-    this.callTrackingStatus = selectedStatus?.value
+    this.callTrackingStatus = selectedStatus?.value;
   }
 
   updateCaseIssueBy(selectedStatus: any) {
-    this.caseIssueBy = selectedStatus?.value
+    this.caseIssueBy = selectedStatus?.value;
   }
   updateCaseType(selectedStatus: any) {
-    this.caseType = selectedStatus?.value
+    this.caseType = selectedStatus?.value;
   }
   updateCaseStatus(selectedStatus: any) {
-    this.caseTrackingStatus = selectedStatus?.value
+    this.caseTrackingStatus = selectedStatus?.value;
   }
 
   updateStatusData() {
     if (!this.callTrackingStatus) {
-      alert("Enter Required Fields.");
+      alert('Enter Required Fields.');
     } else {
       let staffName = localStorage?.getItem('loiuy324re');
       let staffUserName = localStorage?.getItem('loiuy09un');
@@ -1652,47 +1621,8 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       let leadStatusPayload = {
         collectionName: urlConfig.teleCallerLeadStatus,
 
-        callStatus: [{
-          comment: this.userComment,
-          status: this.callTrackingStatus,
-          staffId: staffId,
-          staffName: staffName,
-          staffUserName: staffUserName,
-          calledDate: new Date(),
-          askingPrice: this.askingPrice,
-          givenPrice: this.givenPrice,
-        }],
-
-        productId: this.leadId,
-
-      };
-
-      let path = this.callTrackingId ? urlConfig.updatePath + this.callTrackingId : urlConfig.createPath;
-      let urlMethod: any = this.callTrackingId ? this.baseApi.patch.bind(this.baseApi) : this.baseApi.post.bind(this.baseApi);
-
-
-      if (this.callTrackingId) {
-        let payload = {
-          collectionName: urlConfig.teleCallerLeadStatus,
-          id: this.callTrackingId
-        }
-        this.spinner.show();
-
-        this.baseApi.post(urlConfig.getOnePath, payload)
-        .pipe(
-          catchError((error) => {
-            alert(error?.error?.message);
-            throw error
-          }),
-          finalize(() => {
-            // this.spinner.hide();
-          })
-        )
-        .subscribe((response: any) => {
-          let existingCallStatus = response?.data?.callStatus || [];
-
-
-          existingCallStatus.push({
+        callStatus: [
+          {
             comment: this.userComment,
             status: this.callTrackingStatus,
             staffId: staffId,
@@ -1701,33 +1631,72 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
             calledDate: new Date(),
             askingPrice: this.askingPrice,
             givenPrice: this.givenPrice,
-          });
+          },
+        ],
 
+        productId: this.leadId,
+      };
 
-          leadStatusPayload.callStatus = existingCallStatus;
-          // this.spinner.show();
+      let path = this.callTrackingId
+        ? urlConfig.updatePath + this.callTrackingId
+        : urlConfig.createPath;
+      let urlMethod: any = this.callTrackingId
+        ? this.baseApi.patch.bind(this.baseApi)
+        : this.baseApi.post.bind(this.baseApi);
 
+      if (this.callTrackingId) {
+        let payload = {
+          collectionName: urlConfig.teleCallerLeadStatus,
+          id: this.callTrackingId,
+        };
+        this.spinner.show();
 
-          urlMethod(path, leadStatusPayload)
-            .pipe(
-              finalize(() => {
-                // this.spinner.hide();
-              }),
-              catchError(err => {
-                alert(err?.error?.message)
-
-                throw err;
-              })
-            )
-            .subscribe((response: any) => {
-              if (response?.status == "success") {
-
-                this.callTrackingId = response?.data?._id
-                this.onSubmit();
-
-              }
+        this.baseApi
+          .post(urlConfig.getOnePath, payload)
+          .pipe(
+            catchError((error) => {
+              alert(error?.error?.message);
+              throw error;
+            }),
+            finalize(() => {
+              // this.spinner.hide();
             })
-        });
+          )
+          .subscribe((response: any) => {
+            let existingCallStatus = response?.data?.callStatus || [];
+
+            existingCallStatus.push({
+              comment: this.userComment,
+              status: this.callTrackingStatus,
+              staffId: staffId,
+              staffName: staffName,
+              staffUserName: staffUserName,
+              calledDate: new Date(),
+              askingPrice: this.askingPrice,
+              givenPrice: this.givenPrice,
+            });
+
+            leadStatusPayload.callStatus = existingCallStatus;
+            // this.spinner.show();
+
+            urlMethod(path, leadStatusPayload)
+              .pipe(
+                finalize(() => {
+                  // this.spinner.hide();
+                }),
+                catchError((err) => {
+                  alert(err?.error?.message);
+
+                  throw err;
+                })
+              )
+              .subscribe((response: any) => {
+                if (response?.status == 'success') {
+                  this.callTrackingId = response?.data?._id;
+                  this.onSubmit();
+                }
+              });
+          });
       } else {
         // this.spinner.show();
 
@@ -1736,27 +1705,27 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
             finalize(() => {
               // this.spinner.hide();
             }),
-            catchError(err => {
-              alert(err?.error?.message)
+            catchError((err) => {
+              alert(err?.error?.message);
 
               throw err;
             })
           )
           .subscribe((response: any) => {
-            if (response?.status == "success") {
+            if (response?.status == 'success') {
               this.callTrackingId = response?.data?._id;
               this.adminSeen = true;
               this.adminHasSeenQuotation = true;
               this.onSubmit();
             }
-          })
+          });
       }
     }
   }
 
   async updateCaseStatusData() {
     if (!this.callTrackingStatus) {
-      alert("Enter Required Fields.");
+      alert('Enter Required Fields.');
     } else {
       let staffName = localStorage?.getItem('loiuy324re');
       let staffUserName = localStorage?.getItem('loiuy09un');
@@ -1764,82 +1733,82 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
       let leadStatusPayload = {
         collectionName: urlConfig.scrapLeadCase,
 
-        caseData: [{
-          comment: this.caseComment,
-          caseIssueBy: this.caseIssueBy,
-          caseType: this.caseType,
-          status: this.caseTrackingStatus,
-          staffId: staffId,
-          staffName: staffName,
-          staffUserName: staffUserName,
-          calledDate: new Date(),
-        }],
-
-        leadId: this.leadId,
-        caseId: await this.generateUniqueProductNameAsync(),
-
-      };
-
-      let path = this.caseTrackingId ? urlConfig.updatePath + this.caseTrackingId : urlConfig.createPath;
-      let urlMethod: any = this.caseTrackingId ? this.baseApi.patch.bind(this.baseApi) : this.baseApi.post.bind(this.baseApi);
-
-
-      if (this.caseTrackingId) {
-        let payload = {
-          collectionName: urlConfig.scrapLeadCase,
-          id: this.caseTrackingId
-        }
-        this.spinner.show();
-
-        this.baseApi.post(urlConfig.getOnePath, payload)
-        .pipe(
-          catchError((error) => {
-            alert(error?.error?.message);
-            throw error
-          }),
-          finalize(() => {
-            // this.spinner.hide();
-          })
-        )
-        .subscribe((response: any) => {
-          let existingCaseStatus = response?.data?.caseData || [];
-
-
-          existingCaseStatus.push({
+        caseData: [
+          {
             comment: this.caseComment,
+            caseIssueBy: this.caseIssueBy,
+            caseType: this.caseType,
             status: this.caseTrackingStatus,
             staffId: staffId,
             staffName: staffName,
             staffUserName: staffUserName,
             calledDate: new Date(),
-          caseIssueBy: this.caseIssueBy,
-          caseType: this.caseType,
-          });
+          },
+        ],
 
+        leadId: this.leadId,
+        caseId: await this.generateUniqueProductNameAsync(),
+      };
 
-          leadStatusPayload.caseData = existingCaseStatus;
+      let path = this.caseTrackingId
+        ? urlConfig.updatePath + this.caseTrackingId
+        : urlConfig.createPath;
+      let urlMethod: any = this.caseTrackingId
+        ? this.baseApi.patch.bind(this.baseApi)
+        : this.baseApi.post.bind(this.baseApi);
 
+      if (this.caseTrackingId) {
+        let payload = {
+          collectionName: urlConfig.scrapLeadCase,
+          id: this.caseTrackingId,
+        };
+        this.spinner.show();
 
-          urlMethod(path, leadStatusPayload)
-            .pipe(
-              finalize(() => {
-                // this.spinner.hide();
-              }),
-              catchError(err => {
-                alert(err?.error?.message)
-
-                throw err;
-              })
-            )
-            .subscribe((response: any) => {
-              if (response?.status == "success") {
-
-                this.caseTrackingId = response?.data?._id
-                this.onSubmit();
-
-              }
+        this.baseApi
+          .post(urlConfig.getOnePath, payload)
+          .pipe(
+            catchError((error) => {
+              alert(error?.error?.message);
+              throw error;
+            }),
+            finalize(() => {
+              // this.spinner.hide();
             })
-        });
+          )
+          .subscribe((response: any) => {
+            let existingCaseStatus = response?.data?.caseData || [];
+
+            existingCaseStatus.push({
+              comment: this.caseComment,
+              status: this.caseTrackingStatus,
+              staffId: staffId,
+              staffName: staffName,
+              staffUserName: staffUserName,
+              calledDate: new Date(),
+              caseIssueBy: this.caseIssueBy,
+              caseType: this.caseType,
+            });
+
+            leadStatusPayload.caseData = existingCaseStatus;
+
+            urlMethod(path, leadStatusPayload)
+              .pipe(
+                finalize(() => {
+                  // this.spinner.hide();
+                }),
+                catchError((err) => {
+                  alert(err?.error?.message);
+
+                  throw err;
+                })
+              )
+              .subscribe((response: any) => {
+                if (response?.status == 'success') {
+                  this.caseTrackingId = response?.data?._id;
+                  this.onSubmit();
+                }
+              });
+          });
       } else {
         // this.spinner.show();
 
@@ -1848,91 +1817,99 @@ this.updateDealerQuotationStatusInMainApi(dealerId, quotationId, this.isAssigned
             finalize(() => {
               // this.spinner.hide();
             }),
-            catchError(err => {
-              alert(err?.error?.message)
+            catchError((err) => {
+              alert(err?.error?.message);
 
               throw err;
             })
           )
           .subscribe((response: any) => {
-            if (response?.status == "success") {
+            if (response?.status == 'success') {
               this.caseTrackingId = response?.data?._id;
               this.adminSeen = true;
               this.adminHasSeenQuotation = true;
               this.onSubmit();
             }
-          })
+          });
       }
     }
   }
 
   generateUniqueProductNameAsync(): Promise<string> {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const prefix = 'CL';
-            const randomPart = Math.random().toString(36).substring(2, 7).toUpperCase();
-            const uniqueProductName = `${prefix}${randomPart}`;
-            resolve(uniqueProductName);
-        }, 1000);  // Simulating an async operation with a 1-second delay
+      setTimeout(() => {
+        const prefix = 'CL';
+        const randomPart = Math.random()
+          .toString(36)
+          .substring(2, 7)
+          .toUpperCase();
+        const uniqueProductName = `${prefix}${randomPart}`;
+        resolve(uniqueProductName);
+      }, 1000); // Simulating an async operation with a 1-second delay
     });
-}
+  }
 
   getCallTrackingData() {
     let payload = {
       collectionName: urlConfig.teleCallerLeadStatus,
-      id: this.callTrackingId
-    }
-    this.baseApi.post(urlConfig.getOnePath, payload)
+      id: this.callTrackingId,
+    };
+    this.baseApi
+      .post(urlConfig.getOnePath, payload)
       .pipe(
-        catchError(error => {
+        catchError((error) => {
           throw error;
         })
       )
       .subscribe((res: any) => {
-        if (res?.status == "success") {
-          this.callTrackingList = res?.data?.callStatus ? res?.data?.callStatus : [];
-          let index = this.callTrackingList?.length - 1
+        if (res?.status == 'success') {
+          this.callTrackingList = res?.data?.callStatus
+            ? res?.data?.callStatus
+            : [];
+          let index = this.callTrackingList?.length - 1;
           this.givenPrice = this.callTrackingList[index]?.givenPrice;
         }
-      })
+      });
   }
   getCaseTrackingData() {
     let payload = {
       collectionName: urlConfig.scrapLeadCase,
-      id: this.caseTrackingId
-    }
-    this.baseApi.post(urlConfig.getOnePath, payload)
+      id: this.caseTrackingId,
+    };
+    this.baseApi
+      .post(urlConfig.getOnePath, payload)
       .pipe(
-        catchError(error => {
+        catchError((error) => {
           throw error;
         })
       )
       .subscribe((res: any) => {
-        if (res?.status == "success") {
-          this.caseTrackingList = res?.data?.caseData ? res?.data?.caseData : [];
-          let index = this.caseTrackingList?.length - 1
+        if (res?.status == 'success') {
+          this.caseTrackingList = res?.data?.caseData
+            ? res?.data?.caseData
+            : [];
+          let index = this.caseTrackingList?.length - 1;
           // this.givenPrice = this.caseTrackingList[index]?.givenPrice;
         }
-      })
+      });
   }
 
-openWhatsApp(phone: string) {
-  const cleanedPhone = phone.replace(/\D/g, '');
+  openWhatsApp(phone: string) {
+    const cleanedPhone = phone.replace(/\D/g, '');
 
-  // Check if number starts with a country code (like 91 for India)
-  const hasCountryCode = cleanedPhone.length >= 11; // You can adjust this check based on your needs
-  const defaultCountryCode = '91'; // Change this to your default country code
+    // Check if number starts with a country code (like 91 for India)
+    const hasCountryCode = cleanedPhone.length >= 11; // You can adjust this check based on your needs
+    const defaultCountryCode = '91'; // Change this to your default country code
 
-  const finalPhone = hasCountryCode ? cleanedPhone : defaultCountryCode + cleanedPhone;
+    const finalPhone = hasCountryCode
+      ? cleanedPhone
+      : defaultCountryCode + cleanedPhone;
 
-  const url = `https://wa.me/${finalPhone}`;
-  window.open(url, '_blank');
+    const url = `https://wa.me/${finalPhone}`;
+    window.open(url, '_blank');
+  }
+
+  editPage() {
+    this.enableEdit = !this.enableEdit;
+  }
 }
-
-editPage(){
-  this.enableEdit = !this.enableEdit;
-}
-}
-
-
-
