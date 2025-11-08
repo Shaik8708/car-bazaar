@@ -10,7 +10,7 @@
       <form [formGroup]="leadForm" (ngSubmit)="onSubmit()">
         <div class="card-body">
           <div id="example-form" class="wizard clearfix">
-            <h3>Lead Id : {{ productUniqueId }}</h3>
+            <h3>Lead Id : {{ uniqueLeadName }}</h3>
             <h3>Lead Status : {{ leadStatus }}</h3>
 
             <section>
@@ -64,7 +64,7 @@
                   <div class="field-wrapper">
                     <input
                       type="text"
-                      formControlName="fullName"
+                      formControlName="uniqueLeadName"
                       placeholder="Enetr Customer Full Name"
                       class="border-danger"
                     />

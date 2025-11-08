@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import urlConfig from '../../../config/url.config.json';
 import { catchError, finalize } from 'rxjs';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-all-leads',
   templateUrl: './all-leads.component.html',
@@ -57,6 +59,18 @@ export class AllLeadsComponent {
   convertedStartDate: any;
   convertedEndDate: any;
   partnerUrl: string = '';
+
+  selectedLocations: string[] = [];
+
+  showLocationModal(locations: string[]) {
+    this.selectedLocations = Array.isArray(locations) ? locations : [locations]; // in case it's just a string
+
+    const modalEl = document.getElementById('locationModal');
+    if (modalEl) {
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+  }
 
   userList1 = [
     'Car',
@@ -598,7 +612,9 @@ export class AllLeadsComponent {
     this.fetch.get.subscribe((res: any) => {
       if (res) {
         this.loader = true;
-        this.getAllLeads();
+        // console.log(1);
+
+        // this.getAllLeads();
       }
     });
     this.fetch.click.subscribe((res: any) => {
@@ -723,6 +739,7 @@ export class AllLeadsComponent {
   getValue(data: any) {
     localStorage.setItem('leadStatusValue', data?.target?.value);
     this.currentPage = 1;
+    console.log(2);
     this.getAllLeads('', data?.target?.value);
   }
 
@@ -843,10 +860,12 @@ export class AllLeadsComponent {
   getPage(data: any) {
     this.currentPage = data?.page;
     this.currentPageLimit = data?.limit;
+    console.log(3);
     this.getAllLeads();
   }
 
   reset() {
+    console.log(4);
     this.getAllLeads();
     var da = new Date();
     var datesss: any = da.toLocaleDateString();
@@ -1245,6 +1264,7 @@ export class AllLeadsComponent {
   }
 
   searchItem() {
+    console.log(5);
     this.getAllLeads(this.searchTerm);
   }
 
@@ -1267,6 +1287,7 @@ export class AllLeadsComponent {
     localStorage.setItem('searchByCreatedDate', formattedDate);
     this.createdDate = formattedDate;
     this.currentPage = 1;
+    console.log(6);
     this.getAllLeads();
   }
 
@@ -1282,6 +1303,7 @@ export class AllLeadsComponent {
       this.originalCreatedDateSelected = '';
     }
     this.currentPage = 1;
+    console.log(7);
     this.getAllLeads();
   }
 
@@ -1301,6 +1323,7 @@ export class AllLeadsComponent {
     this.originalCreatedDateSelected = '';
     localStorage.removeItem('searchByCreatedDate');
     localStorage.removeItem('searchByoriginalCreatedDate');
+    console.log(8);
     this.getAllLeads();
   }
 
@@ -1413,7 +1436,7 @@ export class AllLeadsComponent {
       cleaned = cleaned.slice(-10);
     }
     this.phoneNoSearch = cleaned;
-
+    console.log(9);
     this.getAllLeads();
   }
 }

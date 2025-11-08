@@ -490,14 +490,37 @@ Add OR Filter
                         {{ abc?.tripType }}
                         <!-- {{ abc?.createdBy?.phoneNumber }} -->
                       </td>
+                      <!-- (click)="
+                          showLocationModal(abc?.locations);
+                          $event.stopPropagation()
+                        " -->
                       <td
+                        [ngClass]="{ 'bg-success': abc?.comment }"
+                        style="text-align: center"
+                      >
+                        <a
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title=""
+                          data-original-title="View Locations"
+                          (click)="
+                            showLocationModal(abc?.locations);
+                            $event.stopPropagation()
+                          "
+                        >
+                          <i class="icon-eye1 text-success"></i>
+                        </a>
+                        <!-- {{ abc?.locations }} -->
+                      </td>
+
+                      <!-- <td
                         (click)="navigation('/edit-lead', abc?._id)"
                         [ngClass]="{ 'bg-success': abc?.comment }"
                       >
-                        <!-- *ngIf="checkColumn('guestUserCount')" -->
-                        {{ abc?.locations }}
-                        <!-- {{ abc?.guestUserCount }} -->
-                      </td>
+                      {{ abc?.locations }}
+                    </td> -->
+                      <!-- *ngIf="checkColumn('guestUserCount')" -->
+                      <!-- {{ abc?.guestUserCount }} -->
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         <!-- *ngIf="checkColumn('createdAt')" -->
                         {{ abc?.totalKm }}
@@ -559,7 +582,7 @@ Add OR Filter
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         <!-- *ngIf="checkColumn('brandName')" -->
-                        {{ abc?.pickUpTime  }}
+                        {{ abc?.pickUpTime }}
                         <!-- {{ abc?.brandName }} -->
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
@@ -567,7 +590,6 @@ Add OR Filter
                         <!-- {{ abc?.userCity }} -->
                         <!-- {{ abc?.modelName }} -->
                         {{ abc?.locations[0] }}
-
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         <!-- *ngIf="checkColumn('fuleWhellType')" -->
@@ -1018,4 +1040,39 @@ Add OR Filter
     </div>
     <!-- Row end -->
   </ng-template>
+</div>
+
+<!-- Location Modal -->
+<div
+  class="modal fade"
+  id="locationModal"
+  tabindex="-1"
+  aria-labelledby="locationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="locationModalLabel">List of Locations</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          <li *ngFor="let loc of selectedLocations" class="list-group-item">
+            {{ loc }}
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

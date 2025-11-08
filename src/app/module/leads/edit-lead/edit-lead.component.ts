@@ -72,7 +72,7 @@ export class EditLeadComponent implements OnInit {
   confirmedByDealer: any;
   scheduledDate: any;
   leadStatus: any;
-  productUniqueId: any;
+  uniqueLeadName: any;
   originalQuotaionStatusData: any;
   userComment: any;
   callTrackingList: any[] = [];
@@ -213,7 +213,7 @@ export class EditLeadComponent implements OnInit {
       callTrackingId: '',
       tripType: '',
       // whatsAppNumber: '',
-      fullName: '',
+      uniqueLeadName: '',
       assignedTo: '',
 
       items: this.fb.array([this.newFeilds()]),
@@ -326,7 +326,7 @@ export class EditLeadComponent implements OnInit {
         (res: any) => {
           this.spinner.hide();
           if (res?.status == 'success') {
-            this.productUniqueId = res?.data?.uniqueProductName;
+            this.uniqueLeadName = res?.data?.uniqueLeadName;
             this.leadResponse = res?.data;
             const data = {
               username: res?.data?.username,
@@ -382,7 +382,7 @@ export class EditLeadComponent implements OnInit {
               caseTrackingId: res?.data?.caseTrackingId,
               tripType: res?.data?.tripType,
               // whatsAppNumber: res?.data?.whatsAppNumber,
-              fullName: res?.data?.fullName,
+              uniqueLeadName: res?.data?.uniqueLeadName,
               clientId: res?.data?.clientId,
               clientUsername: res?.data?.clientUsername,
             };
