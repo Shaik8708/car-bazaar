@@ -216,67 +216,7 @@ Add OR Filter
 
 <div class="container mt-2">
   <div class="visitor-addmission-inner">
-    <mat-accordion class="example-headers-align accordion-class" multi>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title> Custom Date Search </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-card>
-          <mat-card-content>
-            <div class="row mt-5">
-              <div class="col-6">
-                <!-- <div class="date-range-container"> -->
-                <!-- Start Date Picker -->
-                <mat-form-field appearance="outline">
-                  <mat-label>Start Date</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="startPicker"
-                    [(ngModel)]="startDate"
-                    (dateChange)="validateDates()"
-                    placeholder="Select start date"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="startPicker"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker #startPicker></mat-datepicker>
-                </mat-form-field>
-
-                <!-- </div> -->
-              </div>
-              <div class="col-6">
-                <!-- End Date Picker -->
-                <mat-form-field appearance="outline">
-                  <mat-label>End Date</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="endPicker"
-                    [(ngModel)]="endDate"
-                    (dateChange)="validateDates()"
-                    placeholder="Select end date"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="endPicker"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker #endPicker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="col-12">
-                <button (click)="getDates()">Get Leads of Selected Date</button>
-                <button (click)="clearDates()" class="ml-3">X</button>
-              </div>
-              <!-- Error message -->
-              <div *ngIf="dateError" class="error">
-                End date must be greater than or equal to start date.
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </mat-expansion-panel>
-    </mat-accordion>
+  
   </div>
 </div>
 

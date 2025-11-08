@@ -467,7 +467,7 @@ Add OR Filter
                         {{ currentPageLimit * (currentPage - 1) + (i + 1) }}
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.uniqueProductName }}
+                        {{ abc?.uniqueLeadName }}
                       </td>
                       <td
                         (click)="navigation('/edit-lead', abc?._id)"
@@ -495,7 +495,7 @@ Add OR Filter
                         [ngClass]="{ 'bg-success': abc?.comment }"
                       >
                         <!-- *ngIf="checkColumn('guestUserCount')" -->
-                        {{ abc?.tripType }}
+                        {{ abc?.locations }}
                         <!-- {{ abc?.guestUserCount }} -->
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
@@ -559,13 +559,15 @@ Add OR Filter
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         <!-- *ngIf="checkColumn('brandName')" -->
-                        {{ abc?.pickUpTime | date : "short" }}
+                        {{ abc?.pickUpTime  }}
                         <!-- {{ abc?.brandName }} -->
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         <!-- *ngIf="checkColumn('modelName')" -->
-                        {{ abc?.userCity }}
+                        <!-- {{ abc?.userCity }} -->
                         <!-- {{ abc?.modelName }} -->
+                        {{ abc?.locations[0] }}
+
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         <!-- *ngIf="checkColumn('fuleWhellType')" -->

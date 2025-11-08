@@ -384,7 +384,7 @@ export class AllLeadsComponent {
     },
     {
       col: 'Unique Id',
-      name: 'uniqueProductName',
+      name: 'uniqueLeadName',
       forFilter: true,
       forColumn: true,
     },
@@ -488,7 +488,7 @@ export class AllLeadsComponent {
   //   },
   //   {
   //     col: 'Unique Id',
-  //     name: 'uniqueProductName',
+  //     name: 'uniqueLeadName',
   //     forFilter: true,
   //     forColumn: true,
   //   },
@@ -875,7 +875,7 @@ export class AllLeadsComponent {
     //   limit: this.currentPageLimit,
     // };
     let query = data
-      ? `&userName=${data}&modelName=${data}&brandName=${data}&uniqueProductName=${data}`
+      ? `&userName=${data}&modelName=${data}&brandName=${data}&uniqueLeadName=${data}`
       : '';
     let customSelectedDates =
       this.startDate && this.endDate
@@ -1326,7 +1326,7 @@ export class AllLeadsComponent {
 
     if (uniqueCode) {
       console.log('Extracted code:', uniqueCode);
-      // &uniqueProductName=PRC846
+      // &uniqueLeadName=PRC846
       // Call your API with the code
       // this.fetchPartnerLeadByCode(uniqueCode);
       const params = {
@@ -1335,7 +1335,7 @@ export class AllLeadsComponent {
       };
       this.spinner.show();
       // this.api.getNewFormDataByDate(params, ty)
-      const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.leads}&uniqueProductName=${uniqueCode}&page=${params.page}&limit=${params.limit}`;
+      const url = `${urlConfig.getAllPath}?collectionName=${urlConfig.leads}&uniqueLeadName=${uniqueCode}&page=${params.page}&limit=${params.limit}`;
 
       this.baseApi.get(url).subscribe(
         (res: any) => {
