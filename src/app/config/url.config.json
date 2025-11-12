@@ -5,6 +5,7 @@
   "dealerDetails": "dealerDetails",
   "dealer": "dealer",
   "dealerLeadStatus": "dealerleadstatuses",
+  "driverLeadStatus": "driverleadstatus",
   "driver": "driver",
   "teleCallerLeadStatus": "teleCallerLeadStatus",
   "locations": "locations",

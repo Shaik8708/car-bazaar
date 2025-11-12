@@ -433,7 +433,7 @@
                 </div>
 
                 <div class="card-header">
-                  <div class="card-title">Dealer Quotation :</div>
+                  <div class="card-title">Driver Assignment :</div>
                 </div>
                 <div class="accordion" id="faqAccordion">
                   <div class="accordion-item">
@@ -446,8 +446,8 @@
                         aria-expanded="false"
                         aria-controls="collapseDealerQuotation"
                       >
-                        Dealer Quotation
-                        <span> ({{ dealerQuotationList?.length }})</span>
+                        Driver Assign
+                        <span> ({{ driverAssignmentList?.length }})</span>
                       </button>
                     </h2>
                     <div
@@ -457,9 +457,7 @@
                       data-bs-parent="#faqAccordion"
                     >
                       <div class="card-header" *ngIf="!assignedDealerData">
-                        <div class="card-title">
-                          Manually Add Dealers Quotations
-                        </div>
+                        <div class="card-title">Manually Add Drivers</div>
                         <button
                           style="visibility: hidden"
                           (click)="addFields()"
@@ -474,7 +472,7 @@
                         >
                           <div [formGroupName]="i" class="add-img-input">
                             <div class="row">
-                              <div class="col-xl-3 col-lg-3 col-md-3 col-6">
+                              <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                                 <div class="field-wrapper">
                                   <input
                                     type="text"
@@ -501,7 +499,7 @@
                                       Select City
                                     </option>
                                     <option
-                                      [value]="ci?._id"
+                                      [value]="ci?.cityName"
                                       *ngFor="let ci of cityList"
                                     >
                                       {{ ci?.cityName }}
@@ -512,35 +510,35 @@
                                     <span class="text-danger">*</span>
                                   </div>
                                 </div>
-                              </div>
+                              </div> -->
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                               <div class="field-wrapper">
                                 <ng-container
-                                  *ngIf="allDealers?.length > 0; else noDealers"
+                                  *ngIf="allDrivers?.length > 0; else noDrivers"
                                 >
                                   <select
                                     class="select-single js-states"
-                                    (change)="selectDealer($event.target)"
-                                    title="Select Dealer City"
+                                    (change)="selectDriver($event.target)"
+                                    title="Select Driver City"
                                     data-live-search="true"
                                   >
                                     <option selected disabled value="">
-                                      Select Dealer
+                                      Select Driver
                                     </option>
                                     <option
-                                      *ngFor="let dele of allDealers"
+                                      *ngFor="let dele of allDrivers"
                                       [value]="dele?._id"
                                     >
                                       {{ dele?.fullName }}
                                     </option>
                                   </select>
                                 </ng-container>
-                                <ng-template #noDealers>
-                                  <p>No Dealers in this city</p>
+                                <ng-template #noDrivers>
+                                  <p>No Drivers in this city</p>
                                 </ng-template>
                                 <div class="field-placeholder">
-                                  Select Dealer
+                                  Select Driver
                                   <span class="text-danger">*</span>
                                 </div>
                               </div>
@@ -552,7 +550,7 @@
                                   (click)="createDealerQuotation()"
                                   type="button"
                                 >
-                                  Add Quotation
+                                  Add Driver
                                 </button>
                               </div>
                             </div>
@@ -566,8 +564,8 @@
                         <div class="table-responsive">
                           <ng-container
                             *ngIf="
-                              dealerQuotationList?.length > 0;
-                              else noQuotaion
+                              driverAssignmentList?.length > 0;
+                              else noDriverAssigned
                             "
                           >
                             <table id="copy-print-csv" class="table v-middle">
@@ -575,9 +573,9 @@
                                 <tr>
                                   <th>#</th>
                                   <th>City</th>
-                                  <th>Dealer Id</th>
-                                  <th>Dealer Name</th>
-                                  <th>Quotation</th>
+                                  <th>Driver Id</th>
+                                  <th>Driver Name</th>
+                                  <!-- <th>Quotation</th>
 
                                   <th
                                     *ngIf="
@@ -594,25 +592,25 @@
                                     "
                                   >
                                     Original Quotation (+5% Car)
-                                  </th>
+                                  </th> -->
 
                                   <th *ngIf="!assignedDealerData">Action</th>
                                 </tr>
                               </thead>
                               <tbody
                                 *ngFor="
-                                  let dele of dealerQuotationList;
+                                  let dele of driverAssignmentList;
                                   let i = index
                                 "
                               >
                                 <tr [ngClass]="{ bgColor: dele?.isAssigned }">
                                   <td>{{ i + 1 }}</td>
-                                  <td>{{ dele?.dealerCity }}</td>
-                                  <td>{{ dele?.dealerUserName }}</td>
-                                  <td>{{ dele?.dealerName }}</td>
+                                  <td>{{ dele?.driverCity }}</td>
+                                  <td>{{ dele?.driverId }}</td>
+                                  <td>{{ dele?.driverName }}</td>
 
                                   <!-- <td>₹ {{ dele?.dealerPrice ? (dele.dealerPrice * 0.75).toFixed(2) : '' }}</td> -->
-                                  <td
+                                  <!-- <td
                                     *ngIf="
                                       loginType == 'admin' &&
                                       leadResponse?.vehicleType == 'Bike'
@@ -636,7 +634,7 @@
                                         dele.dealerPrice * 0.95
                                     }}
                                   </td>
-                                  <td>₹ {{ dele?.dealerPrice }}</td>
+                                  <td>₹ {{ dele?.dealerPrice }}</td> -->
 
                                   <td>
                                     <div
@@ -662,11 +660,10 @@
                                             <a
                                               class="dropdown-item"
                                               (click)="
-                                                assignToDealer(
-                                                  dele?.dealerLeadStatusId,
-                                                  dele?.dealerId,
+                                                assignToDriver(
+                                                  dele?.driverId,
                                                   i,
-                                                  dele?.quotationId
+                                                  true
                                                 )
                                               "
                                               >Assign Lead</a
@@ -675,8 +672,8 @@
                                               class="dropdown-item text-danger"
                                               (click)="
                                                 removeQuotation(
-                                                  dele?.dealerLeadStatusId,
-                                                  dele?.dealerId,
+                                                  dele?._id,
+                                                  dele?.driverId,
                                                   i,
                                                   dele?.quotationId
                                                 )
@@ -711,12 +708,10 @@
                                             <a
                                               class="dropdown-item text-danger"
                                               (click)="
-                                                assignToDealer(
-                                                  dele?.dealerLeadStatusId,
-                                                  dele?.dealerId,
+                                                assignToDriver(
+                                                  dele?.driverId,
                                                   i,
-                                                  dele?.quotationId,
-                                                  'unassign'
+                                                  false
                                                 )
                                               "
                                               >Un-Assign
@@ -725,7 +720,7 @@
                                               class="dropdown-item"
                                               [routerLink]="[
                                                 '/single-dealer',
-                                                dele?.dealerId
+                                                dele?.driverId
                                               ]"
                                               >Go to dealer page
                                             </a>
@@ -738,7 +733,7 @@
                               </tbody>
                             </table>
                           </ng-container>
-                          <ng-template #noQuotaion>
+                          <ng-template #noDriverAssigned>
                             <h4>No Quotaion form any dealer</h4>
                           </ng-template>
                         </div>
@@ -1544,7 +1539,7 @@
 
                 <li
                   role="tab"
-                  [ngClass]="{ current: dealerQuotationList?.length > 0 }"
+                  [ngClass]="{ current: driverAssignmentList?.length > 0 }"
                   class="disabled"
                   aria-disabled="true"
                 >

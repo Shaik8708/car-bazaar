@@ -31,9 +31,18 @@ export class EditLeadComponent implements OnInit {
   public status: string;
 
   leadForm: FormGroup = new FormGroup({});
-  cityList: any;
+  cityList: any = [
+    { cityName: 'Bengaluru', _id: '1' },
+    { cityName: 'Chennai', _id: '2' },
+    { cityName: 'Hyderabad', _id: '3' },
+    { cityName: 'Mumbai', _id: '4' },
+    { cityName: 'Pune', _id: '5' },
+    { cityName: 'Delhi', _id: '6' },
+    { cityName: 'Kolkata', _id: '7' },
+    { cityName: 'Ahmedabad', _id: '8' },
+  ];
   citySelected: string = '';
-  allDealers: any;
+  allDrivers: any;
   assignIndex: any;
   vehiclePic: any;
   scrapLetterPic: any;
@@ -57,9 +66,9 @@ export class EditLeadComponent implements OnInit {
   leadIsVerified: any = '';
   dealerName: any = '';
   leadId: any;
-  dealerToAddInQuotation: any;
-  dealerId: any;
-  dealerQuotationList: any;
+  selectedDriverAssigned: any;
+  driverId: any;
+  driverAssignmentList: any;
   vehImage: any;
   rcImage: any;
   chasisImage: any;
@@ -73,7 +82,7 @@ export class EditLeadComponent implements OnInit {
   scheduledDate: any;
   leadStatus: any;
   uniqueLeadName: any;
-  originalQuotaionStatusData: any;
+  originalDriverStatusData: any;
   userComment: any;
   callTrackingList: any[] = [];
   caseTrackingList: any[] = [];
@@ -224,7 +233,7 @@ export class EditLeadComponent implements OnInit {
     this.loginType = localStorage?.getItem('loiu0ac');
     // this.getDealerList();
     this.getLeadById();
-    this.getCityList();
+    // this.getCityList();
   }
 
   goBack(): void {
@@ -280,7 +289,7 @@ export class EditLeadComponent implements OnInit {
     }).then((result: any) => {
       if (result.isConfirmed) {
         let payload = {
-          collectionName: urlConfig.dealerLeadStatus,
+          collectionName: urlConfig.driverLeadStatus,
         };
         this.baseApi.delete(`${urlConfig.deletePath}/${id}`, payload).subscribe(
           (res: any) => {
@@ -328,6 +337,7 @@ export class EditLeadComponent implements OnInit {
           if (res?.status == 'success') {
             this.uniqueLeadName = res?.data?.uniqueLeadName;
             this.leadResponse = res?.data;
+
             const data = {
               username: res?.data?.username,
               phoneNumber: res?.data?.phoneNumber,
@@ -510,7 +520,7 @@ export class EditLeadComponent implements OnInit {
             //               thumb: ele,
             //             });
             //           });
-            // this.dealerQuotationList = data?.items;
+            // this.driverAssignmentList = data?.items;
             this.leadForm.patchValue(data);
             if (
               this.adminSeen == false ||
@@ -538,6 +548,7 @@ export class EditLeadComponent implements OnInit {
             //   this.leadStatus = data.leadStatus;
             // }
             this.getLeadQuotationStatus();
+            this.getDealersByCity(res.data.userCity);
           } else {
             this.spinner.hide();
             alert(res?.message);
@@ -554,55 +565,58 @@ export class EditLeadComponent implements OnInit {
     this.baseApi
       .get(
         urlConfig.getAllPath +
-          `?collectionName=${urlConfig.dealerLeadStatus}&productId=${this.leadId}`
+          `?collectionName=${urlConfig.driverLeadStatus}&leadId=${this.leadId}`
       )
       .subscribe((res: any) => {
-        this.originalQuotaionStatusData = res?.data?.docs;
-        this.dealerQuotationList = res?.data?.docs.flatMap((doc: any) => {
-          return doc.quotations.map((quotation: any) => ({
-            dealerName: doc?.dealerName,
-            dealerUserName: doc?.dealerUserName,
-            leadStatus: doc?.leadStatus,
-            dealerCity: doc?.dealerCity,
-            dealerPrice: quotation?.dealerPrice, // Get the dealerPrice from the quotation
-            dealerId: doc?.dealerId,
-            quotationId: quotation?.id,
-            dealerLeadStatusId: doc?._id,
-            quotationGivenTime: quotation?.quotationGivenTime,
-            isAssigned: quotation?.isAssigned,
-          }));
-        });
+        this.originalDriverStatusData = res?.data?.docs;
+        this.driverAssignmentList = res?.data?.docs;
+        console.log(this.driverAssignmentList);
+
+        // this.driverAssignmentList = res?.data?.docs.flatMap((doc: any) => {
+        //   return doc.quotations.map((quotation: any) => ({
+        //     dealerName: doc?.dealerName,
+        //     dealerUserName: doc?.dealerUserName,
+        //     leadStatus: doc?.leadStatus,
+        //     dealerCity: doc?.dealerCity,
+        //     dealerPrice: quotation?.dealerPrice, // Get the dealerPrice from the quotation
+        //     dealerId: doc?.dealerId,
+        //     quotationId: quotation?.id,
+        //     dealerLeadStatusId: doc?._id,
+        //     quotationGivenTime: quotation?.quotationGivenTime,
+        //     isAssigned: quotation?.isAssigned,
+        //   }));
+        // });
       });
   }
 
-  prepareUpdatedData(unAssign: any) {
-    const updatedDocs = this.originalQuotaionStatusData.map((doc: any) => {
-      // Update the quotations with isAssigned flag
-      unAssign ? (doc.leadStatus = 'QUOTED') : (doc.leadStatus = 'ASSIGNED');
-      const updatedQuotations = doc.quotations.map((quotation: any) => {
-        // Find the matching quotation from dealerQuotationList based on dealerId and dealerPrice
-        const matchingQuotation = this.dealerQuotationList.find(
-          (q: any) =>
-            q.dealerId === doc.dealerId &&
-            q.dealerPrice === quotation.dealerPrice
-        );
-        // If found, add the isAssigned property
-        if (matchingQuotation) {
-          return { ...quotation, isAssigned: matchingQuotation.isAssigned };
-        }
-        return quotation;
-      });
+  // prepareUpdatedData(unAssign: any) {
+  //   const updatedDocs = this.originalDriverStatusData.map((doc: any) => {
+  //     // Update the quotations with isAssigned flag
+  //     unAssign ? (doc.leadStatus = 'QUOTED') : (doc.leadStatus = 'ASSIGNED');
+  //     const updatedQuotations = doc.quotations.map((quotation: any) => {
+  //       // Find the matching quotation from driverAssignmentList based on dealerId and dealerPrice
+  //       const matchingQuotation = this.driverAssignmentList.find(
+  //         (q: any) =>
+  //           q.dealerId === doc.dealerId &&
+  //           q.dealerPrice === quotation.dealerPrice
+  //       );
+  //       // If found, add the isAssigned property
+  //       if (matchingQuotation) {
+  //         return { ...quotation, isAssigned: matchingQuotation.isAssigned };
+  //       }
+  //       return quotation;
+  //     });
 
-      // Filter the updated quotations to only keep those where isAssigned is true
-      // const filteredQuotations = updatedQuotations.filter((quotation: any) => quotation.isAssigned === true);
-      const filteredQuotations = updatedQuotations;
+  //     // Filter the updated quotations to only keep those where isAssigned is true
+  //     // const filteredQuotations = updatedQuotations.filter((quotation: any) => quotation.isAssigned === true);
+  //     const filteredQuotations = updatedQuotations;
 
-      // Return the document with updated quotations (keeping other properties intact)
-      return { ...doc, quotations: filteredQuotations };
-    });
+  //     // Return the document with updated quotations (keeping other properties intact)
+  //     return { ...doc, quotations: filteredQuotations };
+  //   });
 
-    return updatedDocs;
-  }
+  //   return updatedDocs;
+  // }
 
   newImage(): FormGroup {
     return this.fb.group({
@@ -659,9 +673,9 @@ export class EditLeadComponent implements OnInit {
   createDealerQuotation() {
     // let delAmt = parseInt(this.dealerQuotation, 10)
 
-    // if (this.dealerId && this.delearSingleQuote && this.citySelected) {
+    // if (this.driverId && this.delearSingleQuote && this.citySelected) {
     //   let data = {
-    //     dealerId: this.dealerId,
+    //     dealerId: this.driverId,
     //     dealerAmount: this.delearSingleQuote,
     //     productId: this.leadId,
     //     cityId: this.citySelected
@@ -696,76 +710,119 @@ export class EditLeadComponent implements OnInit {
     this.leadResponse.dealerQuotationId =
       this.leadResponse?.dealerQuotationId || []; // Initialize if not present
     this.leadResponse?.dealerQuotationId.find((res: any) => {
-      if (this.dealerId == res?.dealerId) {
+      if (this.driverId == res?.driverUniqueNumber) {
         isDealerExist = res;
         dealerLeadStatusId = res?.dealerLeadStatusId;
       }
     });
 
     // let cityId = this.cookieService.get('dp_ci');
-    if (this.delearSingleQuote) {
-      const businessDetailsFullName = this.dealerToAddInQuotation?.fullName;
-      const businessDetailsUserName = this.dealerToAddInQuotation?.username;
-      const businessDetailsCity = this.dealerToAddInQuotation?.city;
-      const businessDetailsCityId = this.dealerToAddInQuotation?.cityId;
+    // if (this.delearSingleQuote) {
+    const businessDetailsFullName = this.selectedDriverAssigned?.fullName;
+    const businessDetailsUserName = this.selectedDriverAssigned?.username;
+    const businessDetailsCity = this.selectedDriverAssigned?.driverCity;
+    const businessDetailsCityId = this.selectedDriverAssigned?.cityId;
 
-      if (this.dealerId) {
-        this.spinner.show();
+    if (this.driverId) {
+      this.spinner.show();
 
-        let leadStatusPayload = {
-          collectionName: urlConfig.dealerLeadStatus,
-          leadStatus: 'QUOTED',
-          quotations: [
-            {
+      let leadStatusPayload = {
+        collectionName: urlConfig.driverLeadStatus,
+        leadStatus: 'NOT YET ASSIGNED',
+        // quotations: [
+        //   {
+        //     dealerPrice: this.delearSingleQuote,
+        //     quotationGivenTime: new Date(),
+        //     isAssigned: false,
+        //   },
+        // ],
+        driverId: this.driverId,
+        driverName: businessDetailsFullName,
+        driverUserName: businessDetailsUserName,
+        leadId: this.leadId,
+        driverCity: businessDetailsCity,
+        driverCityId: businessDetailsCityId,
+      };
+
+      let postOrPatch;
+      this.isQuoted.find((res: any) => {
+        console.log(res);
+
+        if (this.driverId == res?.driverId) {
+          postOrPatch = res;
+        }
+      });
+
+      let path = postOrPatch
+        ? urlConfig.updatePath + postOrPatch?.dealerLeadStatusId
+        : urlConfig.createPath;
+      let urlMethod: any = postOrPatch
+        ? this.baseApi.patch.bind(this.baseApi)
+        : this.baseApi.post.bind(this.baseApi);
+
+      if (postOrPatch) {
+        let payload = {
+          collectionName: urlConfig.driverLeadStatus,
+          id: dealerLeadStatusId,
+        };
+        this.baseApi
+          .post(urlConfig.getOnePath, payload)
+          .subscribe((response: any) => {
+            let existingQuotations = response?.data?.quotations || [];
+
+            existingQuotations.push({
               dealerPrice: this.delearSingleQuote,
               quotationGivenTime: new Date(),
               isAssigned: false,
-            },
-          ],
-          dealerId: this.dealerId,
-          dealerName: businessDetailsFullName,
-          dealerUserName: businessDetailsUserName,
-          productId: this.leadId,
-          dealerCity: businessDetailsCity,
-          dealerCityId: businessDetailsCityId,
-        };
+            });
 
-        let postOrPatch;
-        this.isQuoted.find((res: any) => {
-          if (this.dealerId == res?.dealerId) {
-            postOrPatch = res;
-          }
-        });
+            // leadStatusPayload.quotations = existingQuotations;
 
-        let path = postOrPatch
-          ? urlConfig.updatePath + postOrPatch?.dealerLeadStatusId
-          : urlConfig.createPath;
-        let urlMethod: any = postOrPatch
-          ? this.baseApi.patch.bind(this.baseApi)
-          : this.baseApi.post.bind(this.baseApi);
+            urlMethod(path, leadStatusPayload)
+              .pipe(
+                finalize(() => {
+                  this.spinner.hide();
+                }),
+                catchError((err) => {
+                  alert(err?.error?.message);
 
-        if (postOrPatch) {
-          let payload = {
-            collectionName: urlConfig.dealerLeadStatus,
-            id: dealerLeadStatusId,
-          };
-          this.baseApi
-            .post(urlConfig.getOnePath, payload)
-            .subscribe((response: any) => {
-              let existingQuotations = response?.data?.quotations || [];
+                  throw err;
+                })
+              )
+              .subscribe((response: any) => {
+                if (response?.status == 'success') {
+                  alert('Successfully Dealer Quotation Created');
 
-              existingQuotations.push({
-                dealerPrice: this.delearSingleQuote,
-                quotationGivenTime: new Date(),
-                isAssigned: false,
+                  window.location.reload();
+                }
               });
+          });
+      } else {
+        urlMethod(path, leadStatusPayload)
+          .pipe(
+            finalize(() => {
+              this.spinner.hide();
+            }),
+            catchError((err) => {
+              alert(err?.error?.message);
 
-              leadStatusPayload.quotations = existingQuotations;
+              throw err;
+            })
+          )
+          .subscribe((response: any) => {
+            if (response?.status == 'success') {
+              !isDealerExist
+                ? this.leadResponse.dealerQuotationId.push({
+                    dealerId: this.driverId,
+                    dealerLeadStatusId: response?.data?._id,
+                  })
+                : this.leadResponse.dealerQuotationId; // Just push, don't assign back
 
-              urlMethod(path, leadStatusPayload)
+              this.baseApi
+                .patch(urlConfig.updatePath + this.leadId, this.leadResponse)
                 .pipe(
                   finalize(() => {
-                    this.spinner.hide();
+                    //this.spinner.hide();
                   }),
                   catchError((err) => {
                     alert(err?.error?.message);
@@ -773,137 +830,150 @@ export class EditLeadComponent implements OnInit {
                     throw err;
                   })
                 )
-                .subscribe((response: any) => {
-                  if (response?.status == 'success') {
+                .subscribe((res: any) => {
+                  if (res?.status == 'success') {
                     alert('Successfully Dealer Quotation Created');
-
                     window.location.reload();
+                  } else {
+                    alert(res?.message);
                   }
                 });
-            });
-        } else {
-          urlMethod(path, leadStatusPayload)
-            .pipe(
-              finalize(() => {
-                this.spinner.hide();
-              }),
-              catchError((err) => {
-                alert(err?.error?.message);
-
-                throw err;
-              })
-            )
-            .subscribe((response: any) => {
-              if (response?.status == 'success') {
-                !isDealerExist
-                  ? this.leadResponse.dealerQuotationId.push({
-                      dealerId: this.dealerId,
-                      dealerLeadStatusId: response?.data?._id,
-                    })
-                  : this.leadResponse.dealerQuotationId; // Just push, don't assign back
-
-                this.baseApi
-                  .patch(urlConfig.updatePath + this.leadId, this.leadResponse)
-                  .pipe(
-                    finalize(() => {
-                      //this.spinner.hide();
-                    }),
-                    catchError((err) => {
-                      alert(err?.error?.message);
-
-                      throw err;
-                    })
-                  )
-                  .subscribe((res: any) => {
-                    if (res?.status == 'success') {
-                      alert('Successfully Dealer Quotation Created');
-                      window.location.reload();
-                    } else {
-                      alert(res?.message);
-                    }
-                  });
-              }
-            });
-        }
+            }
+          });
       }
     }
+    // }
   }
 
   getDealersByCity(id: any) {
-    this.citySelected = id?.value;
+    this.citySelected = id;
 
     this.baseApi
       .get(
-        `${urlConfig.getAllPath}?collectionName=${urlConfig.dealerDetails}&cityId=${id?.value}`
+        `${urlConfig.getAllPath}?collectionName=${urlConfig.driver}&driverCity=${id}`
       )
       .subscribe((res: any) => {
-        this.allDealers = res?.data?.docs;
+        this.allDrivers = res?.data?.docs;
       });
   }
 
-  selectDealer(id: any) {
-    this.dealerId = id?.value;
+  selectDriver(id: any) {
+    this.driverId = id?.value;
 
     // if(this.dealerQuotation){
-    if (this.delearSingleQuote) {
-      this.allDealers.filter((res: any) => {
-        if (res._id == id?.value) {
-          console.log(res);
-          this.dealerToAddInQuotation = res;
-        }
-      });
-    } else {
-      alert('Add the amounts');
-    }
-  }
-
-  assignToDealer(
-    dealerLeadStatusId: any,
-    dealerId: any,
-    index: any,
-    quotationId: any,
-    unAssign?: any,
-    leadStatus?: any
-  ) {
-    this.dealerQuotationList.forEach(
-      (quotation: any) => (quotation.isAssigned = false)
-    );
-
-    this.dealerQuotationList[index].isAssigned = unAssign ? false : true;
-    // this.dealerQuotationList[index].assignedTo =  unAssign ? dealerId : '';
-
-    this.dealerQuotationList[index].leadStatus = unAssign
-      ? this.dealerQuotationList[index].leadStatus
-      : 'ASSIGNED';
-
-    this.leadStatus = unAssign
-      ? leadStatus
-        ? leadStatus
-        : 'PROCESSING'
-      : 'ASSIGNED';
-
-    const updatedData = this.prepareUpdatedData(unAssign);
-    let dataToSend: any;
-    updatedData.map((res: any) => {
-      if (dealerLeadStatusId == res?._id) {
-        dataToSend = res;
+    // if (this.delearSingleQuote) {
+    this.allDrivers.filter((res: any) => {
+      if (res._id == id?.value) {
+        console.log(res);
+        this.selectedDriverAssigned = res;
       }
     });
+    // } else {
+    //   alert('Add the amounts');
+    // }
+  }
 
+  assignToDriver(
+    driverId: any,
+    index: number,
+    unAssign?: boolean,
+    leadStatus?: string
+  ) {
+    // Reset all assignments first
+    this.driverAssignmentList.forEach(
+      (driver: any) => (driver.isAssigned = false)
+    );
+
+    // Assign/unassign the specific driver
+    this.driverAssignmentList[index].isAssigned = !unAssign;
+
+    // Update status
+    this.driverAssignmentList[index].leadStatus = unAssign
+      ? this.driverAssignmentList[index].leadStatus
+      : 'ASSIGNED';
+
+    this.leadStatus = unAssign ? leadStatus || 'AVAILABLE' : 'ASSIGNED';
+
+    // Prepare the data to send for update
+    const dataToSend = this.prepareUpdatedDriverData(driverId, unAssign);
+
+    // API call to update the driver assignment
     this.baseApi
-      .patch(urlConfig.updatePath + dealerLeadStatusId, dataToSend)
+      .patch(urlConfig.updatePath + driverId, dataToSend)
       .subscribe((res: any) => {
-        if (res?.status == 'success') {
-          this.isAssigned = unAssign ? false : true;
-          this.updateDealerQuotationStatusInMainApi(
-            dealerId,
-            quotationId,
-            this.isAssigned,
-            false
-          );
+        if (res?.status === 'success') {
+          this.isAssigned = !unAssign;
         }
       });
   }
+
+  prepareUpdatedDriverData(driverId: any, unAssign: boolean) {
+    const updatedDrivers = this.originalDriverStatusData.map((driver: any) => {
+      // Mark each driver’s status
+      driver.leadStatus = unAssign ? 'AVAILABLE' : 'ASSIGNED';
+
+      // If this is the driver being updated, toggle the flag
+      if (driver.driverId === driverId) {
+        driver.isAssigned = !unAssign;
+      }
+
+      return { ...driver };
+    });
+
+    // You can return a single object if your API expects one driver record, not the full list
+    const updatedDriver = updatedDrivers.find(
+      (d: any) => d.driverId === driverId
+    );
+    return updatedDriver || {};
+  }
+
+  // assignToDriver(
+  //   dealerLeadStatusId: any,
+  //   dealerId: any,
+  //   index: any,
+  //   // quotationId: any,
+  //   unAssign?: any,
+  //   leadStatus?: any
+  // ) {
+  //   this.driverAssignmentList.forEach(
+  //     (assignmentList: any) => (assignmentList.isAssigned = false)
+  //   );
+
+  //   this.driverAssignmentList[index].isAssigned = unAssign ? false : true;
+  //   // this.driverAssignmentList[index].assignedTo =  unAssign ? dealerId : '';
+
+  //   this.driverAssignmentList[index].leadStatus = unAssign
+  //     ? this.driverAssignmentList[index].leadStatus
+  //     : 'ASSIGNED';
+
+  //   this.leadStatus = unAssign
+  //     ? leadStatus
+  //       ? leadStatus
+  //       : 'PROCESSING'
+  //     : 'ASSIGNED';
+
+  //   const updatedData = this.prepareUpdatedData(unAssign);
+  //   let dataToSend: any;
+  //   updatedData.map((res: any) => {
+  //     if (dealerLeadStatusId == res?._id) {
+  //       dataToSend = res;
+  //     }
+  //   });
+
+  //   this.baseApi
+  //     .patch(urlConfig.updatePath + dealerLeadStatusId, dataToSend)
+  //     .subscribe((res: any) => {
+  //       if (res?.status == 'success') {
+  //         this.isAssigned = unAssign ? false : true;
+  //         // this.updateDealerQuotationStatusInMainApi(
+  //         //   dealerId,
+  //         //   quotationId,
+  //         //   this.isAssigned,
+  //         //   false
+  //         // );
+  //       }
+  //     });
+  // }
 
   updateDealerQuotationStatusInMainApi(
     dealerId,
@@ -957,7 +1027,7 @@ export class EditLeadComponent implements OnInit {
     this.api.getAllDealers().subscribe(
       (res: any) => {
         if (res?.message == 'Successfully Dealer fetched') {
-          this.allDealers = res?.data;
+          this.allDrivers = res?.data;
         } else {
           alert('Something went wrong, Try again');
         }
@@ -984,18 +1054,24 @@ export class EditLeadComponent implements OnInit {
   leadStatusChange(event: any) {
     this.leadStatus = event?.value;
     if (this.leadStatus == 'DEAL_CANCELLED') {
-      const index = this.dealerQuotationList.findIndex(
+      const index = this.driverAssignmentList.findIndex(
         (res: any) => res?.isAssigned == true
       );
-      const isAssignedDealerDetailsId = this.dealerQuotationList.find(
+      const isAssignedDriverDetailsId = this.driverAssignmentList.find(
         (res: any) => res?.isAssigned == true
       );
-      if (isAssignedDealerDetailsId) {
-        this.assignToDealer(
-          isAssignedDealerDetailsId?.dealerLeadStatusId,
+      if (isAssignedDriverDetailsId) {
+        // this.assignToDriver(
+        //   isAssignedDealerDetailsId?.dealerLeadStatusId,
+        //   index,
+        //   'unassign',
+        //   'DEAL_CANCELLED'
+        // );
+        this.assignToDriver(
+          isAssignedDriverDetailsId?.driverId,
           index,
-          'unassign',
-          'DEAL_CANCELLED'
+          true,
+          'UNASSIGNED'
         );
       }
     }

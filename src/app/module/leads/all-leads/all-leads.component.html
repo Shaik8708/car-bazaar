@@ -418,6 +418,7 @@ Add OR Filter
                       <th>Locations</th>
                       <!-- <th *ngIf="checkColumn('createdAt')">Lead Date</th> -->
                       <th>Total Km</th>
+                      <th>Customer Response</th>
                       <!-- <th *ngIf="checkColumn('teleCaller')">
                         Customer Response
                       </th> -->
@@ -526,10 +527,11 @@ Add OR Filter
                         {{ abc?.totalKm }}
                         <!-- {{ abc?.createdAt | date : "short" }} -->
                       </td>
-
-                      {{
-                        abc?.teleCaller
-                      }}
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        <!-- *ngIf="checkColumn('createdAt')" -->
+                        {{ abc?.teleCaller }}
+                        <!-- {{ abc?.createdAt | date : "short" }} -->
+                      </td>
                       <!-- <td class="text-dark" *ngIf="checkColumn('teleCaller')">
                                                 <span *ngIf="dropdownIndex != i" (click)="showDropdown(i)"
                                                     class="text-primary" [ngClass]="[
@@ -582,7 +584,7 @@ Add OR Filter
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         <!-- *ngIf="checkColumn('brandName')" -->
-                        {{ abc?.pickUpTime }}
+                        {{ abc?.pickUpTime | date : "short" }}
                         <!-- {{ abc?.brandName }} -->
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
@@ -604,7 +606,6 @@ Add OR Filter
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         {{ abc?.createdDate }}
                       </td>
-
                       <td>
                         <div class="actions d-flex justify-content-between">
                           <!-- <a
