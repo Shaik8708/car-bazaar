@@ -28,5 +28,10 @@
   "singleUserPath": "/user/public",
   "getUserProfilePath": "/user/profile",
   "sparePartsleads": "sparepartsleads",
-  "scrapLeadCase": "scrapLeadCase"
+  "scrapLeadCase": "scrapLeadCase",
+
+
+
+  "getUsers": "/admin/user/getAll",
+  "getDrivers": "/admin/driver/getAll"
 }

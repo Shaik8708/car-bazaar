@@ -53,3 +53,10 @@ https://stackblitz.com/edit/angular-6-sort-array-of-object-by-date?file=src%2Fap
 ## autoComplete
 
 http://mukeshkumar.net/articles/angular/3-ways-to-implement-autocomplete-textbox-in-angular-with-typescript-on-large-data
+
+
+{
+    "email":"usmanpasha002@gmail.com",
+    "password":"Pass@123",
+    phone: 9738286574
+}

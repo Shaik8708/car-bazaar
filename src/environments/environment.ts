@@ -7,7 +7,7 @@ export const environment = {
   defaultPageLimit: 10,
   pageLimit: [10, 20, 30, 50],
   // baseUrl: 'https://carbasketapi.carbasket.in',
-  baseUrl: 'https://backend-dynamic-code-2iet.onrender.com',
+  baseUrl: 'https://cabbajar-backend.kanlifegroup.com',
   // baseUrl: "http://localhost:4000"
 };
 
