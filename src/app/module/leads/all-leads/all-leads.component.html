@@ -11,29 +11,7 @@
           <mat-panel-title> Search Condition </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <!-- <div class="d-flex-div mb-3">
-                    <div class="d-flex">
-                        <button type="button" class="filter-btn mr-10" (click)="addFilter('and')">
-                            <i class="fa fa-filter" aria-hidden="true"></i>
-                            AND Filter:
-                        </button>
-                
-                    </div>
-                    <div class="d-flex">
-                        <button type="button" class="filter-btn" (click)="clearFilter()">
-                            <i class="fa fa-eraser" aria-hidden="true"></i>
-                            Clear
-                        </button>
-                        <button type="button" class="filter-btn ml-10" (click)="searchFilters()">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                            Search
-                        </button>
-                    </div>
-                </div> -->
-
-        <!-- <ul *ngFor="let col of column">
-        <li> {{ col.col }}</li>
-      </ul> -->
+        
 
         <mat-card *ngIf="andFilter?.length > 0">
           <mat-card-content>
@@ -44,14 +22,7 @@
                     >AND Filter:
                   </mat-label>
                   <mat-form-field appearance="fill" class="mat-form-field-line">
-                    <!-- <mat-select placeholder="Select" (selectionChange)="selection('and', i, $event)">
-                     
-                                  <ng-container *ngFor="let col of column">
-                                      <mat-option *ngIf="col.forFilter" [value]="col.name">
-                                          {{ col.col }}
-                                      </mat-option>
-                                  </ng-container>
-                              </mat-select> -->
+                   
                     <select
                       matNativeControl
                       required
@@ -163,10 +134,6 @@
               <i class="fa fa-filter" aria-hidden="true"></i>
               AND Filter:
             </button>
-            <!-- <button type="button" class="filter-btn" (click)="addFilter('or')">
-<i class="fa fa-filter" aria-hidden="true"></i>
-Add OR Filter
-</button> -->
           </div>
           <div class="d-flex">
             <button type="button" class="filter-btn" (click)="clearFilter()">
@@ -186,31 +153,6 @@ Add OR Filter
       </mat-expansion-panel>
     </mat-accordion>
 
-    <!-- <input type="date" name="date" class="mt-5 w-100" (change)="getByDate($event.target)"
-            *ngIf="loginType == 'other'">
-        <div class="d-flex" *ngIf="loginType == 'other'">
-            <input type="text" placeholder="Enter Phone Number" name="phonwNumber" class="mt-5 h-auto"
-                [(ngModel)]="phoneNo">
-            <button (click)="phoneNumber()">Get Ph</button>
-        </div> -->
-
-    <!-- <div class="excel-div mt-4">
-            <button class="btn btn-warning" (click)="changeView()">List</button>
-            <button class="btn btn-info" (click)="changeView()">Grid</button>
-
-            <button class="excel-btn" (click)="downloadExcel()" matTooltip="download_excel"
-                *ngIf="loginType == 'other'">
-                <span><img src="assets/img/excel.svg" /></span>
-            </button> -->
-
-    <!-- <button class="hideshwo">
-<i class="fa fa-eye" aria-hidden="true"></i>
-{{ "REPORTS.SHOW-HIDE" | translate }}
-</button> -->
-
-    <!-- <div class="pannel-icon" (click)="clearFilter()" matTooltip="reset" *ngIf="loginType == 'other'">
-                <mat-icon class="icon-s">refresh</mat-icon>
-            </div> -->
   </div>
 </div>
 
@@ -294,19 +236,6 @@ Add OR Filter
       </option>
     </select>
   </div>
-  <!-- <div class="mt-3 mb-3 col-6 col-md-4">
-        <mat-form-field appearance="fill" class="show-hide-i">
-            <label><i class="fa fa-eye" aria-hidden="true"></i>
-                Show/Hide Fields</label>
-            <mat-select multiple [(ngModel)]="selectedColumn">
-                <ng-container *ngFor="let col of column">
-                    <mat-option #matOption (click)="changeValue(matOption)" *ngIf="col.forColumn" [value]="col.name">
-                        {{ col.col }}
-                    </mat-option>
-                </ng-container>
-            </mat-select>
-        </mat-form-field>
-    </div> -->
 
   <div class="mt-3 mb-3 col-6 col-md-4 position-relative">
     <input
@@ -350,28 +279,6 @@ Add OR Filter
       *ngIf="createdDate"
     ></i>
   </div>
-  <!-- <div class="mt-3 mb-3 col-6 col-md-4 position-relative">
-    <input
-      type="text"
-      class="dateSelector form-control pe-5 w90"
-      placeholder="Paste partner lead URL"
-      (ngModelChange)="onUrlChange()"
-      [(ngModel)]="partnerUrl"
-    />
-    <i
-      class="fa fa-search position-absolute top-50 end-0 translate-middle-y me-4"
-      (click)="handlePartnerUrl()"
-    ></i>
-    <i
-      class="fa fa-times-circle position-absolute top-50 end-0 translate-middle-y me-5"
-      (click)="clearSelected('partnerUrl')"
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      title="Clear url"
-      aria-label="Clear url"
-      *ngIf="partnerUrl"
-    ></i>
-  </div> -->
 
   <div class="d-flex justify-content-between mt-3 mb-3 row">
     <div
@@ -395,12 +302,7 @@ Add OR Filter
       </pagination>
     </div>
   </div>
-
-  <!-- <div *ngFor="let item of sortData">
-        {{item?.updatedAt}} -- {{item?.createdBy?.phoneNumber}}
-      </div> -->
   <ng-container *ngIf="listView; else gridView">
-    <!-- Row start -->
     <div class="row gutters">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
@@ -414,34 +316,16 @@ Add OR Filter
                       <th>Lead Id</th>
                       <th>Phone No</th>
                       <th>Trip Type</th>
-                      <!-- <th *ngIf="checkColumn('guestUserCount')">Attempts</th> -->
                       <th>Locations</th>
-                      <!-- <th *ngIf="checkColumn('createdAt')">Lead Date</th> -->
                       <th>Total Km</th>
-                      <th>Customer Response</th>
-                      <!-- <th *ngIf="checkColumn('teleCaller')">
-                        Customer Response
-                      </th> -->
                       <th>Total Amount</th>
-                      <!-- <th *ngIf="checkColumn('condition')">Condition</th> -->
                       <th>Vehicle Type</th>
-                      <!-- <th *ngIf="checkColumn('vehicleType')">Vehicle Type</th> -->
                       <th>Pick Up Date</th>
-                      <!-- <th *ngIf="checkColumn('location')">Location</th> -->
                       <th>Pick Up Time</th>
-                      <!-- <th *ngIf="checkColumn('brandName')">Brand</th> -->
+                      <th>Assignment Status</th>
                       <th>User City</th>
-                      <!-- <th *ngIf="checkColumn('modelName')">Model</th> -->
                       <th>Lead Status</th>
-                      <!-- <th *ngIf="checkColumn('fuleWhellType')">F/W Type</th> -->
-                      <!-- <th>Condition</th> -->
                       <th>Created At</th>
-                      <!-- <th *ngIf="checkColumn('manufactureYear')">Year</th> -->
-                      <th>Created Date</th>
-                      <!-- <th>Amount Shown</th> -->
-                      <!-- <th>Customer Final Amount</th>
-                                      <th>Dealer Quotation</th>
-                                      <th>Assign Dealer</th> -->
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -476,9 +360,9 @@ Add OR Filter
                           'bg-danger text-white':
                             abc?.dealerQuotationId?.length > 0
                         }"
-                        *ngIf="abc?.phoneNumber"
+                        *ngIf="abc?.userId?.phoneNumber"
                       >
-                        {{ abc?.phoneNumber }}
+                        {{ abc?.userId?.phoneNumber }}
                       </td>
                       <td
                         (click)="navigation('/edit-lead', abc?._id)"
@@ -487,14 +371,8 @@ Add OR Filter
                             abc?.dealerQuotationId?.length > 0
                         }"
                       >
-                        <!-- *ngIf="!abc?.phoneNumber" -->
                         {{ abc?.tripType }}
-                        <!-- {{ abc?.createdBy?.phoneNumber }} -->
                       </td>
-                      <!-- (click)="
-                          showLocationModal(abc?.locations);
-                          $event.stopPropagation()
-                        " -->
                       <td
                         [ngClass]="{ 'bg-success': abc?.comment }"
                         style="text-align: center"
@@ -511,115 +389,42 @@ Add OR Filter
                         >
                           <i class="icon-eye1 text-success"></i>
                         </a>
-                        <!-- {{ abc?.locations }} -->
+                        {{ abc?.locations.length }}
+                      </td>
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.totalKm }}KM
+                      </td>
+                     <td (click)="navigation('/edit-lead', abc?._id)">
+                        ₹{{ abc?.totalAmount }}
+                      </td>
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        🚖{{ abc?.vehicleType }}
+                      </td>
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        📅{{ abc?.pickUpDate | date : "shortDate" }}
+                      </td>
+                      <td (click)="navigation('/edit-lead', abc?._id)">
+                        ⏲️{{ abc?.pickUpTime | date : "shortTime" }}
+                      </td>
+                    
+                        <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.assign?.assignmentStatus }}
                       </td>
 
-                      <!-- <td
-                        (click)="navigation('/edit-lead', abc?._id)"
-                        [ngClass]="{ 'bg-success': abc?.comment }"
-                      >
-                      {{ abc?.locations }}
-                    </td> -->
-                      <!-- *ngIf="checkColumn('guestUserCount')" -->
-                      <!-- {{ abc?.guestUserCount }} -->
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('createdAt')" -->
-                        {{ abc?.totalKm }}
-                        <!-- {{ abc?.createdAt | date : "short" }} -->
+                       <td (click)="navigation('/edit-lead', abc?._id)">
+                        {{ abc?.userCity }}
                       </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('createdAt')" -->
-                        {{ abc?.teleCaller }}
-                        <!-- {{ abc?.createdAt | date : "short" }} -->
-                      </td>
-                      <!-- <td class="text-dark" *ngIf="checkColumn('teleCaller')">
-                                                <span *ngIf="dropdownIndex != i" (click)="showDropdown(i)"
-                                                    class="text-primary" [ngClass]="[
-                          abc?.teleCaller == 'DealCancelled' ? 'text-danger' : '',
-                          abc?.teleCaller == 'AskingHighPrice' ? 'text-danger' : '',
-                          abc?.teleCaller == 'Call me later' ? 'text-info' : '',
-                          abc?.teleCaller == 'AssignedToDealer'
-                            ? 'text-success'
-                            : '',
-                          abc?.teleCaller == 'Completed' ? 'text-success' : '',
-                          abc?.teleCaller == 'CallMeLater' ? 'text-success' : '',
-                          abc?.teleCaller == 'NotResponding' ? 'text-warning' : '',
-                          abc?.teleCaller == 'NotReachable' ? 'text-warning' : '',
-                          abc?.teleCaller == 'NEW-DATA' ? 'text-dark' : ''
-                        ]"><i class="icon-x-circle"></i> {{ abc?.teleCaller }}
-                                                </span>
 
-                                                <select *ngIf="dropdownIndex == i"
-                                                    class="select-single js-states text-dark"
-                                                    (change)="updateList(abc, $event.target)"
-                                                    title="Select Product Category" data-live-search="true">
-                                                    <option disabled selected>Select Lead Status</option>
-                                                    <option value="NotReachable">Not reachable</option>
-                                                    <option value="CallMeLater">Call me later</option>
-                                                    <option value="AskingHighPrice">Asking high price</option>
-                                                    <option value="NotResponding">Not responding</option>
-                                                    <option value="NotInterested">Not interested</option>
-                                                    <option value="SendingImages">Sending Images</option>
-                                                    <option value="CheckingPrice">Checking price</option>
-                                                    <option value="LineBusy">Line Busy</option>
-                                                    <option value="DealCancelled">Deal cancelled</option>
-                                                    <option value="DealAccepted">Deal accepted</option>
-                                                    <option value="AssignedToDealer">Assigned to dealer</option>
-                                                    <option value="Completed">Completed</option>
-                                                </select>
-                                            </td> -->
+
                       <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('condition')" -->
-                        {{ abc?.totalAmount }}
-                        <!-- {{ abc?.condition }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('vehicleType')" -->
-                        {{ abc?.vehicleType }}
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('location')" -->
-                        {{ abc?.pickUpDate }}
-                        <!-- {{ abc?.location }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('brandName')" -->
-                        {{ abc?.pickUpTime | date : "short" }}
-                        <!-- {{ abc?.brandName }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('modelName')" -->
-                        <!-- {{ abc?.userCity }} -->
-                        <!-- {{ abc?.modelName }} -->
-                        {{ abc?.locations[0] }}
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('fuleWhellType')" -->
                         {{ abc?.leadStatus }}
-                        <!-- {{ abc?.fuleWhellType }} -->
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
-                        <!-- *ngIf="checkColumn('manufactureYear')" -->
                         {{ abc?.createdAt | date : "short" }}
-                        <!-- {{ abc?.manufactureYear }} -->
-                      </td>
-                      <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.createdDate }}
                       </td>
                       <td>
                         <div class="actions d-flex justify-content-between">
-                          <!-- <a
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title=""
-                            data-original-title="View"
-                            data-bs-toggle="collapse"
-                            [attr.data-bs-target]="'#collapseExample' + i"
-                            aria-expanded="false"
-                            aria-controls="collapseExample"
-                          >
-                            <i class="icon-eye1 text-success"></i>
-                          </a> -->
+                         
 
                           <a
                             data-toggle="tooltip"
@@ -630,9 +435,6 @@ Add OR Filter
                           >
                             <i class="icon-edit1 text-info"></i>
                           </a>
-                          <!-- <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" routerLink="/product-data">
-                                                <i class="icon-share text-info"></i>
-                                            </a> -->
                         </div>
                       </td>
                     </tr>
@@ -641,14 +443,6 @@ Add OR Filter
                       <td class="p-0" colspan="9">
                         <div class="collapse pt-2" [id]="'collapseExample' + i">
                           <div class="row gutters">
-                            <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                          <div class="field-wrapper">
-                                            <input type="text" formControlName="username" placeholder="Enetr User Name" />
-                                            <div class="field-placeholder">
-                                              Dealer User Name <span class="text-danger">*</span>
-                                            </div>
-                                          </div>
-                                        </div> -->
                             <div
                               class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"
                             >
@@ -745,14 +539,6 @@ Add OR Filter
                                 </div>
                               </div>
                             </div>
-                            <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                          <div class="field-wrapper">
-                                            <input type="text" formControlName="city" placeholder="Enetr City" />
-                                            <div class="field-placeholder">
-                                              Dealer City <span class="text-danger">*</span>
-                                            </div>
-                                          </div>
-                                        </div> -->
                             <div
                               class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"
                               *ngIf="abc?.dealerdata?.dealerAmount"
@@ -792,84 +578,12 @@ Add OR Filter
                                   [value]="abc?.dealerdata?.dealerName"
                                 />
 
-                                <!-- <span
-                                *ngIf="assignIndex != i"
-                                [ngClass]="[
-                                  abc?.dealerdata?.dealerName
-                                    ? 'text-success'
-                                    : 'text-danger'
-                                ]"
-                                (click)="showDealers(i)"
-                              >
-                                <span *ngIf="abc?.dealerdata?.dealerName">{{
-                                  abc?.dealerdata?.dealerName
-                                }}</span>
-    
-                                <span *ngIf="!abc?.dealerdata?.dealerName"
-                                  >Assign to Dealer</span
-                                >
-                              </span> -->
-
-                                <!-- <select
-                                *ngIf="
-                                  !abc?.dealerdata?.dealerName && assignIndex == i
-                                "
-                                class="select-single js-states"
-                                (change)="
-                                  assignToDealer(abc?._id, $event.target, abc)
-                                "
-                                title="Select Product Category"
-                                data-live-search="true"
-                              >
-                                <option disabled selected>Select Dealer</option>
-                                <option
-                                  *ngFor="let dele of allDealers"
-                                  [value]="dele?._id"
-                                >
-                                  {{ dele?.createdBy?.fullName }}
-                                </option>
-                              </select> -->
-                                <!-- <select
-                              *ngIf="!abc?.dealerdata?.dealerName"
-                                class="select-single js-states border-danger"
-                                (change)="
-                                  assignToDealer(abc?._id, $event.target, abc)
-                                "
-                                title="Select Product Category"
-                                data-live-search="true"
-                              >
-                                <option disabled selected>Assign to Dealer</option>
-                                <option
-                                  *ngFor="let dele of allDealers"
-                                  [value]="dele?._id"
-                                >
-                                  {{ dele?.createdBy?.fullName }}
-                                </option>
-                              </select> -->
                                 <div class="field-placeholder">
                                   Assign Dealer
                                 </div>
                               </div>
                             </div>
-                            <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                            <div class="field-wrapper">
-                              <select
-                                class="select-single js-states"
-                                title="Select Dealer City"
-                                data-live-search="true"
-                              >
-                                <option selected disabled value="">
-                                  Select City
-                                </option>
-                                <option value="Bangalore">Bangalore</option>
-                                <option value="Mysore">Mysore</option>
-                                <option value="Kolkata">Kolkata</option>
-                              </select>
-                              <div class="field-placeholder">
-                                Dealer City <span class="text-danger">*</span>
-                              </div>
-                            </div>
-                          </div> -->
+                          
                           </div>
                         </div>
                       </td>

@@ -18,11 +18,12 @@ import { BaseApiService } from 'src/app/services/base-api/base-api.service';
 import { catchError, finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-edit-lead',
-  templateUrl: './edit-lead.component.html',
-  styleUrls: ['./edit-lead.component.css'],
+  selector: 'app-single-driver-details',
+  standalone: false,
+  templateUrl: './single-driver-details.component.html',
+  styleUrl: './single-driver-details.component.css'
 })
-export class EditLeadComponent implements OnInit {
+export class SingleDriverDetailsComponent implements OnInit {
   loginType: any;
 
   @Input()
@@ -173,16 +174,16 @@ export class EditLeadComponent implements OnInit {
       pickUpDate: [''],
       pickUpTime: [''],
       locationList: [''],
-      // brandName: [''],
+      brandName: [''],
       condition: [''],
       totalKm: [''],
-      // fuleWhellType: [''],
+      fuleWhellType: [''],
       guestUserCount: [''],
       userCity: [''],
-      // location: [''],
+      location: [''],
       manufactureYear: [''],
       totalAmount: [''],
-      // modelName: [''],
+      modelName: [''],
       price: [''],
       teleCaller: [''],
       vehicleType: [''],
@@ -198,6 +199,8 @@ export class EditLeadComponent implements OnInit {
       userAddress: [''],
       userDocumentType: [''],
       userDocumentNumber: [''],
+      documentStatus: [''],
+      documentVerification: [''],
       vehicleNumber: [''],
       leadStatus: [''],
       comment: [''],
@@ -221,9 +224,11 @@ export class EditLeadComponent implements OnInit {
       userAddressGoogleMapLink: [''],
       callTrackingId: '',
       tripType: '',
-      // whatsAppNumber: '',
+      whatsAppNumber: '',
       uniqueLeadName: '',
       assignedTo: '',
+      firstName:'',
+      lastName:'',
 
       items: this.fb.array([this.newFeilds()]),
     });
@@ -324,7 +329,7 @@ export class EditLeadComponent implements OnInit {
       id: this.leadId,
     };
     this.baseApi
-      .get(urlConfig.getSingleLeadData + `/${this.leadId}`)
+      .get(urlConfig.getSingleDriverData + `${this.leadId}`)
       .pipe(
         finalize(() => {}),
         catchError((error) => {
@@ -339,62 +344,72 @@ export class EditLeadComponent implements OnInit {
             this.leadResponse = res?.data;
 
             const data = {
-              username: res?.data?.username,
-              phoneNumber: res?.data?.phoneNumber,
+              username: res?.data?.driverId?.username,
+              phoneNumber: res?.data?.driverId?.phoneNumber,
               createdAt: res?.data?.createdAt,
-              locationList: res?.data?.locations.join('\n'),
+              // locationList: res?.data?.locations.join('\n'),
+              locationList: res?.data?.locations,
+
               // brandName: res?.data?.brandName,
-              pickUpDate: res?.data?.pickUpDate,
-              pickUpTime: res?.data?.pickUpTime,
-              condition: res?.data?.condition,
+              // pickUpDate: res?.data?.pickUpDate,
+              // pickUpTime: res?.data?.pickUpTime,
+              // condition: res?.data?.condition,
               totalKm: res?.data?.totalKm,
+              firstName: res?.data?.firstName,
+
+              lastName: res?.data?.lastName,
+
               // fuleWhellType: res?.data?.fuleWhellType,
-              guestUserCount: res?.data?.guestUserCount,
-              userCity: res?.data?.userCity,
+              // guestUserCount: res?.data?.guestUserCount,
+              userCity: res?.data?.city,
               // location: res?.data?.location,
               // manufactureYear: res?.data?.manufactureYear,
               totalAmount: res?.data?.totalAmount,
               // modelName: res?.data?.modelName,
-              price: res?.data?.price,
+              // price: res?.data?.price,
               teleCaller: res?.data?.teleCaller,
-              vehicleType: res?.data?.vehicleType,
-              dealerQuotationId: res?.data?.dealerQuotationId,
-              userFinalAmount: res?.data?.userFinalAmount,
+              vehicleType: res?.data?.vehiclesId[0]?.vehicleType,
+              // dealerQuotationId: res?.data?.dealerQuotationId,
+              // userFinalAmount: res?.data?.userFinalAmount,
               leadIsVerified: res?.data?.leadIsVerified,
-              vehiclePictures: res?.data?.vehiclePictures,
-              rcPictures: res?.data?.rcPictures,
-              towingPictures: res?.data?.towingPictures,
-              userDocumentsPictures: res?.data?.userDocumentsPictures,
-              scrapPictures: res?.data?.scrapPictures,
-              enginePictures: res?.data?.enginePictures,
-              chasisPictures: res?.data?.chasisPictures,
-              scrapLetterPictures: res?.data?.scrapLetterPictures,
-              dealerdata: res?.data?.dealerdata,
+              // vehiclePictures: res?.data?.vehiclePictures,
+              // rcPictures: res?.data?.rcPictures,
+              // towingPictures: res?.data?.towingPictures,
+              // userDocumentsPictures: res?.data?.userDocumentsPictures,
+              // scrapPictures: res?.data?.scrapPictures,
+              // enginePictures: res?.data?.enginePictures,
+              // chasisPictures: res?.data?.chasisPictures,
+              // scrapLetterPictures: res?.data?.scrapLetterPictures,
+              // dealerdata: res?.data?.dealerdata,
 
-              chasisNumber: res?.data?.chasisNumber,
-              userAddress: res?.data?.userAddress,
-              userDocumentType: res?.data?.userDocumentType,
-              userDocumentNumber: res?.data?.userDocumentNumber,
-              vehicleNumber: res?.data?.vehicleNumber,
-              comment: res?.data?.comment,
-              engineNumber: res?.data?.engineNumber,
-              userAddressGoogleMapLink: res?.data?.userAddressGoogleMapLink,
-              canclePickupReason: res?.data?.canclePickupReason,
-              schedulePickUp: res?.data?.schedulePickUp,
-              leadStatus: res?.data?.leadStatus,
+              // chasisNumber: res?.data?.chasisNumber,
+              // userAddress: res?.data?.userAddress,
+              userDocumentType: res?.data?.documentIds[0]?.documentType,
+              userDocumentNumber: res?.data?.documentIds[0]?.documentNumber,
+              documentVerification: res?.data?.documentIds[0]?.documentVerification,
+              documentStatus: res?.data?.documentIds[0]?.documentStatus,
+
+
+              vehicleNumber: res?.data?.vehiclesId[0]?.vehicleNumber,
+              // comment: res?.data?.comment,
+              // engineNumber: res?.data?.engineNumber,
+              // userAddressGoogleMapLink: res?.data?.userAddressGoogleMapLink,
+              // canclePickupReason: res?.data?.canclePickupReason,
+              // schedulePickUp: res?.data?.schedulePickUp,
+              leadStatus: res?.data?.accountStatus,
               isAssigned: res?.data?.isAssigned,
               assignedTo: res?.data?.assignedTo,
               teleCallerData: res?.data?.teleCallerData,
               adminSeen: res?.data?.adminSeen,
               adminHasSeenQuotation: res?.data?.adminHasSeenQuotation,
-              items: res?.data?.items,
-              callTrackingId: res?.data?.callTrackingId,
-              caseTrackingId: res?.data?.caseTrackingId,
+              // items: res?.data?.items,
+              // callTrackingId: res?.data?.callTrackingId,
+              // caseTrackingId: res?.data?.caseTrackingId,
               tripType: res?.data?.tripType,
               // whatsAppNumber: res?.data?.whatsAppNumber,
-              uniqueLeadName: res?.data?.uniqueLeadName,
-              clientId: res?.data?.clientId,
-              clientUsername: res?.data?.clientUsername,
+              uniqueLeadName: res?.data?.driverId?.username,
+              // clientId: res?.data?.clientId,
+              // clientUsername: res?.data?.clientUsername,
             };
 
             this.name = `https://partner.carbasket.in/v/${encodeURIComponent(
@@ -410,105 +425,115 @@ export class EditLeadComponent implements OnInit {
             )}`;
 
             this.adminSeen = data?.adminSeen;
-            this.adminHasSeenQuotation = data?.adminHasSeenQuotation;
+            // this.adminHasSeenQuotation = data?.adminHasSeenQuotation;
             this.leadStatus = data?.leadStatus;
-            (this.teleCallerData = res?.data?.teleCallerData?.fullName),
-              (this.isAssigned = data?.isAssigned);
-            this.assignedTo = data?.assignedTo;
-            this.scheduledDate = data?.schedulePickUp?.date;
-            this.confirmedByDealer = data?.schedulePickUp?.confirmedByDealer;
-            this.confirmedByUser = data?.schedulePickUp?.confirmedByUser;
-            this.userFinalAmount = data?.userFinalAmount;
+            // (this.teleCallerData = res?.data?.teleCallerData?.fullName),
+            //   (this.isAssigned = data?.isAssigned);
+            // this.assignedTo = data?.assignedTo;
+            // this.scheduledDate = data?.schedulePickUp?.date;
+            // this.confirmedByDealer = data?.schedulePickUp?.confirmedByDealer;
+            // this.confirmedByUser = data?.schedulePickUp?.confirmedByUser;
+            // this.userFinalAmount = data?.userFinalAmount;
+            this.uniqueLeadName = data?.uniqueLeadName;
             this.leadIsVerified = data?.leadIsVerified;
-            this.vehiclePic = data?.vehiclePictures;
-            this.rcPictures = data?.rcPictures;
-            this.towingPic = data?.towingPictures;
-            this.userDocPic = data?.userDocumentsPictures;
-            this.enginePic = data?.enginePictures;
-            this.scrapedPic = data?.scrapPictures;
-            this.chasisPictures = data?.chasisPictures;
-            this.scrapLetterPic = data?.scrapLetterPictures;
+
+            // this.vehiclePic = data?.vehiclePictures;
+            // this.rcPictures = data?.rcPictures;
+            // this.towingPic = data?.towingPictures;
+            // this.userDocPic = data?.userDocumentsPictures;
+            // this.enginePic = data?.enginePictures;
+            // this.scrapedPic = data?.scrapPictures;
+            // this.chasisPictures = data?.chasisPictures;
+            // this.scrapLetterPic = data?.scrapLetterPictures;
             this.assignedDealerData = data?.isAssigned;
-            this.callTrackingId = data?.callTrackingId;
-            this.caseTrackingId = data?.caseTrackingId;
-            this.askingPrice = data?.userFinalAmount;
+            // this.callTrackingId = data?.callTrackingId;
+            // this.caseTrackingId = data?.caseTrackingId;
+            // this.askingPrice = data?.userFinalAmount;
             this.callTrackingStatus = data?.teleCaller;
-            this.dealerQuotationId = data?.dealerQuotationId;
+            // this.dealerQuotationId = data?.dealerQuotationId;
             this.phoneNumber = data?.phoneNumber;
-            if (data?.callTrackingId) {
-              this.getCallTrackingData();
+               this.leadForm.patchValue(data);
+            if (
+              this.adminSeen == false ||
+              this.adminHasSeenQuotation == false
+            ) {
+              // this.leadStatus = 'PROCESSING';
+              this.onSubmit();
             }
-            if (data?.caseTrackingId) {
-              this.getCaseTrackingData();
-            }
+            // if (data?.callTrackingId) {
+            //   this.getCallTrackingData();
+            // }
+            // if (data?.caseTrackingId) {
+            //   this.getCaseTrackingData();
+            // }
 
-            if (this.chasisPictures) {
-              const imagesArray = this.leadForm.get(
-                'chasisPictures'
-              ) as FormArray;
-              this.chasisPictures.forEach((imageUrl: any) => {
-                imagesArray.push(this.fb.control(imageUrl?.img));
-              });
-            }
+            // if (this.chasisPictures) {
+            //   const imagesArray = this.leadForm.get(
+            //     'chasisPictures'
+            //   ) as FormArray;
+            //   this.chasisPictures.forEach((imageUrl: any) => {
+            //     imagesArray.push(this.fb.control(imageUrl?.img));
+            //   });
+            // }
 
-            if (this.vehiclePic) {
-              const imagesArray = this.leadForm.get(
-                'vehiclePictures'
-              ) as FormArray;
-              this.vehiclePic.forEach((imageUrl: any) => {
-                imagesArray.push(this.fb.control(imageUrl?.img));
-              });
-            }
+            // if (this.vehiclePic) {
+            //   const imagesArray = this.leadForm.get(
+            //     'vehiclePictures'
+            //   ) as FormArray;
+            //   this.vehiclePic.forEach((imageUrl: any) => {
+            //     imagesArray.push(this.fb.control(imageUrl?.img));
+            //   });
+            // }
 
-            if (this.scrapLetterPic) {
-              const imagesArray = this.leadForm.get(
-                'scrapLetterPictures'
-              ) as FormArray;
-              this.scrapLetterPic.forEach((imageUrl: any) => {
-                imagesArray.push(this.fb.control(imageUrl?.img));
-              });
-            }
+            // if (this.scrapLetterPic) {
+            //   const imagesArray = this.leadForm.get(
+            //     'scrapLetterPictures'
+            //   ) as FormArray;
+            //   this.scrapLetterPic.forEach((imageUrl: any) => {
+            //     imagesArray.push(this.fb.control(imageUrl?.img));
+            //   });
+            // }
 
-            if (this.rcPictures) {
-              const rcImagesArray = this.leadForm.get(
-                'rcPictures'
-              ) as FormArray;
-              this.rcPictures.forEach((rcUrl: any) => {
-                rcImagesArray.push(this.fb.control(rcUrl?.img));
-              });
-            }
-            if (this.towingPic) {
-              const rcImagesArray = this.leadForm.get(
-                'towingPictures'
-              ) as FormArray;
-              this.towingPic.forEach((rcUrl: any) => {
-                rcImagesArray.push(this.fb.control(rcUrl?.img));
-              });
-            }
-            if (this.scrapedPic) {
-              const rcImagesArray = this.leadForm.get(
-                'scrapPictures'
-              ) as FormArray;
-              this.scrapedPic.forEach((rcUrl: any) => {
-                rcImagesArray.push(this.fb.control(rcUrl?.img));
-              });
-            }
-            if (this.enginePic) {
-              const rcImagesArray = this.leadForm.get(
-                'enginePictures'
-              ) as FormArray;
-              this.enginePic.forEach((rcUrl: any) => {
-                rcImagesArray.push(this.fb.control(rcUrl?.img));
-              });
-            }
-            if (this.userDocPic) {
-              const rcImagesArray = this.leadForm.get(
-                'userDocumentsPictures'
-              ) as FormArray;
-              this.userDocPic.forEach((rcUrl: any) => {
-                rcImagesArray.push(this.fb.control(rcUrl?.img));
-              });
-            }
+            // if (this.rcPictures) {
+            //   const rcImagesArray = this.leadForm.get(
+            //     'rcPictures'
+            //   ) as FormArray;
+            //   this.rcPictures.forEach((rcUrl: any) => {
+            //     rcImagesArray.push(this.fb.control(rcUrl?.img));
+            //   });
+            // }
+            // if (this.towingPic) {
+            //   const rcImagesArray = this.leadForm.get(
+            //     'towingPictures'
+            //   ) as FormArray;
+            //   this.towingPic.forEach((rcUrl: any) => {
+            //     rcImagesArray.push(this.fb.control(rcUrl?.img));
+            //   });
+            // }
+            // if (this.scrapedPic) {
+            //   const rcImagesArray = this.leadForm.get(
+            //     'scrapPictures'
+            //   ) as FormArray;
+            //   this.scrapedPic.forEach((rcUrl: any) => {
+            //     rcImagesArray.push(this.fb.control(rcUrl?.img));
+            //   });
+            // }
+            // if (this.enginePic) {
+            //   const rcImagesArray = this.leadForm.get(
+            //     'enginePictures'
+            //   ) as FormArray;
+            //   this.enginePic.forEach((rcUrl: any) => {
+            //     rcImagesArray.push(this.fb.control(rcUrl?.img));
+            //   });
+            // }
+            // if (this.userDocPic) {
+            //   const rcImagesArray = this.leadForm.get(
+            //     'userDocumentsPictures'
+            //   ) as FormArray;
+            //   this.userDocPic.forEach((rcUrl: any) => {
+            //     rcImagesArray.push(this.fb.control(rcUrl?.img));
+            //   });
+            // }
 
             // vehiclePic.forEach(imageUrl => {
             //   this.addImageControl(imageUrl);
@@ -521,14 +546,7 @@ export class EditLeadComponent implements OnInit {
             //             });
             //           });
             // this.driverAssignmentList = data?.items;
-            this.leadForm.patchValue(data);
-            if (
-              this.adminSeen == false ||
-              this.adminHasSeenQuotation == false
-            ) {
-              this.leadStatus = 'PROCESSING';
-              this.onSubmit();
-            }
+         
             // if(data.leadStatus == "CLOSED"){
             //   this.leadStatus= 'CLOSED'
             // }
@@ -547,8 +565,8 @@ export class EditLeadComponent implements OnInit {
             // else{
             //   this.leadStatus = data.leadStatus;
             // }
-            this.getLeadQuotationStatus();
-            this.getDealersByCity(res.data.userCity);
+            // this.getLeadQuotationStatus();
+            // this.getDealersByCity(res.data.userCity);
           } else {
             this.spinner.hide();
             alert(res?.message);
@@ -1989,3 +2007,4 @@ export class EditLeadComponent implements OnInit {
     this.enableEdit = !this.enableEdit;
   }
 }
+

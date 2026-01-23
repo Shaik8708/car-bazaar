@@ -920,7 +920,7 @@ export class AllLeadsComponent {
     const collectionName = this.apiUrlFromOther
       ? `?collectionName=${this.apiUrlPathFromOther}`
       : `?collectionName=${urlConfig.leads}`;
-    const url = `${urlConfig.getAllPath}${collectionName}${teleCaller}${phoneNumber}${this.myLeadsId}${query}${customSelectedDates}${byDate}&page=${params.page}&limit=${params.limit}`;
+    const url = `${urlConfig.getAllLead}?page=${params.page}&limit=${params.limit}`;
     this.spinner.show();
     this.getList = [];
     this.totalList = [];

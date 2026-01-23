@@ -33,5 +33,9 @@
 
 
   "getUsers": "/admin/user/getAll",
-  "getDrivers": "/admin/driver/getAll"
+  "getDrivers": "/admin/driver/getAll",
+  "getSingleLeadData": "/admin/lead/single",
+  "getAllLead": "/admin/lead/getAll",
+  "getSingleDriverData": "/admin/driver/single/"
+
 }

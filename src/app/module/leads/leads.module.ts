@@ -20,6 +20,7 @@ import { PartsLeadsComponent } from '../spare-parts/parts-leads/parts-leads.comp
 import { DealerQuotationLeadsComponent } from './dealer-quotation-leads/dealer-quotation-leads.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { UsersComponent } from './users/users.component';
+import { SingleDriverDetailsComponent } from './single-driver-details/single-driver-details.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'edit-lead/:id',
     component: EditLeadComponent,
+  },
+    {
+    path: 'single-driver-data/:id',
+    component: SingleDriverDetailsComponent,
   },
   {
     path: 'leads-verification',
