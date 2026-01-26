@@ -21,6 +21,8 @@ import { DealerQuotationLeadsComponent } from './dealer-quotation-leads/dealer-q
 import { DriversComponent } from './drivers/drivers.component';
 import { UsersComponent } from './users/users.component';
 import { SingleDriverDetailsComponent } from './single-driver-details/single-driver-details.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { DocumentsComponent } from './documents/documents.component';
 
 const routes: Routes = [
   {
@@ -38,6 +40,14 @@ const routes: Routes = [
   {
     path: 'drivers',
     component: DriversComponent,
+  },
+   {
+    path: 'vehicles',
+    component: VehiclesComponent,
+  },
+     {
+    path: 'documents',
+    component: DocumentsComponent,
   },
   {
     path: 'leads/:id',

@@ -36,6 +36,10 @@
   "getDrivers": "/admin/driver/getAll",
   "getSingleLeadData": "/admin/lead/single",
   "getAllLead": "/admin/lead/getAll",
-  "getSingleDriverData": "/admin/driver/single/"
+  "getSingleDriverData": "/admin/driver/single/",
+  "getAllVehicles": "/admin/vehicle/getAll",
+  "getVehicleDetails": "/admin/vehicle/single/",
+  "getAllDocuments": "/admin/document/getAll",
+  "getDocumentsDetails": "/admin/document/single/"
 
 }

@@ -101,6 +101,8 @@ import { DealerQuotationLeadsComponent } from './module/leads/dealer-quotation-l
 import { DriversComponent } from './module/leads/drivers/drivers.component';
 import { UsersComponent } from './module/leads/users/users.component';
 import { SingleDriverDetailsComponent } from './module/leads/single-driver-details/single-driver-details.component';
+import { DocumentsComponent } from './module/leads/documents/documents.component';
+import { VehiclesComponent } from './module/leads/vehicles/vehicles.component';
 
 @NgModule({
   declarations: [
@@ -140,7 +142,9 @@ import { SingleDriverDetailsComponent } from './module/leads/single-driver-detai
     PartsLeadsComponent,
     DriversComponent,
     UsersComponent,
-    SingleDriverDetailsComponent
+    SingleDriverDetailsComponent,
+    DocumentsComponent,
+    VehiclesComponent,
   ],
   exports: [CopyClipboardDirective],
   bootstrap: [AppComponent],
