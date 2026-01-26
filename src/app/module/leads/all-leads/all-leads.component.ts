@@ -599,8 +599,20 @@ export class AllLeadsComponent {
   ngOnInit(): void {
     this.getFilterLeads();
     this.setPaginationLimit();
-    this.loginType = localStorage?.getItem('loiu0ac');
+    // this.loginType = localStorage?.getItem('loiu0ac');
     this.fetch.navSerachBar('');
+         this._activated.paramMap.subscribe(params => {
+    const id = params.get('id'); // 👈 gets id from URL
+const type = params.get('type'); // user | driver | dealer
+
+    if (id) {
+      // GET with ID
+      this.getAllLeads(id, type);
+    } else {
+      // GET without ID
+      this.getAllLeads();
+    }
+  });
     this.reset();
     this.fetch.getarameters.subscribe((res: any) => {
       this.sideData = res;
@@ -740,7 +752,7 @@ export class AllLeadsComponent {
     localStorage.setItem('leadStatusValue', data?.target?.value);
     this.currentPage = 1;
     console.log(2);
-    this.getAllLeads('', data?.target?.value);
+    this.getAllLeads();
   }
 
   setPaginationLimit() {
@@ -865,16 +877,13 @@ export class AllLeadsComponent {
   }
 
   reset() {
-    console.log(4);
-    this.getAllLeads();
     var da = new Date();
     var datesss: any = da.toLocaleDateString();
     var rev = datesss.split('/');
     this.showDate = rev[2] + '-' + rev[1] + '-' + rev[0];
   }
 
-  getAllLeads(data?: any, tele?: any) {
-    this.value = tele = localStorage.getItem('leadStatusValue');
+  getAllLeads(id?: any, type?:any) {
     this.createdDate = localStorage.getItem('searchByCreatedDate');
     this.originalCreatedDateSelected = localStorage.getItem(
       'searchByoriginalCreatedDate'
@@ -887,28 +896,7 @@ export class AllLeadsComponent {
     localStorage.setItem('currentPage', this.currentPage);
     localStorage.setItem('currentPageLimit', this.currentPageLimit.toString());
 
-    // this.api.getFilteredLeads(params)
 
-    // const params = {
-    //   page: this.currentPage,
-    //   limit: this.currentPageLimit,
-    // };
-    let query = data
-      ? `&userName=${data}&modelName=${data}&brandName=${data}&uniqueLeadName=${data}`
-      : '';
-    let customSelectedDates =
-      this.startDate && this.endDate
-        ? `&startDate=${this.convertedStartDate}&endDate=${this.convertedEndDate}`
-        : '';
-    let teleCaller = tele && tele != 'null' ? `&teleCaller=${tele}` : '';
-    let phoneNumber =
-      this.phoneNoSearch && this.phoneNoSearch != 'null'
-        ? `&phoneNumber=${this.phoneNoSearch}`
-        : '';
-    let byDate =
-      this.createdDate && this.createdDate != 'null'
-        ? `&createdDate=${this.createdDate}`
-        : '';
 
     this._activated.paramMap.subscribe((params) => {
       this.myLeadsId =
@@ -917,10 +905,28 @@ export class AllLeadsComponent {
           : '';
     });
 
-    const collectionName = this.apiUrlFromOther
-      ? `?collectionName=${this.apiUrlPathFromOther}`
-      : `?collectionName=${urlConfig.leads}`;
-    const url = `${urlConfig.getAllLead}?page=${params.page}&limit=${params.limit}`;
+      // ✅ Base URL
+  let url = `${urlConfig.getAllLead}?page=${params.page}&limit=${params.limit}`;
+
+  // ✅ If id exists → append /id
+  // if (id) {
+  //   url = `${url}?userId=${id}&page=${params.page}&limit=${params.limit}`;
+  // }else{
+  // url = `${url}?page=${params.page}&limit=${params.limit}`;
+  // }
+
+    if (id && type) {
+    switch (type) {
+      case 'user':
+        url += `&userId=${id}`;
+        break;
+
+      case 'driver':
+        url += `&assign.driverId=${id}`;
+        break;
+    }
+  }
+
     this.spinner.show();
     this.getList = [];
     this.totalList = [];

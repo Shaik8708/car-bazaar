@@ -55,6 +55,8 @@ https://stackblitz.com/edit/angular-6-sort-array-of-object-by-date?file=src%2Fap
 http://mukeshkumar.net/articles/angular/3-ways-to-implement-autocomplete-textbox-in-angular-with-typescript-on-large-data
 
 
+vehicle data in leads api
+full name in leads api
 
 https://emojidb.org/person-emojis
 

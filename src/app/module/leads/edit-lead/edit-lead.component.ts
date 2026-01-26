@@ -170,7 +170,7 @@ export class EditLeadComponent implements OnInit {
       username: [''],
       phoneNumber: [''],
       email: [''],
-      fullName: [''],
+      // fullName: [''],
       createdAt: [''],
       pickUpDate: [''],
       pickUpTime: [''],
@@ -354,7 +354,7 @@ export class EditLeadComponent implements OnInit {
               // fuleWhellType: res?.data?.fuleWhellType,
               guestUserCount: res?.data?.guestUserCount,
               userCity: res?.data?.userCity,
-              fullName: res?.data?.userId?.fullName,
+              // fullName: res?.data?.userId?.fullName,
 
               // location: res?.data?.location,
               // manufactureYear: res?.data?.manufactureYear,
@@ -724,10 +724,16 @@ let url = "";
       }else{
         this.toastr.error('Something went wrong. Please try again.');
       }
-  })
+  },
+  (err:any)=>{
+    this.toastr.error(err?.error?.message ||'Something went wrong. Please try again.');
+  }
+  );  
       } else if (result.isDenied) {
       }
-    });
+    }).catch((error)=>{
+      this.toastr.error(error?.message ||'Something went wrong. Please try again.');
+    })
 }
 
   selectDriver(id: any) {

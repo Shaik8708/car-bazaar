@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'leads',
     component: AllLeadsComponent,
   },
+    {
+    path: 'leads/:type/:id',
+    component: AllLeadsComponent,
+  },
   {
     path: 'dealer-quotations-leads',
     component: DealerQuotationLeadsComponent,
