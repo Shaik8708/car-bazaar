@@ -44,6 +44,7 @@
                       <th>Doc Type</th>
                       <th>Doc No</th>
                       <th>Doc Verification</th>
+                      <th>Action Btn</th>
                       <th>Created At</th>
                       <th>Verified At</th>
 
@@ -70,6 +71,10 @@
                       </td>
                         <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.documentVerification }}
+                      </td>
+                       <td>
+                        <button class="btn btn-danger" *ngIf="abc?.documentVerification == true" (click)="onDocAction($event, abc, 'rejected')">Reject</button>
+                        <button class="btn btn-success" *ngIf="abc?.documentVerification == false" (click)="onDocAction($event, abc, 'approved')">Approve</button>
                       </td>
                       <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.createdAt | date : "short" }}

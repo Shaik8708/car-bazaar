@@ -10,6 +10,8 @@ import { PaginationService } from 'src/app/services/pagination.service';
 import { environment } from 'src/environments/environment';
 import urlConfig from '../../../config/url.config.json';
 import { catchError, finalize } from 'rxjs';
+import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-documents',
@@ -32,12 +34,23 @@ export class DocumentsComponent {
     private toastr: ToastrService,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private baseApi: BaseApiService
+    private baseApi: BaseApiService,
+    private route: ActivatedRoute 
   ) {}
 
   ngOnInit(): void {
     this.setPaginationLimit();
-    this.getAllLeads();
+          this.route.paramMap.subscribe(params => {
+    const id = params.get('id'); // 👈 gets id from URL
+
+    if (id) {
+      // GET with ID
+      this.getAllLeads(id);
+    } else {
+      // GET without ID
+      this.getAllLeads();
+    }
+  });
   }
 
   setPaginationLimit() {
@@ -59,7 +72,7 @@ export class DocumentsComponent {
     this.getAllLeads();
   }
 
-  getAllLeads() {
+  getAllLeads(id?: string) {
 
 
     const params = {
@@ -71,7 +84,16 @@ export class DocumentsComponent {
 
 
  
-    const url = `${urlConfig.getAllDocuments}?page=${params.page}&limit=${params.limit}`;
+      // ✅ Base URL
+  let url = urlConfig.getAllDocuments;
+
+  // ✅ If id exists → append /id
+  if (id) {
+    url = `${url}?driverId=${id}`;
+  }else{
+  url = `${url}?page=${params.page}&limit=${params.limit}`;
+  }
+
     this.spinner.show();
     this.getList = [];
     this.totalList = [];
@@ -126,5 +148,53 @@ export class DocumentsComponent {
     navigation(path: any, id: any) {
     this.router.navigate([path, id]);
   }
+
+  onDocAction(event: Event, doc: any, status: 'approved' | 'rejected') {
+  event.stopPropagation();
+
+  const actionText = status === 'approved' ? 'Approve' : 'Reject';
+
+  Swal.fire({
+    title: `Are you sure?`,
+    text: `You want to ${actionText} this doc : ${doc?.driverId?.phoneNumber}`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: `Yes, ${actionText}`,
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.updateDocStatus(doc?._id, status);
+    }
+  });
+}
+
+updateDocStatus(docId: string, status: string) {
+  const url = `${urlConfig.approveRejectVehicle}/${docId}`;
+
+  const payload = {
+    status: status
+  };
+
+  this.spinner.show();
+
+  this.baseApi
+    .patch(url, payload)
+    .pipe(
+      finalize(() => this.spinner.hide()),
+      catchError((err) => {
+        if (err?.error?.message === 'jwt expired') {
+          this.toastr.error('Token Expired, Login Again');
+          this.router.navigateByUrl('/login');
+        } else {
+          this.toastr.error(err?.error?.message || 'Something went wrong');
+        }
+        return [];
+      })
+    )
+    .subscribe((res: any) => {
+      this.toastr.success(`Vehicle ${status} successfully`);
+      this.getAllLeads(); // refresh list
+    });
+}
 
 }

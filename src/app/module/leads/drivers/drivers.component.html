@@ -53,6 +53,10 @@
                       <th>Profile Status</th>
                       <th>Vehicle Status</th>
                       <th>Document Status</th>
+                      <th>View Vehicles</th>
+                      <th>View Doc</th>
+
+
 
                     </tr>
                   </thead>
@@ -99,7 +103,12 @@
                       <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.vehiclesId[0]?.vehicleStatus }}
                       </td>
-
+                      <td>
+                        <button class="btn btn-info" (click)="navigation('/vehicles', abc?.driverId?._id)">View Vehicles</button>
+                      </td>
+                       <td>
+                        <button class="btn btn-primary" (click)="navigation('/documents', abc?.driverId?._id)">View Doc</button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

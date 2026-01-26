@@ -46,7 +46,15 @@ const routes: Routes = [
     component: VehiclesComponent,
   },
      {
+    path: 'vehicles/:id',
+    component: VehiclesComponent,
+  },
+     {
     path: 'documents',
+    component: DocumentsComponent,
+  },
+       {
+    path: 'documents/:id',
     component: DocumentsComponent,
   },
   {

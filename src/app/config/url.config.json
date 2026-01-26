@@ -40,6 +40,8 @@
   "getAllVehicles": "/admin/vehicle/getAll",
   "getVehicleDetails": "/admin/vehicle/single/",
   "getAllDocuments": "/admin/document/getAll",
-  "getDocumentsDetails": "/admin/document/single/"
+  "getDocumentsDetails": "/admin/document/single/",
+  "approveRejectVehicle": "/admin/vehicle/approve-reject",
+  "approveRejectDocument": "/admin/document/approve-reject"
 
 }

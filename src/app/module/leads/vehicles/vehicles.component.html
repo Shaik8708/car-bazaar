@@ -52,8 +52,11 @@
 
                       <th>Created At</th>
                       <th>Vehicle Status</th>
+                      <th>Action Btn</th>
+
                       <th>Verified By</th>
                       <th>Verified At</th>
+                      
 
 
                     </tr>
@@ -94,6 +97,10 @@
                       </td>
                       <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.vehicleStatus }}
+                      </td>
+                      <td>
+                        <button class="btn btn-danger" *ngIf="abc?.vehicleStatus == 'approved'" (click)="onVehicleAction($event, abc, 'rejected')">Reject</button>
+                        <button class="btn btn-success" *ngIf="abc?.vehicleStatus == 'pending'" (click)="onVehicleAction($event, abc, 'approved')">Approve</button>
                       </td>
                         <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.verifiedBy?.username }}
