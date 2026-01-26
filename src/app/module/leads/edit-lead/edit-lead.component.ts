@@ -169,6 +169,8 @@ export class EditLeadComponent implements OnInit {
     this.leadForm = this.fb.group({
       username: [''],
       phoneNumber: [''],
+      email: [''],
+      fullName: [''],
       createdAt: [''],
       pickUpDate: [''],
       pickUpTime: [''],
@@ -233,7 +235,6 @@ export class EditLeadComponent implements OnInit {
     this.loginType = localStorage?.getItem('loiu0ac');
     // this.getDealerList();
     this.getLeadById();
-    // this.getCityList();
   }
 
   goBack(): void {
@@ -337,10 +338,12 @@ export class EditLeadComponent implements OnInit {
           if (res?.status == 'success') {
             this.uniqueLeadName = res?.data?.uniqueLeadName;
             this.leadResponse = res?.data;
+            this.getDriversByCity();
 
             const data = {
               username: res?.data?.username,
-              phoneNumber: res?.data?.phoneNumber,
+              phoneNumber: res?.data?.userId?.phoneNumber,
+              email: res?.data?.userId?.email,
               createdAt: res?.data?.createdAt,
               locationList: res?.data?.locations.join('\n'),
               // brandName: res?.data?.brandName,
@@ -351,6 +354,8 @@ export class EditLeadComponent implements OnInit {
               // fuleWhellType: res?.data?.fuleWhellType,
               guestUserCount: res?.data?.guestUserCount,
               userCity: res?.data?.userCity,
+              fullName: res?.data?.userId?.fullName,
+
               // location: res?.data?.location,
               // manufactureYear: res?.data?.manufactureYear,
               totalAmount: res?.data?.totalAmount,
@@ -435,12 +440,14 @@ export class EditLeadComponent implements OnInit {
             this.callTrackingStatus = data?.teleCaller;
             this.dealerQuotationId = data?.dealerQuotationId;
             this.phoneNumber = data?.phoneNumber;
-            if (data?.callTrackingId) {
-              this.getCallTrackingData();
-            }
-            if (data?.caseTrackingId) {
-              this.getCaseTrackingData();
-            }
+
+           
+            // if (data?.callTrackingId) {
+              // this.getCallTrackingData();
+            // }
+            // if (data?.caseTrackingId) {
+              // this.getCaseTrackingData();
+            // }
 
             if (this.chasisPictures) {
               const imagesArray = this.leadForm.get(
@@ -547,8 +554,8 @@ export class EditLeadComponent implements OnInit {
             // else{
             //   this.leadStatus = data.leadStatus;
             // }
-            this.getLeadQuotationStatus();
-            this.getDealersByCity(res.data.userCity);
+            // this.getLeadQuotationStatus();
+            // this.getDealersByCity(res.data.userCity);
           } else {
             this.spinner.hide();
             alert(res?.message);
@@ -670,200 +677,67 @@ export class EditLeadComponent implements OnInit {
 
   isQuoted: any = [];
 
-  createDealerQuotation() {
-    // let delAmt = parseInt(this.dealerQuotation, 10)
 
-    // if (this.driverId && this.delearSingleQuote && this.citySelected) {
-    //   let data = {
-    //     dealerId: this.driverId,
-    //     dealerAmount: this.delearSingleQuote,
-    //     productId: this.leadId,
-    //     cityId: this.citySelected
-    //   }
-    //   this.spinner.show();
-    //   this.api.createDealerQuotation(data).subscribe((res: any) => {
 
-    //     if (res?.message == "Successfully Dealer Quotation Created") {
-    //       this.spinner.hide();
-    //       this.delearSingleQuote = "";
-
-    //       alert("Successfully Dealer Quotation Created");
-    //       window.location.reload()
-    //     } else {
-    //       alert(res?.message)
-    //     }
-
-    //   },
-    //     (err: any) => {
-    //       this.spinner.hide();
-    //       alert(err?.error?.message)
-    //     }
-    //   )
-    // }
-    // else {
-    //   alert("All the fields required")
-    // }
-
-    let isDealerExist: any;
-    let dealerLeadStatusId: any;
-
-    this.leadResponse.dealerQuotationId =
-      this.leadResponse?.dealerQuotationId || []; // Initialize if not present
-    this.leadResponse?.dealerQuotationId.find((res: any) => {
-      if (this.driverId == res?.driverUniqueNumber) {
-        isDealerExist = res;
-        dealerLeadStatusId = res?.dealerLeadStatusId;
-      }
-    });
-
-    // let cityId = this.cookieService.get('dp_ci');
-    // if (this.delearSingleQuote) {
-    const businessDetailsFullName = this.selectedDriverAssigned?.fullName;
-    const businessDetailsUserName = this.selectedDriverAssigned?.username;
-    const businessDetailsCity = this.selectedDriverAssigned?.driverCity;
-    const businessDetailsCityId = this.selectedDriverAssigned?.cityId;
-
-    if (this.driverId) {
-      this.spinner.show();
-
-      let leadStatusPayload = {
-        collectionName: urlConfig.driverLeadStatus,
-        leadStatus: 'NOT YET ASSIGNED',
-        // quotations: [
-        //   {
-        //     dealerPrice: this.delearSingleQuote,
-        //     quotationGivenTime: new Date(),
-        //     isAssigned: false,
-        //   },
-        // ],
-        driverId: this.driverId,
-        driverName: businessDetailsFullName,
-        driverUserName: businessDetailsUserName,
-        leadId: this.leadId,
-        driverCity: businessDetailsCity,
-        driverCityId: businessDetailsCityId,
-      };
-
-      let postOrPatch;
-      this.isQuoted.find((res: any) => {
-        console.log(res);
-
-        if (this.driverId == res?.driverId) {
-          postOrPatch = res;
-        }
-      });
-
-      let path = postOrPatch
-        ? urlConfig.updatePath + postOrPatch?.dealerLeadStatusId
-        : urlConfig.createPath;
-      let urlMethod: any = postOrPatch
-        ? this.baseApi.patch.bind(this.baseApi)
-        : this.baseApi.post.bind(this.baseApi);
-
-      if (postOrPatch) {
-        let payload = {
-          collectionName: urlConfig.driverLeadStatus,
-          id: dealerLeadStatusId,
-        };
-        this.baseApi
-          .post(urlConfig.getOnePath, payload)
-          .subscribe((response: any) => {
-            let existingQuotations = response?.data?.quotations || [];
-
-            existingQuotations.push({
-              dealerPrice: this.delearSingleQuote,
-              quotationGivenTime: new Date(),
-              isAssigned: false,
-            });
-
-            // leadStatusPayload.quotations = existingQuotations;
-
-            urlMethod(path, leadStatusPayload)
-              .pipe(
-                finalize(() => {
-                  this.spinner.hide();
-                }),
-                catchError((err) => {
-                  alert(err?.error?.message);
-
-                  throw err;
-                })
-              )
-              .subscribe((response: any) => {
-                if (response?.status == 'success') {
-                  alert('Successfully Dealer Quotation Created');
-
-                  window.location.reload();
-                }
-              });
-          });
-      } else {
-        urlMethod(path, leadStatusPayload)
-          .pipe(
-            finalize(() => {
-              this.spinner.hide();
-            }),
-            catchError((err) => {
-              alert(err?.error?.message);
-
-              throw err;
-            })
-          )
-          .subscribe((response: any) => {
-            if (response?.status == 'success') {
-              !isDealerExist
-                ? this.leadResponse.dealerQuotationId.push({
-                    dealerId: this.driverId,
-                    dealerLeadStatusId: response?.data?._id,
-                  })
-                : this.leadResponse.dealerQuotationId; // Just push, don't assign back
-
-              this.baseApi
-                .patch(urlConfig.updatePath + this.leadId, this.leadResponse)
-                .pipe(
-                  finalize(() => {
-                    //this.spinner.hide();
-                  }),
-                  catchError((err) => {
-                    alert(err?.error?.message);
-
-                    throw err;
-                  })
-                )
-                .subscribe((res: any) => {
-                  if (res?.status == 'success') {
-                    alert('Successfully Dealer Quotation Created');
-                    window.location.reload();
-                  } else {
-                    alert(res?.message);
-                  }
-                });
-            }
-          });
-      }
-    }
-    // }
-  }
-
-  getDealersByCity(id: any) {
-    this.citySelected = id;
+  getDriversByCity() {
+    // this.citySelected = id;
 
     this.baseApi
       .get(
-        `${urlConfig.getAllPath}?collectionName=${urlConfig.driver}&driverCity=${id}`
+        // `${urlConfig.getDrivers}?city=${this.leadResponse?.locations[0]}`
+        `${urlConfig.getDrivers}?city=${this.leadResponse?.userCity}&accountStatus=approved`
       )
       .subscribe((res: any) => {
         this.allDrivers = res?.data?.docs;
+         if(this.leadResponse?.assign?.driverId){
+              this.selectDriver(this.leadResponse?.assign?.driverId);
+            }
       });
   }
 
+  assignLeadToDriver(value){
+let url = "";
+    if(value == 'unassign'){
+     url = `${urlConfig.unAssignLeadToDriver}/${this.leadResponse?._id}`;
+    }else{
+     url = `${urlConfig.assignLeadToDriver}/${this.leadResponse?._id}`;
+    }
+    const payload = {
+      "driverId" : this.selectedDriverAssigned?.driverId?._id,
+    };
+
+
+     Swal.fire({
+      text: `Are you sure you want to ${value} lead to ${this.selectedDriverAssigned?.firstName + " " + this.selectedDriverAssigned?.lastName}.`,
+      showDenyButton: true,
+      showCancelButton: false,
+      allowOutsideClick: false,
+      confirmButtonText: 'Ok',
+      denyButtonText: `Cancel`,
+      icon: 'warning',
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+            this.baseApi.patch(url, payload).subscribe((res:any)=>{
+      if(res?.status == 'success'){
+        this.toastr.success(`Lead ${value} to driver successfully`);
+        this.getLeadById();
+      }else{
+        this.toastr.error('Something went wrong. Please try again.');
+      }
+  })
+      } else if (result.isDenied) {
+      }
+    });
+}
+
   selectDriver(id: any) {
-    this.driverId = id?.value;
+    // this.driverId = id?.value;
+        console.log(id);
 
     // if(this.dealerQuotation){
     // if (this.delearSingleQuote) {
     this.allDrivers.filter((res: any) => {
-      if (res._id == id?.value) {
+      if (res._id == id?.value || id) {
         console.log(res);
         this.selectedDriverAssigned = res;
       }
@@ -1067,12 +941,12 @@ export class EditLeadComponent implements OnInit {
         //   'unassign',
         //   'DEAL_CANCELLED'
         // );
-        this.assignToDriver(
-          isAssignedDriverDetailsId?.driverId,
-          index,
-          true,
-          'UNASSIGNED'
-        );
+        // this.assignToDriver(
+        //   isAssignedDriverDetailsId?.driverId,
+        //   index,
+        //   true,
+        //   'UNASSIGNED'
+        // );
       }
     }
   }

@@ -43,6 +43,8 @@
   "getDocumentsDetails": "/admin/document/single/",
   "approveRejectVehicle": "/admin/vehicle/approve-reject",
   "approveRejectDocument": "/admin/document/approve-reject",
-  "approveRejectDriverProfile": "/admin/driver/approve-reject"
+  "approveRejectDriverProfile": "/admin/driver/approve-reject",
+  "assignLeadToDriver": "/admin/lead/assign",
+  "unAssignLeadToDriver": "/admin/lead/unassign"
 
 }

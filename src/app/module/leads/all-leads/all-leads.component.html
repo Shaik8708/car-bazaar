@@ -408,7 +408,7 @@
                       </td>
                     
                         <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.assign?.assignmentStatus }}
+                        {{ abc?.assign?.assignmentStatus == 'pending' ? '‼️Pending' : '✅Approved'}}
                       </td>
 
                        <td (click)="navigation('/edit-lead', abc?._id)">
