@@ -169,7 +169,7 @@ export class DocumentsComponent {
 }
 
 updateDocStatus(docId: string, status: string) {
-  const url = `${urlConfig.approveRejectVehicle}/${docId}`;
+  const url = `${urlConfig.approveRejectDocument}/${docId}`;
 
   const payload = {
     status: status
@@ -192,7 +192,7 @@ updateDocStatus(docId: string, status: string) {
       })
     )
     .subscribe((res: any) => {
-      this.toastr.success(`Vehicle ${status} successfully`);
+      this.toastr.success(`Document ${status} successfully`);
       this.getAllLeads(); // refresh list
     });
 }

@@ -41,7 +41,7 @@
                       <th>Driver Username</th>
                       <th>Account Type</th>
                       <th>Phone No</th>
-                      <th>Type</th>
+                      <th>Veh Type</th>
                       <th>Brand</th>
                       <th>Modal</th>
                       <th>Veh Number</th>
@@ -69,10 +69,10 @@
                         {{ abc?.driverId?.username }}
                       </td>
                        <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.driverId?.accountType }}
+                        {{ abc?.driverId?.accountType == 'agency' ? '🏛️ Agency' : '🧍 Individual' }}
                       </td>
                       <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.driverId?.phoneNumber }}
+                        📞{{ abc?.driverId?.phoneNumber }}
                       </td>
                       <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.vehicleType }}
@@ -87,7 +87,7 @@
                         {{ abc?.vehicleNumber }}
                       </td>
                         <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.regYear }}
+                        🗓️{{ abc?.regYear }}
                       </td>
                        <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.vehicleRc }}
@@ -96,7 +96,7 @@
                         {{ abc?.createdAt | date : "short" }}
                       </td>
                       <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.vehicleStatus }}
+                        {{ abc?.vehicleStatus  == 'approved' ? '✅Approved' : '‼️Pending'}}
                       </td>
                       <td>
                         <!-- <button class="btn btn-danger" *ngIf="abc?.vehicleStatus == 'approved'" (click)="onVehicleAction($event, abc, 'rejected')">Reject</button> -->
@@ -106,7 +106,7 @@
                         {{ abc?.verifiedBy?.username }}
                       </td>
                         <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.verifiedAt  | date : "short" }}
+                        🕒{{ abc?.verifiedAt  | date : "short" }}
                       </td>
 
                     </tr>

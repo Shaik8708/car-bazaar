@@ -65,10 +65,10 @@
                         {{ abc?.lastName }}
                       </td>
                         <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.dob }}
+                        🗓️{{ abc?.dob }}
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.userId?.phoneNumber }}
+                        📞{{ abc?.userId?.phoneNumber }}
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         {{ abc?.userId?.email }}
@@ -77,7 +77,7 @@
                         {{ abc?.state }}
                       </td>
                        <td (click)="navigation('/edit-lead', abc?._id)">
-                        {{ abc?.city }}
+                        📍{{ abc?.city }}
                       </td>
                       <td (click)="navigation('/edit-lead', abc?._id)">
                         {{ abc?.createdAt | date : "short" }}

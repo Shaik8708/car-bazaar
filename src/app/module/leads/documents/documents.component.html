@@ -58,29 +58,29 @@
                         {{ abc?.driverId?.username }}
                       </td>
                        <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.driverId?.accountType }}
+                        {{ abc?.driverId?.accountType == 'agency' ? '🏛️ Agency' : '🧍 Individual' }}
                       </td>
                       <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.driverId?.phoneNumber }}
+                        📞{{ abc?.driverId?.phoneNumber }}
                       </td>
                        <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.documentType }}
+                        {{ abc?.documentType | titlecase}}
                       </td>
                        <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.documentNumber }}
                       </td>
                         <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.documentVerification }}
+                        {{ abc?.documentVerification ? '✅Approved' : '‼️Pending'}}
                       </td>
                        <td>
-                        <button class="btn btn-danger" *ngIf="abc?.documentVerification == true" (click)="onDocAction($event, abc, 'rejected')">Reject</button>
-                        <!-- <button class="btn btn-success" *ngIf="abc?.documentVerification == false" (click)="onDocAction($event, abc, 'approved')">Approve</button> -->
+                        <!-- <button class="btn btn-danger" *ngIf="abc?.documentVerification == true" (click)="onDocAction($event, abc, 'rejected')">Reject</button> -->
+                        <button class="btn btn-success" *ngIf="abc?.documentVerification == false" (click)="onDocAction($event, abc, 'approved')">Approve</button>
                       </td>
                       <td (click)="navigation('/single-driver-data', abc?._id)">
                         {{ abc?.createdAt | date : "short" }}
                       </td>
                        <td (click)="navigation('/single-driver-data', abc?._id)">
-                        {{ abc?.verifiedAt | date : "short" }}
+                        🕒{{ abc?.verifiedAt | date : "short" }}
                       </td>
                     </tr>
                   </tbody>
