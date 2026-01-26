@@ -156,21 +156,12 @@
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                   <div class="field-wrapper">
-                    <!-- <input
-                      type="text"
-                      formControlName="locationList"
-                      placeholder="Enetr Brand"
-                      [readonly]="!enableEdit"
-                    /> -->
+
                     <input
-                      type="text"
+                      type="date"
                       [readonly]="!enableEdit"
-                      [value]="
-                        leadForm.get('pickUpDate').value
-                          | date : 'shortDate'
-                      "
+                      [value]="formatDateForInput(leadForm.get('pickUpDate')?.value)"
                       placeholder="Enetr Lead Date"
-                      readonly
                     />
                     <div class="field-placeholder">
                       Pick Up Date <span *ngIf="!enableEdit">[RO]</span
@@ -236,24 +227,11 @@
                 </div> -->
                 <div class="col-xl-3 col-lg-3 col-md-3 col-6">
                   <div class="field-wrapper">
-                    <!-- <input
-                      type="text"
-                      (keypress)="numberOnly($event)"
-                      valueAsNumber
-                      formControlName="pickUpTime"
-                      placeholder="Enetr Final Price"
-                      class="border-danger"
-                      [readonly]="!enableEdit"
-                    /> -->
                     <input
-                      type="text"
+                      type="time"
                       [readonly]="!enableEdit"
-                      [value]="
-                        leadForm.get('pickUpTime').value
-                          | date : 'shortTime'
-                      "
+                      [value]="formatTimeForInput(leadForm.get('pickUpTime')?.value)"
                       placeholder="Enetr Lead Date"
-                      readonly
                     />
                     <div class="field-placeholder">
                       Pick Up Time <span *ngIf="!enableEdit">[RO]</span

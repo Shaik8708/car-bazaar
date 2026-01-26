@@ -1862,4 +1862,16 @@ let url = "";
   editPage() {
     this.enableEdit = !this.enableEdit;
   }
+
+
+  formatDateForInput(dateString: string): string {
+  if (!dateString) return '';
+  return dateString.split('T')[0]; // YYYY-MM-DD
+}
+
+formatTimeForInput(dateString: string): string {
+  if (!dateString) return '';
+  return dateString.substring(11, 16); // HH:mm
+}
+
 }
