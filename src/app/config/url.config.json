@@ -42,6 +42,7 @@
   "getAllDocuments": "/admin/document/getAll",
   "getDocumentsDetails": "/admin/document/single/",
   "approveRejectVehicle": "/admin/vehicle/approve-reject",
-  "approveRejectDocument": "/admin/document/approve-reject"
+  "approveRejectDocument": "/admin/document/approve-reject",
+  "approveRejectDriverProfile": "/admin/driver/approve-reject"
 
 }

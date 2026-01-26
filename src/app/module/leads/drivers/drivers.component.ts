@@ -10,6 +10,7 @@ import { PaginationService } from 'src/app/services/pagination.service';
 import { environment } from 'src/environments/environment';
 import urlConfig from '../../../config/url.config.json';
 import { catchError, finalize } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-drivers',
@@ -127,4 +128,51 @@ export class DriversComponent {
     this.router.navigate([path, id]);
   }
 
+    onDocAction(event: Event, doc: any, status: 'approved' | 'rejected') {
+  event.stopPropagation();
+
+  const actionText = status === 'approved' ? 'Approve' : 'Reject';
+
+  Swal.fire({
+    title: `Are you sure?`,
+    text: `You want to ${actionText} this driver : ${doc?.firstName}`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: `Yes, ${actionText}`,
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.updateDocStatus(doc?._id, status);
+    }
+  });
+}
+
+updateDocStatus(docId: string, status: string) {
+  const url = `${urlConfig.approveRejectDriverProfile}/${docId}`;
+
+  const payload = {
+    status: status
+  };
+
+  this.spinner.show();
+
+  this.baseApi
+    .patch(url, payload)
+    .pipe(
+      finalize(() => this.spinner.hide()),
+      catchError((err) => {
+        if (err?.error?.message === 'jwt expired') {
+          this.toastr.error('Token Expired, Login Again');
+          this.router.navigateByUrl('/login');
+        } else {
+          this.toastr.error(err?.error?.message || 'Something went wrong');
+        }
+        return [];
+      })
+    )
+    .subscribe((res: any) => {
+      this.toastr.success(`Driver ${status} successfully`);
+      this.getAllLeads(); // refresh list
+    });
+}
 }
