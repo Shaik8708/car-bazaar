@@ -55,6 +55,9 @@ https://stackblitz.com/edit/angular-6-sort-array-of-object-by-date?file=src%2Fap
 http://mukeshkumar.net/articles/angular/3-ways-to-implement-autocomplete-textbox-in-angular-with-typescript-on-large-data
 
 
+
+https://emojidb.org/person-emojis
+
 {
     "email":"usmanpasha002@gmail.com",
     "password":"Pass@123",
