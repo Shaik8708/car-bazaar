@@ -1,0 +1,166 @@
+<ngx-spinner></ngx-spinner>
+<h4 class="d-flex justify-content-center">Drivers
+</h4>
+
+<div class="row">
+
+
+  <div class="d-flex justify-content-between mt-3 mb-3 row">
+    <div
+      class="dataTables_info col-12 col-md-6"
+      id="copy-print-csv_info"
+      role="status"
+      aria-live="polite"
+    >
+      Showing {{ currentPageLimit * (currentPage - 1) + 1 }} to
+      {{ currentPageLimit * currentPage }} of {{ totalList }} entries
+    </div>
+
+    <div class="col-12 col-md-6">
+      <pagination
+        [paginationList]="pagination"
+        [selectedPageLimit]="currentPageLimit"
+        [currentPage]="currentPage"
+        (onPageChange)="getPage($event)"
+        [lastPage]="lastpage"
+      >
+      </pagination>
+    </div>
+  </div>
+
+    <div class="row gutters">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+          <div class="card-body">
+            <ng-container *ngIf="getList?.length > 0; else noData">
+              <div class="table-responsive">
+                <table id="copy-print-csv" class="table v-middle">
+                  <thead>
+                    <tr>
+                      <th>SL No</th>
+                      <th>Username</th>
+                      <th>Owner Name</th>
+
+                      <!-- <th>Last Name</th> -->
+                      <th>Account Type</th>
+                      <!-- <th>DOB</th> -->
+
+                      <th>Phone No</th>
+                      <th>Email</th>
+                      <th>State</th>
+                      <th>City</th>
+                      <th>PinCode</th>
+                      <th>Created At</th>
+                      <th>Profile Status</th>
+                      <th>Approve Profile</th>
+                      <th>Vehicle Status</th>
+                      <th>View Vehicles</th>
+                      <th>Document Status</th>
+                      <th>View Doc</th>
+                      <th>View Leads</th>
+
+
+
+
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let abc of getList; let i = index">
+                    <tr>
+                      <td>{{i+1}}</td>
+              
+                      <td (click)="navigation('/single-agency-data', abc?._id)">
+                        {{ abc?.agencyId?.username }}
+                      </td>
+                      <td (click)="navigation('/single-agency-data', abc?._id)">
+                        {{ abc?.ownerName }}
+                      </td>
+                      <!-- <td (click)="navigation('/single-agency-data', abc?._id)">
+                        {{ abc?.lastName }}
+                      </td> -->
+                       <td (click)="navigation('/single-agency-data', abc?._id)">
+                        {{ abc?.agencyId?.accountType == 'agency' ? '🏛️ Agency' : '🧍 Individual' }}
+                      <!-- </td>
+                        <td (click)="navigation('/single-agency-data', abc?._id)">
+                        📅{{ abc?.dob }}
+                      </td> -->
+                      <td (click)="navigation('/single-agency-data', abc?._id)">
+                        📞{{ abc?.agencyId?.phoneNumber }}
+                      </td>
+                      <td (click)="navigation('/single-agency-data', abc?._id)">
+                        ✉️{{ abc?.agencyId?.email }}
+                      </td>
+                      <td (click)="navigation('/single-agency-data', abc?._id)">
+                        {{ abc?.state }}
+                      </td>
+                       <td (click)="navigation('/single-agency-data', abc?._id)">
+                        📍{{ abc?.city }}
+                      </td>
+                       <td (click)="navigation('/single-agency-data', abc?._id)">
+                        📍{{ abc?.pinCode }}
+                      </td>
+                      <td (click)="navigation('/single-agency-data', abc?._id)">
+                        {{ abc?.createdAt | date : "short" }}
+                      </td>
+                      <td (click)="navigation('/single-agency-data', abc?._id)" [ngClass]="abc?.accountStatus?.toLowerCase() == 'approved' ? 'text-success' : 'text-danger'">
+                        {{ abc?.accountStatus == 'approved' ? '✅Approved' : '‼️Pending'}}
+                      </td>
+                       <td>
+                        <!-- <button class="btn btn-danger" *ngIf="abc?.documentVerification == true" (click)="onDocAction($event, abc, 'rejected')">Reject</button> -->
+                        <button class="btn btn-success" *ngIf="abc?.accountStatus == 'pending'" (click)="onDocAction($event, abc, 'approved')">Approve</button>
+                      </td>
+                      
+                      <td (click)="navigation('/single-agency-data', abc?._id)" [ngClass]="abc?.vehiclesId[0]?.vehicleStatus?.toLowerCase() == 'approved' ? 'text-success' : 'text-danger'">
+                        {{ abc?.vehiclesId[0]?.vehicleStatus == 'approved' ? '✅Approved' : '‼️Pending'}}
+                      </td>
+                      <td (click)="navigation('/vehicles', abc?.agencyId?._id)" class="btn-link">
+                        <!-- <button class="btn btn-info" (click)="navigation('/vehicles', abc?.agencyId?._id)">View Vehicles</button> -->
+                        <i class="icon-eye1 text-success"></i> View Vehicles
+                      </td>
+                      <td (click)="navigation('/single-agency-data', abc?._id)" [ngClass]="abc?.documentIds[0]?.documentStatus?.toLowerCase() == 'approved' ? 'text-success' : 'text-danger'">
+                        {{ abc?.documentIds[0]?.documentStatus == 'approved' ? '✅Approved' : '‼️Pending'}}
+                      </td>
+                       <td (click)="navigation('/documents', abc?.agencyId?._id)"  class="btn-link">
+                        <!-- <button class="btn btn-primary" (click)="navigation('/documents', abc?.agencyId?._id)">View Doc</button> -->
+                         <i class="icon-eye1 text-success"></i> View Doc
+                      </td>
+                       <td (click)="navigation('/leads/driver', abc?.agencyId?._id)"  class="btn-link">
+                        <!-- <button class="btn btn-primary" (click)="navigation('/documents', abc?.agencyId?._id)">View Doc</button> -->
+                         <i class="icon-eye1 text-success"></i> View Leads
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between mt-3 mb-3 row">
+                  <div
+                    class="dataTables_info col-12 col-md-6"
+                    id="copy-print-csv_info"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    Showing {{ currentPageLimit * (currentPage - 1) + 1 }} to
+                    {{ currentPageLimit * currentPage }} of
+                    {{ totalList }} entries
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <pagination
+                      [paginationList]="pagination"
+                      [selectedPageLimit]="currentPageLimit"
+                      [currentPage]="currentPage"
+                      (onPageChange)="getPage($event)"
+                      [lastPage]="lastpage"
+                    >
+                    </pagination>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #noData>
+              <h4>No Data Found</h4>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

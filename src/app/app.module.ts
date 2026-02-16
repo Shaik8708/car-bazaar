@@ -103,6 +103,8 @@ import { UsersComponent } from './module/leads/users/users.component';
 import { SingleDriverDetailsComponent } from './module/leads/single-driver-details/single-driver-details.component';
 import { DocumentsComponent } from './module/leads/documents/documents.component';
 import { VehiclesComponent } from './module/leads/vehicles/vehicles.component';
+import { AgenciesComponent } from './module/leads/agencies/agencies.component';
+import { SingleAgencyDetailsComponent } from './module/leads/single-agency-details/single-agency-details.component';
 
 @NgModule({
   declarations: [
@@ -141,8 +143,10 @@ import { VehiclesComponent } from './module/leads/vehicles/vehicles.component';
     LeadsComponent,
     PartsLeadsComponent,
     DriversComponent,
+    AgenciesComponent,
     UsersComponent,
     SingleDriverDetailsComponent,
+    SingleAgencyDetailsComponent,
     DocumentsComponent,
     VehiclesComponent,
   ],

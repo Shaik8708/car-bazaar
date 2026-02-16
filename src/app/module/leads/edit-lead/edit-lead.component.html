@@ -160,8 +160,8 @@
                     <input
                       type="date"
                       [readonly]="!enableEdit"
-                      [value]="formatDateForInput(leadForm.get('pickUpDate')?.value)"
                       placeholder="Enetr Lead Date"
+                      formControlName="pickUpDate"
                     />
                     <div class="field-placeholder">
                       Pick Up Date <span *ngIf="!enableEdit">[RO]</span
@@ -230,8 +230,8 @@
                     <input
                       type="time"
                       [readonly]="!enableEdit"
-                      [value]="formatTimeForInput(leadForm.get('pickUpTime')?.value)"
-                      placeholder="Enetr Lead Date"
+                      placeholder="Enetr Lead Date",
+                      formControlName="pickUpTime"
                     />
                     <div class="field-placeholder">
                       Pick Up Time <span *ngIf="!enableEdit">[RO]</span

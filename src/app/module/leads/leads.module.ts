@@ -23,6 +23,8 @@ import { UsersComponent } from './users/users.component';
 import { SingleDriverDetailsComponent } from './single-driver-details/single-driver-details.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { DocumentsComponent } from './documents/documents.component';
+import { AgenciesComponent } from './agencies/agencies.component';
+import { SingleAgencyDetailsComponent } from './single-agency-details/single-agency-details.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,10 @@ const routes: Routes = [
   {
     path: 'drivers',
     component: DriversComponent,
+  },
+    {
+    path: 'agencies',
+    component: AgenciesComponent,
   },
    {
     path: 'vehicles',
@@ -72,6 +78,10 @@ const routes: Routes = [
     {
     path: 'single-driver-data/:id',
     component: SingleDriverDetailsComponent,
+  },
+     {
+    path: 'single-agency-data/:id',
+    component: SingleAgencyDetailsComponent,
   },
   {
     path: 'leads-verification',

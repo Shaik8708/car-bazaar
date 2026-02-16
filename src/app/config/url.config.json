@@ -34,9 +34,11 @@
 
   "getUsers": "/admin/user/getAll",
   "getDrivers": "/admin/driver/getAll",
+  "getAllAgencies": "/agency-account/getAllAccounts",
   "getSingleLeadData": "/admin/lead/single",
   "getAllLead": "/admin/lead/getAll",
   "getSingleDriverData": "/admin/driver/single/",
+  "getSingleAgencyData": "/agency-account/getSingleAccount/",
   "getAllVehicles": "/admin/vehicle/getAll",
   "getVehicleDetails": "/admin/vehicle/single/",
   "getAllDocuments": "/admin/document/getAll",
@@ -45,6 +47,7 @@
   "approveRejectDocument": "/admin/document/approve-reject",
   "approveRejectDriverProfile": "/admin/driver/approve-reject",
   "assignLeadToDriver": "/admin/lead/assign",
-  "unAssignLeadToDriver": "/admin/lead/unassign"
+  "unAssignLeadToDriver": "/admin/lead/unassign",
+  "updateLeadPath": "/admin/lead/update/"
 
 }
