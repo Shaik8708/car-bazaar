@@ -101,12 +101,12 @@
                       <td (click)="navigation('/single-agency-data', abc?._id)">
                         {{ abc?.createdAt | date : "short" }}
                       </td>
-                      <td (click)="navigation('/single-agency-data', abc?._id)" [ngClass]="abc?.accountStatus?.toLowerCase() == 'approved' ? 'text-success' : 'text-danger'">
-                        {{ abc?.accountStatus == 'approved' ? '✅Approved' : '‼️Pending'}}
+                      <td (click)="navigation('/single-agency-data', abc?._id)" [ngClass]="abc?.agencyStatus?.toLowerCase() == 'approved' ? 'text-success' : 'text-danger'">
+                        {{ abc?.agencyStatus == 'approved' ? '✅Approved' : '‼️Pending'}}
                       </td>
                        <td>
                         <!-- <button class="btn btn-danger" *ngIf="abc?.documentVerification == true" (click)="onDocAction($event, abc, 'rejected')">Reject</button> -->
-                        <button class="btn btn-success" *ngIf="abc?.accountStatus == 'pending'" (click)="onDocAction($event, abc, 'approved')">Approve</button>
+                        <button class="btn btn-success" *ngIf="abc?.agencyStatus == 'pending'" (click)="onDocAction($event, abc, 'approved')">Approve</button>
                       </td>
                       
                       <td (click)="navigation('/single-agency-data', abc?._id)" [ngClass]="abc?.vehiclesId[0]?.vehicleStatus?.toLowerCase() == 'approved' ? 'text-success' : 'text-danger'">

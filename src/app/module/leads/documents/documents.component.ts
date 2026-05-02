@@ -89,7 +89,7 @@ export class DocumentsComponent {
 
   // ✅ If id exists → append /id
   if (id) {
-    url = `${url}?driverId=${id}`;
+    url = `${url}?ownerId=${id}`;
   }else{
   url = `${url}?page=${params.page}&limit=${params.limit}`;
   }
